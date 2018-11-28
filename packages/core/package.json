@@ -2,5 +2,9 @@
   "name": "@drizzle-utils/core",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@drizzle-utils/get-accounts": "^1.0.0",
+    "@drizzle-utils/get-web3": "^1.0.0"
+  }
 }
