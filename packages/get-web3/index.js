@@ -3,7 +3,10 @@ const Web3 = require("web3");
 const resolveWeb3 = (resolve, options) => {
   let provider;
 
-  if (window.ethereum) {
+  if (options.customProvider) {
+    // use custom provider from options object
+    provider = options.customProvider;    
+  } else if (window.ethereum) {
     // use `ethereum` object injected by MetaMask
     provider = window.ethereum;
   } else if (typeof window.web3 !== "undefined") {
@@ -21,7 +24,7 @@ const resolveWeb3 = (resolve, options) => {
   resolve(web3);
 };
 
-const getWeb3 = options =>
+const getWeb3 = (options = {}) =>
   new Promise((resolve, reject) => {
     // handle environments without a `window` object
     if (!window) {
@@ -38,4 +41,4 @@ const getWeb3 = options =>
     }
   });
 
-export default getWeb3;
+module.exports = getWeb3;
