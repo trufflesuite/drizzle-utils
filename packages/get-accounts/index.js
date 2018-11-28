@@ -1,19 +1,19 @@
 const getAccounts = options =>
-  new Promise((resolve, reject) => {
+  new Promise(async (resolve, reject) => {
     if (!options) {
       reject("The options object with web3 is required.");
     }
     const { web3 } = options;
-    if (window.ethereum) {
-      try {
-        // Request account access
+    try {
+      // request account access if Metamask is detected
+      if (window && window.ethereum) {
         await window.ethereum.enable();
-      } catch (error) {
-        reject(error);
       }
+      const accounts = await web3.eth.getAccounts();
+      resolve(accounts);
+    } catch (err) {
+      reject(err);
     }
-    const accounts = await web3.eth.getAccounts();
-    resolve(accounts);
   });
 
 module.exports = getAccounts;
