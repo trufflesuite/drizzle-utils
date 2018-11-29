@@ -1,6 +1,6 @@
 const getAccounts = options =>
   new Promise(async (resolve, reject) => {
-    if (!options) {
+    if (!options || !options.web3) {
       reject("The options object with web3 is required.");
     }
     const { web3, onChange } = options;
