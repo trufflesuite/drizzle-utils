@@ -11,7 +11,7 @@ import getAccounts from "@drizzle-utils/get-accounts";
 
 // pass in your web3 (required), and an onChange callback (optionally)
 const accounts = await getAccounts({ web3, onChange });
-console.log(accounts) // ["0x..."]
+console.log(accounts); // ["0x..."]
 ```
 
 The `onChange` callback functionality relies upon the undocumented API:
