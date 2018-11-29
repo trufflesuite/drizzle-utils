@@ -2,32 +2,30 @@ import React, { Component } from "react";
 import DrizzleUtils from "@drizzle-utils/core";
 
 class App extends Component {
-  state = { loading: true, drizzleUtils: null, accounts: null };
+  state = {
+    loading: true,
+    drizzleUtils: null,
+    currentAccount: null
+  };
 
   componentDidMount = async () => {
     const drizzleUtils = new DrizzleUtils();
     await drizzleUtils.init();
 
-    drizzleUtils.onAccountChange(accounts => this.setState({ accounts }));
+    this.setState({ drizzleUtils, loading: false });
 
-    this.setState({
-      drizzleUtils,
-      loading: false,
-      accounts: drizzleUtils.accounts
-    });
-
-    console.log(drizzleUtils);
+    drizzleUtils.currentAccount$.subscribe(addr =>
+      this.setState({ currentAccount: addr })
+    );
   };
 
   render() {
+    const { loading, currentAccount } = this.state;
+    if (loading) return "Loading...";
     return (
       <div style={{ margin: "2em" }}>
         <h1>@drizzle-utils/core</h1>
-        {this.state.loading ? (
-          "Loading..."
-        ) : (
-          <p>Account: {<span>{this.state.accounts}</span>}</p>
-        )}
+        <p>Current selected account: {currentAccount}</p>
       </div>
     );
   }
