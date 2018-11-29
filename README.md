@@ -2,6 +2,10 @@
 
 A library of frontend utilities for making dapps
 
+## For usage
+
+See the README for the core package [here](./packages/core/README.md).
+
 ## For development
 
 Make sure you have Yarn installed globally.
