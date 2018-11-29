@@ -6,12 +6,11 @@ class App extends Component {
   state = { accounts: null };
 
   componentDidMount = async () => {
-    const options = {
-      web3: await getWeb3(),
-      onChange: this.handleAddressChange
-    };
+    const web3 = await getWeb3()
+    const onChange = this.handleAddressChange
+    
     try {
-      const accounts = await getAccounts(options);
+      const accounts = await getAccounts({ web3, onChange });
       this.setState({ accounts });
     } catch (error) {
       console.error(error);
