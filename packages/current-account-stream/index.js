@@ -27,7 +27,7 @@ const createCurrentAccount$ = options =>
 
       const currentAccount$ = merge(initialAccount$, newAccount$).pipe(
         distinctUntilChanged((a, b) => a.toLowerCase() === b.toLowerCase()),
-        switchMap(() => from(web3.eth.getAccounts()).pipe(map(x => x[0])))
+        switchMap(() => from(web3.eth.getAccounts()).pipe(map(x => x[0]))),
       );
 
       resolve(currentAccount$);

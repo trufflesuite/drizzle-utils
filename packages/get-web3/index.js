@@ -5,7 +5,7 @@ const resolveWeb3 = (resolve, options) => {
 
   if (options.customProvider) {
     // use custom provider from options object
-    provider = options.customProvider;    
+    provider = options.customProvider;
   } else if (window.ethereum) {
     // use `ethereum` object injected by MetaMask
     provider = window.ethereum;
@@ -25,11 +25,11 @@ const resolveWeb3 = (resolve, options) => {
 };
 
 const getWeb3 = (options = {}) =>
-  new Promise((resolve, reject) => {
+  new Promise(resolve => {
     // handle environments without a `window` object
     if (!window) {
       throw new Error(
-        "`window` object not found, non-browser environments are not currently supported"
+        "`window` object not found, non-browser environments are not currently supported",
       );
     }
 
