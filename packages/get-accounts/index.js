@@ -13,7 +13,7 @@ const getAccounts = options =>
       // track account change with callback
       if (onChange) {
         web3.currentProvider.publicConfigStore.on("update", data =>
-          onChange(data.selectedAddress)
+          onChange(data.selectedAddress),
         );
       }
 
