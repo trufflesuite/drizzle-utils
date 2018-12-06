@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint packages",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --coverage",
+    "test:watch": "jest --watch --coverage"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -16,6 +16,7 @@
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-jest": "^22.1.2",
     "eslint-plugin-prettier": "^3.0.0",
+    "ganache-cli": "^6.2.3",
     "husky": "^1.2.0",
     "jest": "^23.6.0",
     "lerna": "^3.4.3",
@@ -39,7 +40,8 @@
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/test-app/"
+      "/test-app/",
+      "/coverage/"
     ]
   }
 }
