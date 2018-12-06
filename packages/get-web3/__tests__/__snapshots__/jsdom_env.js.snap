@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-web3 tests in browser environment default fallback provider exists 1`] = `
+HttpProvider {
+  "connected": false,
+  "headers": undefined,
+  "host": "http://127.0.0.1:9545",
+  "httpAgent": Agent {
+    "_events": Object {
+      "free": [Function],
+    },
+    "_eventsCount": 1,
+    "_maxListeners": undefined,
+    "defaultPort": 80,
+    "freeSockets": Object {},
+    "keepAlive": true,
+    "keepAliveMsecs": 1000,
+    "maxFreeSockets": 256,
+    "maxSockets": Infinity,
+    "options": Object {
+      "keepAlive": true,
+      "path": null,
+    },
+    "protocol": "http:",
+    "requests": Object {},
+    "sockets": Object {},
+  },
+  "timeout": 0,
+}
+`;
