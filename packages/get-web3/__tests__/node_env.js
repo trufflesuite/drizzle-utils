@@ -10,19 +10,17 @@ describe("get-web3 tests in node environment", () => {
   });
 
   test("custom provider works properly", async () => {
-    const host = "http://127.0.0.1:1111";
-    const customProvider = new Web3.providers.HttpProvider(host);
-    const web3 = await getWeb3({ customProvider });
+    const provider = new Web3.providers.HttpProvider("http://127.0.0.1:1111");
+    const web3 = await getWeb3({ customProvider: provider });
 
-    expect(web3.currentProvider.host).toBe(host);
+    expect(web3.currentProvider.host).toBe("http://127.0.0.1:1111");
   });
 
   test("fallback provider works properly", async () => {
-    const host = "http://127.0.0.1:2222";
-    const fallbackProvider = new Web3.providers.HttpProvider(host);
-    const web3 = await getWeb3({ fallbackProvider });
+    const provider = new Web3.providers.HttpProvider("http://127.0.0.1:2222");
+    const web3 = await getWeb3({ fallbackProvider: provider });
 
-    expect(web3.currentProvider.host).toBe(host);
+    expect(web3.currentProvider.host).toBe("http://127.0.0.1:2222");
   });
 
   test("default fallback provider exists", async () => {
