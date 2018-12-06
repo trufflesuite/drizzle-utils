@@ -6,7 +6,8 @@
   "repository": "git@github.com:trufflesuite/drizzle-utils.git",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint packages"
+    "lint": "eslint packages",
+    "test": "jest"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -25,7 +26,7 @@
   ],
   "lint-staged": {
     "*.js": [
-      "eslint packages --fix",
+      "eslint --fix",
       "git add"
     ]
   },
@@ -33,5 +34,8 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "jest": {
+    "testPathIgnorePatterns": ["/node_modules/", "/test-app/"]
   }
 }
