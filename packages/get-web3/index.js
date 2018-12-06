@@ -1,15 +1,15 @@
 const Web3 = require("web3");
 
-const resolveWeb3 = (resolve, options) => {
+const resolveWeb3 = (resolve, options, isBrowser) => {
   let provider;
 
   if (options.customProvider) {
     // use custom provider from options object
     provider = options.customProvider;
-  } else if (window.ethereum) {
+  } else if (isBrowser && window.ethereum) {
     // use `ethereum` object injected by MetaMask
     provider = window.ethereum;
-  } else if (typeof window.web3 !== "undefined") {
+  } else if (isBrowser && typeof window.web3 !== "undefined") {
     // use injected web3 object by legacy dapp browsers
     provider = window.web3.currentProvider;
   } else if (options.fallbackProvider) {
@@ -26,19 +26,20 @@ const resolveWeb3 = (resolve, options) => {
 
 const getWeb3 = (options = {}) =>
   new Promise(resolve => {
-    // handle environments without a `window` object
-    if (!window) {
-      throw new Error(
-        "`window` object not found, non-browser environments are not currently supported",
-      );
+    // handle server-side environments
+    if (typeof window === "undefined") {
+      return resolveWeb3(resolve, options, false);
     }
 
-    // resolve for web3 when the page is done loading
+    // if page is ready, resolve for web3 immediately
     if (document.readyState === `complete`) {
-      resolveWeb3(resolve, options);
-    } else {
-      window.addEventListener("load", () => resolveWeb3(resolve, options));
+      return resolveWeb3(resolve, options, true);
     }
+
+    // otherwise, resolve for web3 when page is done loading
+    return window.addEventListener("load", () =>
+      resolveWeb3(resolve, options, true),
+    );
   });
 
 module.exports = getWeb3;
