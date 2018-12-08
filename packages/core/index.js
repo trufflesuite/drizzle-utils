@@ -19,7 +19,7 @@ class DrizzleUtils {
     this.accounts = await getAccounts({ web3: this.web3 });
     this.currentAccount$ = await createCurrentAccount$({ web3: this.web3 });
 
-    // keep internal accounts array up-to-date
+    // keep `this.accounts` array up-to-date
     this.currentAccount$.subscribe(this.getAccounts.bind(this));
   }
 }

@@ -3,18 +3,11 @@ const getAccounts = options =>
     if (!options || !options.web3) {
       return reject(new Error("The options object with web3 is required."));
     }
-    const { web3, onChange } = options;
+    const { web3 } = options;
     try {
       // request account access if Metamask is detected
       if (typeof window !== "undefined" && window.ethereum) {
         await window.ethereum.enable();
-      }
-
-      // track account change with callback
-      if (onChange) {
-        web3.currentProvider.publicConfigStore.on("update", data =>
-          onChange(data.selectedAddress),
-        );
       }
 
       // resolve accounts
