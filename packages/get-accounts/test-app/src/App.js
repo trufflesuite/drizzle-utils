@@ -7,20 +7,12 @@ class App extends Component {
 
   componentDidMount = async () => {
     const web3 = await getWeb3()
-    const onChange = this.handleAddressChange
-    
+
     try {
-      const accounts = await getAccounts({ web3, onChange });
+      const accounts = await getAccounts({ web3 });
       this.setState({ accounts });
     } catch (error) {
       console.error(error);
-    }
-  };
-
-  handleAddressChange = newAddr => {
-    if (this.state.accounts[0] !== newAddr) {
-      console.log("New address change detected");
-      this.setState({ accounts: [newAddr] });
     }
   };
 
