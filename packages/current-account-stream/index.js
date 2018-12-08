@@ -26,6 +26,9 @@ const createCurrentAccount$ = options =>
       const initialAccount$ = from(web3.eth.getAccounts()).pipe(map(x => x[0]));
       const newAccount$ = createUpdate$(web3).pipe(map(x => x.selectedAddress));
 
+      // Note: addresses from `newAccount$` are always lowercased, therefore we
+      // need to perform a `web3.eth.getAccounts()` call to get the fully check
+      // -summed address (i.e. with capital letters)
       const currentAccount$ = merge(initialAccount$, newAccount$).pipe(
         distinctUntilChanged((a, b) => a.toLowerCase() === b.toLowerCase()),
         switchMap(() => from(web3.eth.getAccounts()).pipe(map(x => x[0]))),
