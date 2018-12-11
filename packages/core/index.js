@@ -26,6 +26,7 @@ class DrizzleUtils {
 
   async addContract(contractArtifact) {
     const instance = await this.getContractInstance(contractArtifact);
+    this.contractInstances.push(instance);
     return instance;
   }
 
