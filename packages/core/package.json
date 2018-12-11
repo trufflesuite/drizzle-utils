@@ -1,6 +1,6 @@
 {
   "name": "@drizzle-utils/core",
-  "version": "1.0.1-alpha.0",
+  "version": "0.1.1-alpha.1",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
@@ -8,5 +8,6 @@
     "@drizzle-utils/get-accounts": "^1.0.0",
     "@drizzle-utils/get-contract-instance": "^1.0.0",
     "@drizzle-utils/get-web3": "^1.0.0"
-  }
+  },
+  "gitHead": "fc9b6dca7fa4bec6138d08aa4b74864758226ed7"
 }
