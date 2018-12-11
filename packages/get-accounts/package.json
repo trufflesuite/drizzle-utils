@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "main": "index.js",
   "license": "MIT",
-  "gitHead": "60165d32ebf482ff386ba65af207e9af2914c42e",
+  "gitHead": "78353207c5f530445bc5966013595809bc14506c",
   "publishConfig": {
     "access": "public"
   }
