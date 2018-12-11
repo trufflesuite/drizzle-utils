@@ -1,6 +1,6 @@
 {
   "name": "@drizzle-utils/get-accounts",
-  "version": "0.1.1-alpha.1",
+  "version": "0.1.1-alpha.2",
   "main": "index.js",
   "license": "MIT",
   "gitHead": "fc9b6dca7fa4bec6138d08aa4b74864758226ed7"
