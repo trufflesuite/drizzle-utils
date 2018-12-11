@@ -1,7 +1,7 @@
 {
   "name": "drizzle-utils",
+  "version": "0.1.1",
   "private": true,
-  "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:trufflesuite/drizzle-utils.git",
   "license": "MIT",
@@ -27,6 +27,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "lint-staged": {
     "*.js": [
       "eslint --fix",
