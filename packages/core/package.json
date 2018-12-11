@@ -1,12 +1,12 @@
 {
   "name": "@drizzle-utils/core",
-  "version": "1.0.0",
+  "version": "1.0.1-alpha.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@drizzle-utils/get-accounts": "^1.0.0",
-    "@drizzle-utils/get-web3": "^1.0.0",
     "@drizzle-utils/current-account-stream": "^1.0.0",
-    "@drizzle-utils/get-contract-instance": "^1.0.0"
+    "@drizzle-utils/get-accounts": "^1.0.0",
+    "@drizzle-utils/get-contract-instance": "^1.0.0",
+    "@drizzle-utils/get-web3": "^1.0.0"
   }
 }
