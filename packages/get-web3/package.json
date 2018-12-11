@@ -6,5 +6,8 @@
   "dependencies": {
     "web3": "^1.0.0-beta.37"
   },
-  "gitHead": "60165d32ebf482ff386ba65af207e9af2914c42e"
+  "gitHead": "60165d32ebf482ff386ba65af207e9af2914c42e",
+  "publishConfig": {
+    "access": "public"
+  }
 }
