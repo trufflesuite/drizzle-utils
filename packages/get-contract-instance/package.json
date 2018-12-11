@@ -1,6 +1,6 @@
 {
   "name": "@drizzle-utils/get-contract-instance",
-  "version": "0.1.1",
+  "version": "0.1.2-alpha.0",
   "main": "index.js",
   "license": "MIT",
   "gitHead": "78353207c5f530445bc5966013595809bc14506c",
