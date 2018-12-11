@@ -26,6 +26,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "lint-staged": {
     "*.js": [
       "eslint --fix",

@@ -9,5 +9,5 @@
     "@drizzle-utils/get-contract-instance": "^1.0.0",
     "@drizzle-utils/get-web3": "^1.0.0"
   },
-  "gitHead": "fc9b6dca7fa4bec6138d08aa4b74864758226ed7"
+  "gitHead": "60165d32ebf482ff386ba65af207e9af2914c42e"
 }
