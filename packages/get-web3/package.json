@@ -1,6 +1,6 @@
 {
   "name": "@drizzle-utils/get-web3",
-  "version": "0.1.1-alpha.2",
+  "version": "0.1.1-alpha.3",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
