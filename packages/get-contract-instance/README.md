@@ -11,6 +11,13 @@ import SimpleStorage from "./SimpleStorage.json";
 // pass in web3 and contract artifact
 const instance = await getContractInstance({
   web3,
-  contractArtifact: SimpleStorage,
+  artifact: SimpleStorage,
+});
+
+// alternatively, pass in your own ABI and deployed address
+const instance = await getContractInstance({
+  web3,
+  abi: SimpleStorage.abi,
+  address: "0x..."
 });
 ```
