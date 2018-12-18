@@ -16,16 +16,18 @@ class DrizzleUtils {
     return this.accounts;
   }
 
-  async getContractInstance(contractArtifact) {
+  async getContractInstance({ artifact, abi, address }) {
     const instance = await getContractInstance({
       web3: this.web3,
-      contractArtifact,
+      artifact,
+      abi,
+      address,
     });
     return instance;
   }
 
-  async addContract(contractArtifact) {
-    const instance = await this.getContractInstance(contractArtifact);
+  async addContract({ artifact, abi, address }) {
+    const instance = await this.getContractInstance({ artifact, abi, address });
     this.contractInstances.push(instance);
     return instance;
   }
