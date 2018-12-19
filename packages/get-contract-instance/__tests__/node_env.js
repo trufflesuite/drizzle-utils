@@ -4,7 +4,7 @@
 const Ganache = require("ganache-cli");
 const Web3 = require("web3");
 const getContractInstance = require("../index");
-const SimpleStorage = require("./SimpleStorage.json");
+const SampleContractArtifact = require("./SampleContractArtifact.json");
 
 describe("get-contract-instance tests in node environment", () => {
   let web3;
@@ -47,7 +47,7 @@ describe("get-contract-instance tests in node environment", () => {
   test("test instantiation from Truffle JSON artifact", async () => {
     const instance = await getContractInstance({
       web3,
-      artifact: SimpleStorage,
+      artifact: SampleContractArtifact,
     });
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
@@ -56,7 +56,7 @@ describe("get-contract-instance tests in node environment", () => {
   test("test instantiation from ABI array", async () => {
     const instance = await getContractInstance({
       web3,
-      abi: SimpleStorage.abi,
+      abi: SampleContractArtifact.abi,
     });
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
