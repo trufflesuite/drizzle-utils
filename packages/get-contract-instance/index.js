@@ -26,7 +26,7 @@ const getContractInstance = (options = {}) =>
       } else {
         return reject(
           new Error(
-            "You must pass in a contract artifact or the ABI and address of a deployed contract.",
+            "You must pass in a contract artifact or the ABI of a deployed contract.",
           ),
         );
       }

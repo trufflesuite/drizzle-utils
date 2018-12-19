@@ -28,7 +28,7 @@ describe("get-contract-instance tests in node environment", () => {
 
   test("throw error if web3 exists, but no artifacts/abi/address", async () => {
     expect(getContractInstance({ web3 })).rejects.toThrow(
-      "You must pass in a contract artifact or the ABI and address of a deployed contract.",
+      "You must pass in a contract artifact or the ABI of a deployed contract.",
     );
   });
 
