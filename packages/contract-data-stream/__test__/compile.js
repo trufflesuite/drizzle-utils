@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const path = require("path");
 const fs = require("fs");
 const TruffleCompile = require("truffle-compile");
@@ -41,7 +40,6 @@ const compile = async pathToFile => {
 
   // write artifact to file
   fs.writeFileSync(artifactFilename, artifactString, "utf8");
-  console.log("Success!");
 };
 
 module.exports = compile;
