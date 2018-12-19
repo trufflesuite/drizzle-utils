@@ -8,32 +8,20 @@ class DrizzleUtils {
     this.web3 = null;
     this.accounts = null;
     this.currentAccount$ = null;
-    this.contractInstances = [];
   }
 
-  async getAccounts() {
-    this.accounts = await getAccounts({ web3: this.web3 });
+  async getAccounts(options = {}) {
+    this.accounts = await getAccounts({ web3: this.web3, ...options });
     return this.accounts;
   }
 
-  async getContractInstance({ artifact, abi, address }) {
-    const instance = await getContractInstance({
-      web3: this.web3,
-      artifact,
-      abi,
-      address,
-    });
+  async getContractInstance(options = {}) {
+    const instance = await getContractInstance({ web3: this.web3, ...options });
     return instance;
   }
 
-  async addContract({ artifact, abi, address }) {
-    const instance = await this.getContractInstance({ artifact, abi, address });
-    this.contractInstances.push(instance);
-    return instance;
-  }
-
-  async init() {
-    this.web3 = await getWeb3();
+  async init(options = {}) {
+    this.web3 = await getWeb3(options);
     this.accounts = await getAccounts({ web3: this.web3 });
     this.currentAccount$ = await createCurrentAccount$({ web3: this.web3 });
 
