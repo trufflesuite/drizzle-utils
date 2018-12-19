@@ -22,6 +22,7 @@
     "lerna": "^3.4.3",
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3",
+    "truffle-compile": "^4.0.0",
     "web3": "^1.0.0-beta.37"
   },
   "workspaces": [
@@ -45,7 +46,8 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/test-app/",
-      "/coverage/"
+      "/coverage/",
+      "/__tests__/utils/"
     ]
   }
 }
