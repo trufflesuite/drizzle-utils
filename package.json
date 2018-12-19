@@ -46,7 +46,8 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/test-app/",
-      "/coverage/"
+      "/coverage/",
+      "/__tests__/utils/"
     ]
   }
 }
