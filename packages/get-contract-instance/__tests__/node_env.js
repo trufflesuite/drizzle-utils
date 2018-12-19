@@ -1,10 +1,21 @@
 /**
  * @jest-environment node
  */
+const Ganache = require("ganache-cli");
 const Web3 = require("web3");
 const getContractInstance = require("../index");
+const SimpleStorage = require("./SimpleStorage.json");
 
 describe("get-contract-instance tests in node environment", () => {
+  let web3;
+  beforeAll(() => {
+    const provider = Ganache.provider({
+      seed: "drizzle-utils",
+      network_id: "1234",
+    });
+    web3 = new Web3(provider);
+  });
+
   test("getContractInstance function exists", () => {
     expect(getContractInstance).toBeDefined();
   });
@@ -16,8 +27,38 @@ describe("get-contract-instance tests in node environment", () => {
   });
 
   test("throw error if web3 exists, but no artifacts/abi/address", async () => {
-    expect(getContractInstance({ web3: new Web3() })).rejects.toThrow(
+    expect(getContractInstance({ web3 })).rejects.toThrow(
       "You must pass in a contract artifact or the ABI and address of a deployed contract.",
     );
+  });
+
+  test("throw error if artifact is faulty", async () => {
+    expect(getContractInstance({ web3, artifact: {} })).rejects.toThrow(
+      new TypeError("Cannot read property '1234' of undefined"),
+    );
+  });
+
+  test("throw error if ABI is faulty", async () => {
+    expect(getContractInstance({ web3, abi: {} })).rejects.toThrow(
+      "You must provide the json interface of the contract when instantiating a contract object.",
+    );
+  });
+
+  test("test instantiation from Truffle JSON artifact", async () => {
+    const instance = await getContractInstance({
+      web3,
+      artifact: SimpleStorage,
+    });
+    expect(instance).toBeDefined();
+    expect(instance.methods).toBeDefined();
+  });
+
+  test("test instantiation from ABI array", async () => {
+    const instance = await getContractInstance({
+      web3,
+      abi: SimpleStorage.abi,
+    });
+    expect(instance).toBeDefined();
+    expect(instance.methods).toBeDefined();
   });
 });

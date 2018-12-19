@@ -9,14 +9,17 @@ const getContractInstance = (options = {}) =>
     let instance;
     try {
       if (options.artifact) {
-        // if artifact exists, get network ID and the deployed address
+        // if artifact exists, attempt to get network ID and the deployed address
         const { artifact } = options;
         const networkId = await web3.eth.net.getId();
-        const address = artifact.networks[networkId].address;
+        const deployedNetwork = artifact.networks[networkId];
+
+        // if no deployed address is found, instantiate without the address
+        const address = deployedNetwork && deployedNetwork.address;
 
         instance = new web3.eth.Contract(artifact.abi, address);
-      } else if (options.abi && options.address) {
-        // otherwise, use passed-in ABI and deployed address
+      } else if (options.abi) {
+        // otherwise, use passed-in ABI and deployed address (optional)
         const { abi, address } = options;
 
         instance = new web3.eth.Contract(abi, address);
