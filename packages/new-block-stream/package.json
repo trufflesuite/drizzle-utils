@@ -1,0 +1,12 @@
+{
+  "name": "@drizzle-utils/new-block-stream",
+  "version": "0.1.2-alpha.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "rxjs": "^6.3.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
