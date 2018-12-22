@@ -10,6 +10,7 @@ const createContractData$ = require("../index");
 jest.setTimeout(20000);
 
 describe("contract-data-stream tests in node environment", () => {
+  let provider;
   let contractInstance;
   let accounts;
   beforeAll(async () => {
@@ -17,7 +18,7 @@ describe("contract-data-stream tests in node environment", () => {
     const { SimpleStorage } = await compile("SimpleStorage.sol");
 
     // 2. Spawn Ganache test blockchain
-    const provider = Ganache.provider({ seed: "drizzle-utils" });
+    provider = Ganache.provider({ seed: "drizzle-utils" });
     const web3 = new Web3(provider);
     accounts = await web3.eth.getAccounts();
 
@@ -32,6 +33,10 @@ describe("contract-data-stream tests in node environment", () => {
     // Note: deployed address located at `deployedInstance._address`
 
     contractInstance = deployedInstance;
+  });
+
+  afterAll(async () => {
+    provider.close();
   });
 
   test("ensure test suite setup works", async () => {
