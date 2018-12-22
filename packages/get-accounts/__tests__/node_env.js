@@ -1,7 +1,7 @@
 /**
  * @jest-environment node
  */
-const Ganache = require("ganache-cli");
+const Ganache = require("ganache-core");
 const Web3 = require("web3");
 const getAccounts = require("../index");
 
