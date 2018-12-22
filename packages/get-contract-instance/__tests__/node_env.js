@@ -7,13 +7,18 @@ const getContractInstance = require("../index");
 const SampleContractArtifact = require("./SampleContractArtifact.json");
 
 describe("get-contract-instance tests in node environment", () => {
+  let provider;
   let web3;
   beforeAll(() => {
-    const provider = Ganache.provider({
+    provider = Ganache.provider({
       seed: "drizzle-utils",
       network_id: "1234",
     });
     web3 = new Web3(provider);
+  });
+
+  afterAll(() => {
+    provider.close();
   });
 
   test("getContractInstance function exists", () => {

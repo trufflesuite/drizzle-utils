@@ -7,9 +7,14 @@ const getAccounts = require("../index");
 
 describe("get-accounts tests in node environment", () => {
   let web3;
+  let provider;
   beforeAll(() => {
-    const provider = Ganache.provider({ seed: "drizzle-utils" });
+    provider = Ganache.provider({ seed: "drizzle-utils" });
     web3 = new Web3(provider);
+  });
+
+  afterAll(() => {
+    provider.close();
   });
 
   test("getAccounts function exists", () => {
