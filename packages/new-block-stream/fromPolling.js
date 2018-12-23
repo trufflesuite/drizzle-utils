@@ -1,13 +1,13 @@
 const { Subject } = require("rxjs");
 const PollingBlockTracker = require("eth-block-tracker");
 
-const fromPolling = ({ web3 }) => {
+const fromPolling = ({ web3, pollingInterval }) => {
   // patch missing method
   web3.currentProvider.sendAsync = web3.currentProvider.send;
 
   // instantiate block tracker
   const provider = web3.currentProvider;
-  const blockTracker = new PollingBlockTracker({ provider });
+  const blockTracker = new PollingBlockTracker({ provider, pollingInterval });
 
   const observable = new Subject();
   blockTracker
@@ -20,7 +20,10 @@ const fromPolling = ({ web3 }) => {
 
   return {
     observable,
-    subscription: { unsubscribe: () => blockTracker.stop() }, // stub for users to unsubscribe
+    subscription: {
+      // stub for users to unsubscribe
+      unsubscribe: () => blockTracker.removeAllListeners("latest"),
+    },
   };
 };
 

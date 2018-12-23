@@ -6,7 +6,7 @@ const createNewBlock$ = options =>
     if (!options || !options.web3) {
       return reject(new Error("The options object with web3 is required."));
     }
-    let { web3 } = options;
+    let { web3, pollingInterval } = options;
 
     const providerType = web3.currentProvider.constructor.name;
     if (providerType === "WebsocketProvider") {
@@ -15,7 +15,7 @@ const createNewBlock$ = options =>
     }
 
     // fallback to polling with eth-block-tracker
-    return resolve(fromPolling({ web3 }));
+    return resolve(fromPolling({ web3, pollingInterval }));
   });
 
 module.exports = createNewBlock$;

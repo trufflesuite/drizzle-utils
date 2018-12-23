@@ -6,8 +6,21 @@ const main = async () => {
   // const web3 = new Web3("http://127.0.0.1:9545"); // HttpProvider
   const web3 = new Web3("ws://127.0.0.1:9545"); // WebsocketProvider
 
-  const { observable } = await createNewBlock$({ web3 });
-  observable.subscribe(console.log);
+  const { observable, subscription } = await createNewBlock$({
+    web3,
+    pollingInterval: 200, // only used if non-WebsocketProvider
+  });
+
+  // log out new blocks (can skip blocks if polling)
+  const stream = observable.subscribe(console.log);
+
+  // 10 seconds later, unsubscribe
+  setTimeout(() => {
+    console.log("unsubscribing...");
+    subscription.unsubscribe();
+    stream.unsubscribe();
+    process.exit();
+  }, 10000);
 };
 
 main();
