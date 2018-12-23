@@ -3,15 +3,6 @@
 const { Subject, from, merge } = require("rxjs");
 const { map, distinctUntilChanged, switchMap } = require("rxjs/operators");
 
-// wraps an un-documented API for updates into a stream
-const createUpdate$ = web3 => {
-  const observable = new Subject();
-  web3.currentProvider.publicConfigStore.on("update", data => {
-    observable.next(data);
-  });
-  return observable;
-};
-
 const createContractData$ = options =>
   new Promise(async (resolve, reject) => {
     if (!options || !options.web3) {

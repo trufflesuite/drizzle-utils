@@ -3342,6 +3342,17 @@ eth-block-tracker@^3.0.0:
     pify "^2.3.0"
     tape "^4.6.3"
 
+eth-block-tracker@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/eth-block-tracker/-/eth-block-tracker-4.1.0.tgz#46c5c417044e68ffd2b3887f4ae80900ef071219"
+  integrity sha512-991xTy6CzYYbizkHmgRFFI9iGx1OCISve8sSLuOlt7/yD7VFH1Jd8mOmBqxaG5ywGkIXdwAR78nQ2WDReETzBg==
+  dependencies:
+    eth-json-rpc-infura "^3.1.2"
+    eth-query "^2.1.0"
+    events "^3.0.0"
+    pify "^3.0.0"
+    safe-event-emitter "^1.0.1"
+
 eth-ens-namehash@2.0.8:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/eth-ens-namehash/-/eth-ens-namehash-2.0.8.tgz#229ac46eca86d52e0c991e7cb2aef83ff0f68bcf"
@@ -3350,7 +3361,7 @@ eth-ens-namehash@2.0.8:
     idna-uts46-hx "^2.3.1"
     js-sha3 "^0.5.7"
 
-eth-json-rpc-infura@^3.1.0:
+eth-json-rpc-infura@^3.1.0, eth-json-rpc-infura@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/eth-json-rpc-infura/-/eth-json-rpc-infura-3.1.2.tgz#04c5d0cee98619e93ba8a9842492b771b316e83a"
   integrity sha512-IuK5Iowfs6taluA/3Okmu6EfZcFMq6MQuyrUL1PrCoJstuuBr3TvVeSy3keDyxfbrjFB34nCo538I8G+qMtsbw==
