@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import Web3 from "web3";
+import createNewBlock$ from "@drizzle-utils/new-block-stream";
+import createContractData$ from "@drizzle-utils/contract-data-stream";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
-import getWeb3 from "./utils/getWeb3";
 
 import "./App.css";
 
@@ -9,8 +11,14 @@ class App extends Component {
 
   componentDidMount = async () => {
     try {
-      // Get network provider and web3 instance.
-      const web3 = await getWeb3();
+      const web3 = new Web3("http://127.0.0.1:9545"); // HttpProvider
+      // const web3 = new Web3("ws://127.0.0.1:9545"); // WebsocketProvider
+
+      // track new blocks
+      const { observable: newBlock$ } = await createNewBlock$({
+        web3,
+        pollingInterval: 200, // only used if non-WebsocketProvider
+      });
 
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
@@ -23,9 +31,17 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
+      // create stream of values
+      const value$ = await createContractData$({
+        newBlock$,
+        methodCall: instance.methods.get(),
+      });
+
+      value$.subscribe(val => this.setState({ storageValue: val }));
+
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      this.setState({ web3, accounts, contract: instance });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -35,17 +51,16 @@ class App extends Component {
     }
   };
 
-  runExample = async () => {
+  increment = async () => {
     const { accounts, contract } = this.state;
-
-    // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
-
-    // Get the value from the contract to prove it worked.
+    // get current number
     const response = await contract.methods.get().call();
 
-    // Update state with the result.
-    this.setState({ storageValue: response });
+    // get new value
+    const newVal = parseInt(response, 10) + 1;
+
+    // send transaction to set new value
+    await contract.methods.set(newVal).send({ from: accounts[0] });
   };
 
   render() {
@@ -65,6 +80,7 @@ class App extends Component {
           Try changing the value stored on <strong>line 40</strong> of App.js.
         </p>
         <div>The stored value is: {this.state.storageValue}</div>
+        <button onClick={this.increment}>Increment</button>
       </div>
     );
   }
