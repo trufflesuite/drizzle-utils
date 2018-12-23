@@ -1,28 +1,21 @@
-/* eslint-disable no-unused-vars, no-console */
+const fromSubscribeMethod = require("./fromSubscribeMethod");
+const fromPolling = require("./fromPolling");
 
-const { Subject, from, merge } = require("rxjs");
-const { map, distinctUntilChanged, switchMap } = require("rxjs/operators");
-
-const createContractData$ = options =>
+const createNewBlock$ = options =>
   new Promise(async (resolve, reject) => {
     if (!options || !options.web3) {
       return reject(new Error("The options object with web3 is required."));
     }
-    const { web3 } = options;
-    const providerType = web3.currentProvider.constructor.name;
+    let { web3 } = options;
 
+    const providerType = web3.currentProvider.constructor.name;
     if (providerType === "WebsocketProvider") {
       // use web3.eth.subscribe to listen for new blocks
-      const observable = new Subject();
-      const subscription = web3.eth.subscribe(
-        "newBlockHeaders",
-        (err, blockHeader) => observable.next(err || blockHeader),
-      );
-
-      return resolve({ observable, subscription });
+      return resolve(fromSubscribeMethod({ web3 }));
     }
 
-    // TODO - fallback to polling with eth-block-tracker
+    // fallback to polling with eth-block-tracker
+    return resolve(fromPolling({ web3 }));
   });
 
-module.exports = createContractData$;
+module.exports = createNewBlock$;
