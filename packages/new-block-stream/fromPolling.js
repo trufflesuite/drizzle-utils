@@ -13,7 +13,7 @@ const fromPolling = ({ web3, pollingInterval }) => {
   blockTracker
     .on("latest", async blockNum => {
       // get full block info with `web3.eth.getBlock`
-      const block = await web3.eth.getBlock(blockNum);
+      const block = await web3.eth.getBlock(blockNum, true);
       observable.next(block);
     })
     .on("error", err => observable.next(err));

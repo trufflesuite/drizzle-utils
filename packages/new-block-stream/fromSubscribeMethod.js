@@ -8,7 +8,7 @@ const fromSubscribeMethod = ({ web3 }) => {
       if (err) return observable.next(err);
 
       // get full block info with `web3.eth.getBlock`
-      const block = await web3.eth.getBlock(blockHeader.number);
+      const block = await web3.eth.getBlock(blockHeader.number, true);
       observable.next(block);
     },
   );
