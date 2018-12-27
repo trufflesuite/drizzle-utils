@@ -57,16 +57,17 @@ describe("contract-data-stream tests in node environment", () => {
   });
 
   test("can track changes to a call method return value", async done => {
-    const { observable } = await createNewBlock$({
+    const { observable: newBlock$ } = await createNewBlock$({
       web3,
-      pollingInterval: 200,
+      pollingInterval: 1,
     });
 
     const returnVal$ = await createContractData$({
-      newBlock$: observable,
+      newBlock$,
       methodCall: contractInstance.methods.get(),
     });
 
+    // tap observable to make sure it emitted a "0" and then a "5"
     returnVal$
       .pipe(
         take(2),
