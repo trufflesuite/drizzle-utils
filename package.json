@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint packages",
-    "test": "jest --coverage --verbose",
-    "test:watch": "jest --watch --verbose --coverage"
+    "test": "jest",
+    "test:watch": "jest --watch --runInBand"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

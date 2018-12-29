@@ -5,6 +5,7 @@ const Ganache = require("ganache-core");
 const Web3 = require("web3");
 const createNewBlock$ = require("@drizzle-utils/new-block-stream");
 const { take, finalize, tap, toArray } = require("rxjs/operators");
+const TruffleDecoder = require("truffle-decoder");
 
 const compile = require("./utils/compile");
 const createContractData$ = require("../index");
@@ -16,12 +17,14 @@ describe("contract-data-stream tests in node environment", () => {
   let web3;
   let accounts;
   let contractInstance;
+  let artifact;
   beforeAll(async () => {
     // 1. Compile contract artifact
     const { SimpleStorage } = await compile("SimpleStorage.sol");
+    artifact = SimpleStorage;
 
     // 2. Spawn Ganache test blockchain
-    provider = Ganache.provider({ seed: "drizzle-utils" });
+    provider = Ganache.provider({ seed: "drizzle-utils", network_id: "1234" });
     web3 = new Web3(provider);
     accounts = await web3.eth.getAccounts();
 
@@ -54,6 +57,23 @@ describe("contract-data-stream tests in node environment", () => {
 
   test("createContractData$ function exists", () => {
     expect(createContractData$).toBeDefined();
+  });
+
+  test("can decode contract state", async () => {
+    await contractInstance.methods.set(22).send({ from: accounts[0] });
+
+    // important! this name must match contract name or else it won't detect variables
+    artifact.contractName = "SimpleStorage";
+    artifact.networks = {
+      "1234": { address: contractInstance._address },
+    };
+
+    const decoder = TruffleDecoder.forContract(artifact, [], provider);
+    decoder.init();
+
+    const initialState = await decoder.state();
+    const value = initialState.variables.storedData.value.toString();
+    expect(value).toBe(22);
   });
 
   test("can track changes to a call method return value", async done => {
