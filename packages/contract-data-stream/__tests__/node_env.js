@@ -61,9 +61,8 @@ describe("contract-data-stream tests in node environment", () => {
 
   test("can decode contract state", async () => {
     await contractInstance.methods.set(22).send({ from: accounts[0] });
-
     // important! this name must match contract name or else it won't detect variables
-    artifact.contractName = "SimpleStorage";
+    artifact.contractName = artifact.contract_name;
     artifact.networks = {
       "1234": { address: contractInstance._address },
     };
@@ -73,7 +72,7 @@ describe("contract-data-stream tests in node environment", () => {
 
     const initialState = await decoder.state();
     const value = initialState.variables.storedData.value.toString();
-    expect(value).toBe(22);
+    expect(value).toBe("22");
   });
 
   test("can track changes to a call method return value", async done => {
