@@ -22,6 +22,7 @@ describe("get-web3 tests in React Native environment", () => {
     expect(web3.currentProvider.host).toBe("http://127.0.0.1:2222");
   });
 
+  // In RN window var points to global var
   test("does not attempt to connect to metamask provider", async () => {
     window.ethereum = new Web3.providers.HttpProvider("http://127.0.0.1:3333");
     const web3 = await getWeb3();
@@ -30,6 +31,7 @@ describe("get-web3 tests in React Native environment", () => {
     window.ethereum = undefined;
   });
 
+  // In RN window var points to global var
   test("does not attempt to connect to legacy dapp browser provider", async () => {
     window.web3 = new Web3("http://localhost:8546");
     const web3 = await getWeb3();
