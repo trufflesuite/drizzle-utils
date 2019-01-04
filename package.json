@@ -43,11 +43,33 @@
     }
   },
   "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/test-app/",
-      "/coverage/",
-      "/__tests__/utils/"
+    "projects": [
+      {
+        "displayName": "jsdom and node",
+        "testPathIgnorePatterns": [
+          "/node_modules/",
+          "/test-app/",
+          "/coverage/",
+          "/__tests__/utils/"
+        ],
+        "testMatch": [
+          "**/__tests__/**/!(react_native)*.js?(x)",
+          "**/!(react_native)?(*.)+(spec|test).js?(x)"
+        ]
+      },
+      {
+        "displayName": "React Native",
+        "testPathIgnorePatterns": [
+          "/node_modules/",
+          "/test-app/",
+          "/coverage/",
+          "/__tests__/utils/"
+        ],
+        "testMatch": [
+          "**/__tests__/**/react_native*.js?(x)",
+          "**/react_native?(*.)+(spec|test).js?(x)"
+        ]
+      }
     ]
   }
 }
