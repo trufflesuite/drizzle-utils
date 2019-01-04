@@ -8,7 +8,7 @@ const testPathIgnorePatterns = [
 module.exports = {
   projects: [
     {
-      // jest built-ing jsodm and node jest-environments specified using docblocks
+      // jest built-in jsodm and node jest-environments specified using docblocks
       // https://jestjs.io/docs/en/configuration.html#testenvironment-string
       displayName: "jsdom and node",
       testPathIgnorePatterns,
