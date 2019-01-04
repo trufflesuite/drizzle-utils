@@ -26,8 +26,10 @@ const resolveWeb3 = (resolve, options, isBrowser) => {
 
 const getWeb3 = (options = {}) =>
   new Promise(resolve => {
-    // handle server-side environments
-    if (typeof window === "undefined") {
+    // handle server-side and React Native environments
+    const isReactNative = navigator && navigator.product === "ReactNative";
+    const isNode = typeof window === "undefined";
+    if (isNode || isReactNative) {
       return resolveWeb3(resolve, options, false);
     }
 
