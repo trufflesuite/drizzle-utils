@@ -41,13 +41,5 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/test-app/",
-      "/coverage/",
-      "/__tests__/utils/"
-    ]
   }
 }
