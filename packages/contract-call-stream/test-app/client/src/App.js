@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Web3 from "web3";
 import createNewBlock$ from "@drizzle-utils/new-block-stream";
-import createContractData$ from "@drizzle-utils/contract-data-stream";
+import createContractCall$ from "@drizzle-utils/contract-call-stream";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 
 import "./App.css";
@@ -32,7 +32,7 @@ class App extends Component {
       );
 
       // create stream of values
-      const value$ = await createContractData$({
+      const value$ = await createContractCall$({
         newBlock$,
         methodCall: instance.methods.get(),
       });
