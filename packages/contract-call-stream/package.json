@@ -1,5 +1,5 @@
 {
-  "name": "@drizzle-utils/contract-data-stream",
+  "name": "@drizzle-utils/contract-call-stream",
   "version": "0.1.2-alpha.0",
   "main": "index.js",
   "license": "MIT",
