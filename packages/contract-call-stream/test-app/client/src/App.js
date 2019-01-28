@@ -39,9 +39,9 @@ class App extends Component {
 
       value$.subscribe(val => this.setState({ storageValue: val }));
 
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance });
+      // Set web3, accounts, contract, and value to the state
+      const currentVal = await instance.methods.get().call();
+      this.setState({ web3, accounts, contract: instance, storageValue: currentVal });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -53,13 +53,10 @@ class App extends Component {
 
   increment = async () => {
     const { accounts, contract } = this.state;
-    // get current number
-    const response = await contract.methods.get().call();
 
-    // get new value
-    const newVal = parseInt(response, 10) + 1;
+    const currentVal = await contract.methods.get().call();
+    const newVal = parseInt(currentVal, 10) + 1;
 
-    // send transaction to set new value
     await contract.methods.set(newVal).send({ from: accounts[0] });
   };
 
@@ -69,18 +66,8 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
-        <h2>Smart Contract Example</h2>
-        <p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
-        </p>
-        <p>
-          Try changing the value stored on <strong>line 40</strong> of App.js.
-        </p>
         <div>The stored value is: {this.state.storageValue}</div>
-        <button onClick={this.increment}>Increment</button>
+        <button onClick={this.increment}>increment</button>
       </div>
     );
   }

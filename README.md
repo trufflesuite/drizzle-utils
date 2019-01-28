@@ -12,4 +12,4 @@ Make sure you have Yarn installed globally.
 
 1. Clone the repo.
 2. Run `lerna bootstrap`.
-3. (Optional) Run `yarn` inside any of the `test-app` folders.
+3. (Optional) Run `npm install` inside any of the `test-app` folders. Note that `yarn` may not work properly.
