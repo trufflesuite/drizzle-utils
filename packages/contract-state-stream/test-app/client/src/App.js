@@ -62,6 +62,8 @@ class App extends Component {
 
     // send transaction to set new value
     await contract.methods.set(newVal).send({ from: accounts[0] });
+    const valAfterSet = await contract.methods.get().call();
+    this.setState({ storageValue: valAfterSet });
   };
 
   render() {
