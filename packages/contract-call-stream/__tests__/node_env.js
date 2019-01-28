@@ -7,11 +7,11 @@ const createNewBlock$ = require("@drizzle-utils/new-block-stream");
 const { take, finalize, tap, toArray } = require("rxjs/operators");
 
 const compile = require("./utils/compile");
-const createContractData$ = require("../index");
+const createContractCall$ = require("../index");
 
 jest.setTimeout(20000);
 
-describe("contract-data-stream tests in node environment", () => {
+describe("contract-call-stream tests in node environment", () => {
   let provider;
   let web3;
   let accounts;
@@ -52,8 +52,8 @@ describe("contract-data-stream tests in node environment", () => {
     expect(newVal).toBe("5");
   });
 
-  test("createContractData$ function exists", () => {
-    expect(createContractData$).toBeDefined();
+  test("createContractCall$ function exists", () => {
+    expect(createContractCall$).toBeDefined();
   });
 
   test("can track changes to a call method return value", async done => {
@@ -62,7 +62,7 @@ describe("contract-data-stream tests in node environment", () => {
       pollingInterval: 1,
     });
 
-    const returnVal$ = await createContractData$({
+    const returnVal$ = await createContractCall$({
       newBlock$,
       methodCall: contractInstance.methods.get(),
     });

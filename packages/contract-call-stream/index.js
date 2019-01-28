@@ -1,7 +1,7 @@
 const { from } = require("rxjs");
 const { distinctUntilChanged, switchMap } = require("rxjs/operators");
 
-const createContractData$ = options =>
+const createContractCall$ = options =>
   new Promise(async resolve => {
     // TODO - check that the user passed newBlock$ and a web3 method call
     const { newBlock$, methodCall } = options;
@@ -15,4 +15,4 @@ const createContractData$ = options =>
     resolve(observable);
   });
 
-module.exports = createContractData$;
+module.exports = createContractCall$;
