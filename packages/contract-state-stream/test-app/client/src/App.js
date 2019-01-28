@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Web3 from "web3";
 import createNewBlock$ from "@drizzle-utils/new-block-stream";
-import createContractData$ from "@drizzle-utils/contract-data-stream";
+import createContractState$ from "@drizzle-utils/contract-state-stream";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 
 import "./App.css";
@@ -31,13 +31,14 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
-      // create stream of values
-      const value$ = await createContractData$({
+      // create stream of contract state values
+      const state$ = await createContractState$({
         newBlock$,
-        methodCall: instance.methods.get(),
+        artifact: SimpleStorageContract,
+        provider: web3.currentProvider,
       });
 
-      value$.subscribe(val => this.setState({ storageValue: val }));
+      state$.subscribe(console.log);
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
