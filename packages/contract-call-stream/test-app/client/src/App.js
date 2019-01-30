@@ -32,7 +32,7 @@ class App extends Component {
       );
 
       // create stream of values
-      const value$ = await createContractCall$({
+      const value$ = createContractCall$({
         newBlock$,
         methodCall: instance.methods.get(),
       });
