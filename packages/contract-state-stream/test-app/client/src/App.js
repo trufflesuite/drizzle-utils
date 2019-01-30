@@ -32,7 +32,7 @@ class App extends Component {
       );
 
       // create stream of contract state values
-      const state$ = await createContractState$({
+      const state$ = createContractState$({
         newBlock$,
         artifact: SimpleStorageContract,
         provider: web3.currentProvider,
