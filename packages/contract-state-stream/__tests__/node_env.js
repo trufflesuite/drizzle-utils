@@ -95,6 +95,8 @@ describe("contract-state-stream tests in node environment", () => {
       .subscribe();
 
     await contractInstance.methods.set(0).send({ from: accounts[0] });
-    await contractInstance.methods.set(5).send({ from: accounts[0] });
+    setTimeout(async () => {
+      await contractInstance.methods.set(5).send({ from: accounts[0] });
+    }, 1000);
   });
 });
