@@ -6,7 +6,7 @@ const main = async () => {
   // const web3 = new Web3("http://127.0.0.1:9545"); // HttpProvider
   const web3 = new Web3("ws://127.0.0.1:9545"); // WebsocketProvider
 
-  const { observable, subscription } = await createNewBlock$({
+  const { observable, subscription } = createNewBlock$({
     web3,
     pollingInterval: 200, // only used if non-WebsocketProvider
   });

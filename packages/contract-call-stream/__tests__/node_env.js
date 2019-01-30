@@ -57,7 +57,7 @@ describe("contract-call-stream tests in node environment", () => {
   });
 
   test("can track changes to a call method return value", async done => {
-    const { observable: newBlock$, subscription } = await createNewBlock$({
+    const { observable: newBlock$, subscription } = createNewBlock$({
       web3,
       pollingInterval: 1,
     });
