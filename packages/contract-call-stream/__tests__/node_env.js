@@ -62,7 +62,7 @@ describe("contract-call-stream tests in node environment", () => {
       pollingInterval: 1,
     });
 
-    const returnVal$ = await createContractCall$({
+    const returnVal$ = createContractCall$({
       newBlock$,
       methodCall: contractInstance.methods.get(),
     });
