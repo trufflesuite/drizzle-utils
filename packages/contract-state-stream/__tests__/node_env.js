@@ -68,6 +68,37 @@ describe("contract-state-stream tests in node environment", () => {
     expect(createContractState$).toBeDefined();
   });
 
+  test("createContractState$ throws errors when required options fields not found", async () => {
+    expect(() => createContractState$()).toThrow();
+
+    expect(() =>
+      createContractState$({
+        artifact,
+        provider,
+      }),
+    ).toThrow(new Error("The options object with newBlock$ is required"));
+
+    const { observable: newBlock$, subscription } = await createNewBlock$({
+      web3,
+      pollingInterval: 1,
+    });
+    expect(() =>
+      createContractState$({
+        newBlock$,
+        provider,
+      }),
+    ).toThrow(new Error("The options object with artifact is required"));
+
+    expect(() =>
+      createContractState$({
+        newBlock$,
+        artifact,
+      }),
+    ).toThrow(new Error("The options object with provider is required"));
+
+    subscription.unsubscribe();
+  });
+
   test("can track changes to a call method return value", async done => {
     const { observable: newBlock$, subscription } = await createNewBlock$({
       web3,
