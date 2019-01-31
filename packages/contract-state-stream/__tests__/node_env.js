@@ -78,7 +78,7 @@ describe("contract-state-stream tests in node environment", () => {
       }),
     ).toThrow(new Error("The options object with newBlock$ is required"));
 
-    const { observable: newBlock$, subscription } = await createNewBlock$({
+    const { observable: newBlock$, subscription } = createNewBlock$({
       web3,
       pollingInterval: 1,
     });
@@ -100,7 +100,7 @@ describe("contract-state-stream tests in node environment", () => {
   });
 
   test("can track changes to a call method return value", async done => {
-    const { observable: newBlock$, subscription } = await createNewBlock$({
+    const { observable: newBlock$, subscription } = createNewBlock$({
       web3,
       pollingInterval: 1,
     });
