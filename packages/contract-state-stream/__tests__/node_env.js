@@ -102,7 +102,7 @@ describe("contract-state-stream tests in node environment", () => {
   test("can track changes to a call method return value", async done => {
     const { observable: newBlock$, subscription } = createNewBlock$({
       web3,
-      pollingInterval: 1,
+      pollingInterval: 200,
     });
 
     const returnVal$ = createContractState$({
@@ -126,8 +126,6 @@ describe("contract-state-stream tests in node environment", () => {
       .subscribe();
 
     await contractInstance.methods.set(0).send({ from: accounts[0] });
-    setTimeout(async () => {
-      await contractInstance.methods.set(5).send({ from: accounts[0] });
-    }, 250);
+    await contractInstance.methods.set(5).send({ from: accounts[0] });
   });
 });
