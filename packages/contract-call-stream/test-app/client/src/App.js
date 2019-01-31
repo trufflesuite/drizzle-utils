@@ -15,7 +15,7 @@ class App extends Component {
       // const web3 = new Web3("ws://127.0.0.1:9545"); // WebsocketProvider
 
       // track new blocks
-      const { observable: newBlock$ } = await createNewBlock$({
+      const { observable: newBlock$ } = createNewBlock$({
         web3,
         pollingInterval: 200, // only used if non-WebsocketProvider
       });
