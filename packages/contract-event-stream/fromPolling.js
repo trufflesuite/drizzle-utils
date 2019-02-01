@@ -1,15 +1,10 @@
 const { from } = require("rxjs");
 const { concatMap } = require("rxjs/operators");
-const createNewBlock$ = require("@drizzle-utils/new-block-stream");
 
-const fromPolling = ({ web3, pollingInterval, contract }) => {
-  const { observable: newBlock$ } = createNewBlock$({
-    web3,
-    pollingInterval,
-  });
-
+const fromPolling = ({ contract, newBlock$ }) => {
   const observable = newBlock$.pipe(
     // TODO, this returns an array, should just be an object like the ws one
+    // Default getPastEvents only returns latest block, will always be an array of 1
     concatMap(() => from(contract.getPastEvents("allEvents"))),
   );
 

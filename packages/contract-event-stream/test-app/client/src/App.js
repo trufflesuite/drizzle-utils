@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Web3 from "web3";
 import createContractEvent$ from "@drizzle-utils/contract-event-stream";
+import createNewBlock$ from "@drizzle-utils/new-block-stream";
 import TutorialTokenContract from "./contracts/TutorialToken.json";
 
 import "./App.css";
@@ -11,6 +12,11 @@ class App extends Component {
   componentDidMount = async () => {
     try {
       const web3 = new Web3("http://127.0.0.1:9545"); // HttpProvider
+      const { observable: newBlock$ } = createNewBlock$({
+        web3,
+        pollingInterval: 200,
+      });
+
       // const web3 = new Web3("ws://127.0.0.1:9545"); // event subs only work with WebsocketProvider
 
       // Use web3 to get the user's accounts.
@@ -29,6 +35,7 @@ class App extends Component {
         web3,
         abi: TutorialTokenContract.abi,
         address: deployedNetwork && deployedNetwork.address,
+        newBlock$,
       });
 
       event$.subscribe(console.log);
