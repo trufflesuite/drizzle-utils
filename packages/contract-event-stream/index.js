@@ -1,5 +1,5 @@
 const { Subject, from } = require("rxjs");
-const { distinctUntilChanged, switchMap } = require("rxjs/operators");
+const { switchMap } = require("rxjs/operators");
 const createNewBlock$ = require("@drizzle-utils/new-block-stream");
 
 const createContractEvent$ = (options = {}) => {
@@ -33,7 +33,6 @@ const createContractEvent$ = (options = {}) => {
 
   const observable = newBlock$.pipe(
     switchMap(() => from(contract.getPastEvents("allEvents"))),
-    distinctUntilChanged(),
   );
 
   return observable;
