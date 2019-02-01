@@ -1,9 +1,8 @@
-const { Subject, from } = require("rxjs");
-const { concatMap } = require("rxjs/operators");
-const createNewBlock$ = require("@drizzle-utils/new-block-stream");
+const fromPolling = require("./fromPolling");
+const fromSubscribe = require("./fromSubscribe");
 
 const createContractEvent$ = (options = {}) => {
-  const { web3, abi, address } = options;
+  const { web3, abi, address, pollingInterval } = options;
   if (!web3) throw new Error("The options object with web3 is required");
   if (!abi) throw new Error("The options object with contract abi is required");
   if (!address)
@@ -11,31 +10,16 @@ const createContractEvent$ = (options = {}) => {
 
   const providerType = web3.currentProvider.constructor.name;
 
+  // TODO: perhaps use get-contract-instance
   const contract = new web3.eth.Contract(abi, address);
 
   // TODO: for subs, return sub so user can unsub
   // Events subscription only works with websocket provider
   if (providerType === "WebsocketProvider") {
-    const observable = new Subject();
-    contract.events
-      .allEvents()
-      .on("data", event => {
-        observable.next(event);
-      })
-      .on("error", err => observable.next(err));
-    return observable;
+    return fromSubscribe({ contract });
   }
 
-  const { observable: newBlock$ } = createNewBlock$({
-    web3,
-    pollingInterval: 200,
-  });
-
-  const observable = newBlock$.pipe(
-    concatMap(() => from(contract.getPastEvents("allEvents"))),
-  );
-
-  return observable;
+  return fromPolling({ web3, pollingInterval, contract });
 };
 
 module.exports = createContractEvent$;
