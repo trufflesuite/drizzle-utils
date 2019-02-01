@@ -33,7 +33,7 @@ class App extends Component {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance });
-      await this.updateBalanceOf()
+      await this.updateBalanceOf();
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -44,14 +44,19 @@ class App extends Component {
   };
 
   updateBalanceOf = async () => {
-    const {contract, accounts} = this.state
-    const [account1Bal,account2Bal] = await Promise.all([ contract.methods.balanceOf(accounts[0]).call(), contract.methods.balanceOf(accounts[1]).call()])
-    this.setState({  account1Bal, account2Bal });
-  }
+    const { contract, accounts } = this.state;
+    const [account1Bal, account2Bal] = await Promise.all([
+      contract.methods.balanceOf(accounts[0]).call(),
+      contract.methods.balanceOf(accounts[1]).call(),
+    ]);
+    this.setState({ account1Bal, account2Bal });
+  };
 
   transfer = async () => {
-    const {contract, accounts} = this.state
-    await contract.methods.transfer(accounts[1], 1000).send({ from: accounts[0]})
+    const { contract, accounts } = this.state;
+    await contract.methods
+      .transfer(accounts[1], 1000)
+      .send({ from: accounts[0] });
     await this.updateBalanceOf();
   };
 
@@ -64,9 +69,7 @@ class App extends Component {
         <h1>Good to Go!</h1>
         <p>Your Truffle Box is installed and ready.</p>
         <h2>Smart Contract Example</h2>
-        <p>
-          Transfer some TutorialToken (TT) from Acccount 1 to Account 2.
-        </p>
+        <p>Transfer some TutorialToken (TT) from Acccount 1 to Account 2.</p>
         <h2>TT balance</h2>
         <div>Account 1: {this.state.account1Bal}</div>
         <div>Account 2: {this.state.account2Bal}</div>
