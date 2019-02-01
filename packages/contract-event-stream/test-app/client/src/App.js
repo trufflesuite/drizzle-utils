@@ -54,9 +54,7 @@ class App extends Component {
 
   transfer = async () => {
     const { contract, accounts } = this.state;
-    await contract.methods
-      .transfer(accounts[1], 1000)
-      .send({ from: accounts[0] });
+    await contract.methods.transfer(accounts[1], 1).send({ from: accounts[0] });
     await this.updateBalanceOf();
   };
 
