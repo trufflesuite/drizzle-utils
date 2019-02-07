@@ -1,13 +1,13 @@
 {
   "name": "@drizzle-utils/core",
-  "version": "0.1.2-alpha.0",
+  "version": "0.1.3-alpha.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@drizzle-utils/current-account-stream": "^0.1.2-alpha",
-    "@drizzle-utils/get-accounts": "^0.1.2-alpha",
-    "@drizzle-utils/get-contract-instance": "^0.1.2-alpha",
-    "@drizzle-utils/get-web3": "^0.1.2-alpha"
+    "@drizzle-utils/current-account-stream": "^0.1.3-alpha.0",
+    "@drizzle-utils/get-accounts": "^0.1.3-alpha.0",
+    "@drizzle-utils/get-contract-instance": "^0.1.3-alpha.0",
+    "@drizzle-utils/get-web3": "^0.1.3-alpha.0"
   },
   "gitHead": "78353207c5f530445bc5966013595809bc14506c",
   "publishConfig": {
