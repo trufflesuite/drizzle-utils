@@ -1,33 +1,22 @@
-const getWeb3 = require("@drizzle-utils/get-web3");
-const getAccounts = require("@drizzle-utils/get-accounts");
-const getContractInstance = require("@drizzle-utils/get-contract-instance");
-const createCurrentAccount$ = require("@drizzle-utils/current-account-stream");
+const _getAccounts = require("@drizzle-utils/get-accounts");
+const _getContractInstance = require("@drizzle-utils/get-contract-instance");
+const _createCurrentAccount$ = require("@drizzle-utils/current-account-stream");
 
-class DrizzleUtils {
-  constructor() {
-    this.web3 = null;
-    this.accounts = null;
-    this.currentAccount$ = null;
-  }
+const createDrizzleUtils = async ({ web3 }) => {
+  const getAccounts = async (options = {}) =>
+    await _getAccounts({ web3, ...options });
 
-  async getAccounts(options = {}) {
-    this.accounts = await getAccounts({ web3: this.web3, ...options });
-    return this.accounts;
-  }
+  const getContractInstance = async (options = {}) =>
+    await _getContractInstance({ web3, ...options });
 
-  async getContractInstance(options = {}) {
-    const instance = await getContractInstance({ web3: this.web3, ...options });
-    return instance;
-  }
+  const createCurrentAccount$ = async options =>
+    await _createCurrentAccount$({ web3, ...options });
 
-  async init(options = {}) {
-    this.web3 = await getWeb3(options);
-    this.accounts = await getAccounts({ web3: this.web3 });
-    this.currentAccount$ = await createCurrentAccount$({ web3: this.web3 });
+  return {
+    getAccounts,
+    getContractInstance,
+    createCurrentAccount$,
+  };
+};
 
-    // keep `this.accounts` array up-to-date
-    this.currentAccount$.subscribe(this.getAccounts.bind(this));
-  }
-}
-
-module.exports = DrizzleUtils;
+module.exports = createDrizzleUtils;
