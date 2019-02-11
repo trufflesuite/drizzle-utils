@@ -38,7 +38,6 @@ describe("contract-event-stream tests in node environment", () => {
       .send({ from: accounts[0], gas: 150000 });
 
     // Note: deployed address located at `deployedInstance._address`
-
     contractInstance = deployedInstance;
 
     artifact = {
@@ -88,6 +87,7 @@ describe("contract-event-stream tests in node environment", () => {
       new Error("The options object with contract address is required"),
     );
 
+    // Note: ganache provider.constructor.name is Provider
     expect(() => createContractEvent$({ web3, abi, address })).toThrow(
       new Error("Must provide newBlock$ when using http provider with web3"),
     );
