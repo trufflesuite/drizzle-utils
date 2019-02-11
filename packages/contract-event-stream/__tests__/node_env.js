@@ -129,9 +129,15 @@ describe("contract-event-stream tests in node environment", () => {
   });
 
   test("fromSubscribe can track events emitted by send method", async done => {
+    // Change constructor so we can test Websocket route
+    // Note that ganache provider.constructor.name is Provider
+    function WebsocketProvider() {}
+    const web3Ws = new Web3(provider);
+    web3Ws.currentProvider.constructor = WebsocketProvider;
+
     const { _address: address } = contractInstance;
     const { abi } = artifact;
-    const event$ = createContractEvent$({ web3, abi, address });
+    const event$ = createContractEvent$({ web3: web3Ws, abi, address });
 
     // tap observable to make sure it emitted a "0" and then a "5"
     event$
