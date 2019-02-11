@@ -120,4 +120,26 @@ describe("contract-event-stream tests in node environment", () => {
     await contractInstance.methods.set(0).send({ from: accounts[0] });
     await contractInstance.methods.set(5).send({ from: accounts[0] });
   });
+
+  test("fromSubscribe can track events emitted by send method", async done => {
+    const { _address: address } = contractInstance;
+    const { abi } = artifact;
+    const event$ = createContractEvent$({ web3, abi, address });
+
+    // tap observable to make sure it emitted a "0" and then a "5"
+    event$
+      .pipe(
+        take(2),
+        toArray(),
+        tap(vals => expect(vals).toMatchSnapshot()),
+        finalize(() => {
+          expect.assertions(1);
+          done();
+        }),
+      )
+      .subscribe();
+
+    await contractInstance.methods.set(0).send({ from: accounts[0] });
+    await contractInstance.methods.set(5).send({ from: accounts[0] });
+  });
 });
