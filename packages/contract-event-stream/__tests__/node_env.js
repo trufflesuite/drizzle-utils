@@ -3,8 +3,8 @@
  */
 const Ganache = require("ganache-core");
 const Web3 = require("web3");
-// const createNewBlock$ = require("@drizzle-utils/new-block-stream");
-// const { take, finalize, tap, toArray } = require("rxjs/operators");
+const createNewBlock$ = require("@drizzle-utils/new-block-stream");
+const { take, finalize, tap, toArray } = require("rxjs/operators");
 
 const compile = require("./utils/compile");
 const createContractEvent$ = require("../index");
@@ -91,5 +91,33 @@ describe("contract-event-stream tests in node environment", () => {
     expect(() => createContractEvent$({ web3, abi, address })).toThrow(
       new Error("Must provide newBlock$ when using http provider with web3"),
     );
+  });
+
+  test("fromPolling can track events to a send method return value", async done => {
+    const { observable: newBlock$, subscription } = createNewBlock$({
+      web3,
+      pollingInterval: 200,
+    });
+
+    const { _address: address } = contractInstance;
+    const { abi } = artifact;
+    const event$ = createContractEvent$({ web3, abi, address, newBlock$ });
+
+    // tap observable to make sure it emitted a "0" and then a "5"
+    event$
+      .pipe(
+        take(2),
+        toArray(),
+        tap(vals => expect(vals).toMatchSnapshot()),
+        finalize(() => {
+          expect.assertions(1);
+          subscription.unsubscribe();
+          done();
+        }),
+      )
+      .subscribe();
+
+    await contractInstance.methods.set(0).send({ from: accounts[0] });
+    await contractInstance.methods.set(5).send({ from: accounts[0] });
   });
 });

@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`contract-event-stream tests in node environment fromPolling can track events to a send method return value 1`] = `
+Array [
+  Object {
+    "address": "0xf2bE270719ddD7722220d49b0093D51227f3A2Aa",
+    "blockHash": "0xc27de239004619a0296aeead35b27525d3d0d97516d7475c7d85a236b5359b08",
+    "blockNumber": 3,
+    "event": "Update",
+    "id": "log_8e183451",
+    "logIndex": 0,
+    "raw": Object {
+      "data": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "topics": Array [
+        "0x164f7b2ab803097dab5e39f06d2e4f3c3ddc5d4171abbdcc3e76443b8359c7f5",
+      ],
+    },
+    "returnValues": Result {
+      "0": "0",
+      "storedData": "0",
+    },
+    "signature": "0x164f7b2ab803097dab5e39f06d2e4f3c3ddc5d4171abbdcc3e76443b8359c7f5",
+    "transactionHash": "0x02e4b9f793d84005b1cd210dffe2b353fb21c707a6f111a215d5d2bb4b785507",
+    "transactionIndex": 0,
+    "type": "mined",
+  },
+  Object {
+    "address": "0xf2bE270719ddD7722220d49b0093D51227f3A2Aa",
+    "blockHash": "0x12fb1024bfc8b8016a764a2a70ce85ed1fd0255c2425f083665c2af09714eea9",
+    "blockNumber": 4,
+    "event": "Update",
+    "id": "log_5ae9d069",
+    "logIndex": 0,
+    "raw": Object {
+      "data": "0x0000000000000000000000000000000000000000000000000000000000000005",
+      "topics": Array [
+        "0x164f7b2ab803097dab5e39f06d2e4f3c3ddc5d4171abbdcc3e76443b8359c7f5",
+      ],
+    },
+    "returnValues": Result {
+      "0": "5",
+      "storedData": "5",
+    },
+    "signature": "0x164f7b2ab803097dab5e39f06d2e4f3c3ddc5d4171abbdcc3e76443b8359c7f5",
+    "transactionHash": "0x81342cb4c9eb9d29f471f6e36dc51a878ac91642ffe67bfed9da1d2d4c740037",
+    "transactionIndex": 0,
+    "type": "mined",
+  },
+]
+`;
