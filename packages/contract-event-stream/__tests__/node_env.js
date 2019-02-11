@@ -8,6 +8,7 @@ const { take, finalize, tap, toArray } = require("rxjs/operators");
 
 const compile = require("./utils/compile");
 const createContractEvent$ = require("../index");
+const makePropertyMatcher = require("./utils/makePropertyMatcher");
 
 jest.setTimeout(20000);
 
@@ -104,20 +105,6 @@ describe("contract-event-stream tests in node environment", () => {
     const event$ = createContractEvent$({ web3, abi, address, newBlock$ });
 
     // tap observable to make sure it emitted a "0" and then a "5"
-    const makePropertyMatcher = blockNumber => ({
-      address: expect.anything(),
-      blockHash: expect.anything(),
-      blockNumber,
-      id: expect.anything(),
-      logIndex: expect.anything(),
-      raw: {
-        data: expect.anything(),
-        topics: [expect.anything()],
-      },
-      signature: expect.anything(),
-      transactionHash: expect.anything(),
-    });
-
     event$
       .pipe(
         take(2),
