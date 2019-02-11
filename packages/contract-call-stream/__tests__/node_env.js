@@ -56,6 +56,23 @@ describe("contract-call-stream tests in node environment", () => {
     expect(createContractCall$).toBeDefined();
   });
 
+  test("createContractCall$ throws errors when required options fields not found", () => {
+    const { observable: newBlock$ } = createNewBlock$({
+      web3,
+      pollingInterval: 200,
+    });
+
+    expect(() => createContractCall$()).toThrow();
+
+    expect(() =>
+      createContractCall$({ methodCall: contractInstance.methods.get() }),
+    ).toThrow(new Error("The options object with newBlock$ is required"));
+
+    expect(() => createContractCall$({ newBlock$ })).toThrow(
+      new Error("The options object with methodCall is required"),
+    );
+  });
+
   test("can track changes to a call method return value", async done => {
     const { observable: newBlock$, subscription } = createNewBlock$({
       web3,
