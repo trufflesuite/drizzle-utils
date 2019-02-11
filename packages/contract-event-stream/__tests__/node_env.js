@@ -88,7 +88,6 @@ describe("contract-event-stream tests in node environment", () => {
       new Error("The options object with contract address is required"),
     );
 
-    // Note: ganache provider.constructor.name is Provider
     const web3Http = new Web3("http://127.0.0.1:9545"); // HttpProvider
     expect(() =>
       createContractEvent$({ web3: web3Http, abi, address }),

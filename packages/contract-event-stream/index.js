@@ -16,6 +16,7 @@ const createContractEvent$ = (options = {}) => {
   // TODO: for subs, return sub so user can unsub
   // Events subscription only works with websocket provider
   // or a pubsub capable provider (e.g. Ganache core), check for presence of EventEmitter fields
+  // Note that ganache provider.constructor.name is Provider
   if (providerType === "WebsocketProvider" || web3.currentProvider.on) {
     return fromSubscribe({ contract });
   }
