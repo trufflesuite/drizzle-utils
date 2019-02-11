@@ -93,7 +93,7 @@ describe("contract-event-stream tests in node environment", () => {
     );
   });
 
-  test("fromPolling can track events to a send method return value", async done => {
+  test("fromPolling can track events emitted by send method", async done => {
     const { observable: newBlock$, subscription } = createNewBlock$({
       web3,
       pollingInterval: 200,
