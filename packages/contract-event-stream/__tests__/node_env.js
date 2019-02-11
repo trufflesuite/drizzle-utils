@@ -70,7 +70,7 @@ describe("contract-event-stream tests in node environment", () => {
     expect(createContractEvent$).toBeDefined();
   });
 
-  test("createContractEvent$ throws errors when required options fields not found", async () => {
+  test("createContractEvent$ throws errors when required options fields not found", () => {
     const { _address: address } = contractInstance;
     const { abi } = artifact;
 
