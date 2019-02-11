@@ -110,11 +110,8 @@ describe("contract-event-stream tests in node environment", () => {
         take(2),
         toArray(),
         tap(vals =>
-          vals.forEach((val, i) => {
-            // Ensure that events come in correct order
-            // Property matcher arg must be an object. Can't be an array of objs.
-            const startingBlock = 3;
-            expect(val).toMatchSnapshot(makePropertyMatcher(startingBlock + i));
+          vals.forEach(val => {
+            expect(val).toMatchSnapshot(makePropertyMatcher());
           }),
         ),
         finalize(() => {
@@ -140,11 +137,8 @@ describe("contract-event-stream tests in node environment", () => {
         take(2),
         toArray(),
         tap(vals => {
-          vals.forEach((val, i) => {
-            // Ensure that events come in correct order
-            // Property matcher arg must be an object. Can't be an array of objs.
-            const startingBlock = 3;
-            expect(val).toMatchSnapshot(makePropertyMatcher(startingBlock + i));
+          vals.forEach(val => {
+            expect(val).toMatchSnapshot(makePropertyMatcher());
           });
         }),
         finalize(() => {
