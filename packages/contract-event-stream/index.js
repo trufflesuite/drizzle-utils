@@ -15,7 +15,7 @@ const createContractEvent$ = (options = {}) => {
 
   // TODO: for subs, return sub so user can unsub
   // Events subscription only works with websocket provider
-  if (providerType === "WebsocketProvider") {
+  if (providerType === "WebsocketProvider" || web3.currentProvider.on) {
     return fromSubscribe({ contract });
   }
 
