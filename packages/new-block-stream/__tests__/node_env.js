@@ -91,4 +91,38 @@ describe("new-block-stream tests in node environment", () => {
     await contractInstance.methods.set(0).send({ from: accounts[0] });
     await contractInstance.methods.set(5).send({ from: accounts[0] });
   });
+
+  test("fromSubscribeMethod can track blocks", async done => {
+    // Change constructor so we can test Websocket route
+    // Note that ganache provider.constructor.name is Provider
+    function WebsocketProvider() {}
+    const web3Ws = new Web3(provider);
+    web3Ws.currentProvider.constructor = WebsocketProvider;
+
+    const { observable: newBlock$, subscription } = createNewBlock$({
+      web3: web3Ws,
+      pollingInterval: 200,
+    });
+
+    // tap observable to make sure it emitted a "0" and then a "5"
+    newBlock$
+      .pipe(
+        take(2),
+        toArray(),
+        tap(vals =>
+          vals.forEach(val => {
+            expect(val).toMatchSnapshot(makePropertyMatcher());
+          }),
+        ),
+        finalize(() => {
+          expect.assertions(2);
+          subscription.unsubscribe();
+          done();
+        }),
+      )
+      .subscribe();
+
+    await contractInstance.methods.set(0).send({ from: accounts[0] });
+    await contractInstance.methods.set(5).send({ from: accounts[0] });
+  });
 });
