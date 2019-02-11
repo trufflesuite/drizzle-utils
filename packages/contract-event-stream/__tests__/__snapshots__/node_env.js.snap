@@ -4,7 +4,7 @@ exports[`contract-event-stream tests in node environment fromPolling can track e
 Object {
   "address": Anything,
   "blockHash": Anything,
-  "blockNumber": Anything,
+  "blockNumber": 3,
   "event": "Update",
   "id": Anything,
   "logIndex": Anything,
@@ -29,7 +29,7 @@ exports[`contract-event-stream tests in node environment fromPolling can track e
 Object {
   "address": Anything,
   "blockHash": Anything,
-  "blockNumber": Anything,
+  "blockNumber": 4,
   "event": "Update",
   "id": Anything,
   "logIndex": Anything,

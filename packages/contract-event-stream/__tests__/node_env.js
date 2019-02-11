@@ -104,10 +104,10 @@ describe("contract-event-stream tests in node environment", () => {
     const event$ = createContractEvent$({ web3, abi, address, newBlock$ });
 
     // tap observable to make sure it emitted a "0" and then a "5"
-    const propertyMatcher = {
+    const makePropertyMatcher = blockNumber => ({
       address: expect.anything(),
       blockHash: expect.anything(),
-      blockNumber: expect.anything(),
+      blockNumber,
       id: expect.anything(),
       logIndex: expect.anything(),
       raw: {
@@ -116,14 +116,19 @@ describe("contract-event-stream tests in node environment", () => {
       },
       signature: expect.anything(),
       transactionHash: expect.anything(),
-    };
+    });
 
     event$
       .pipe(
         take(2),
         toArray(),
         tap(vals =>
-          vals.forEach(val => expect(val).toMatchSnapshot(propertyMatcher)),
+          vals.forEach((val, i) => {
+            // Ensure that events come in correct order
+            // Property matcher arg must be an object. Can't be an array of objs.
+            const startingBlock = 3;
+            expect(val).toMatchSnapshot(makePropertyMatcher(startingBlock + i));
+          }),
         ),
         finalize(() => {
           expect.assertions(2);
