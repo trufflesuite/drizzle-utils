@@ -55,5 +55,11 @@ describe("new-block-stream tests in node environment", () => {
     expect(createNewBlock$).toBeDefined();
   });
 
-  test("createContractEvent$ throws errors when required options fields not found", () => {});
+  test("createNewBlock$ throws errors when required options fields not found", () => {
+    expect(() => createNewBlock$()).toThrow();
+
+    expect(() => createNewBlock$({ pollingInterval: 200 })).toThrow(
+      new Error("The options object with web3 is required."),
+    );
+  });
 });
