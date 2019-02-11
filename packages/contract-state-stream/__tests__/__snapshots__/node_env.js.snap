@@ -26,3 +26,30 @@ Array [
   },
 ]
 `;
+
+exports[`contract-state-stream tests in node environment can track changes to a send method return value 1`] = `
+Array [
+  Object {
+    "balance": "0",
+    "name": undefined,
+    "variables": Object {
+      "storedData": Object {
+        "name": "storedData",
+        "type": "uint",
+        "value": "0",
+      },
+    },
+  },
+  Object {
+    "balance": "0",
+    "name": undefined,
+    "variables": Object {
+      "storedData": Object {
+        "name": "storedData",
+        "type": "uint",
+        "value": "5",
+      },
+    },
+  },
+]
+`;
