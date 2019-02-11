@@ -139,9 +139,16 @@ describe("contract-event-stream tests in node environment", () => {
       .pipe(
         take(2),
         toArray(),
-        tap(vals => expect(vals).toMatchSnapshot()),
+        tap(vals => {
+          vals.forEach((val, i) => {
+            // Ensure that events come in correct order
+            // Property matcher arg must be an object. Can't be an array of objs.
+            const startingBlock = 3;
+            expect(val).toMatchSnapshot(makePropertyMatcher(startingBlock + i));
+          });
+        }),
         finalize(() => {
-          expect.assertions(1);
+          expect.assertions(2);
           done();
         }),
       )
