@@ -89,7 +89,10 @@ describe("contract-event-stream tests in node environment", () => {
     );
 
     // Note: ganache provider.constructor.name is Provider
-    expect(() => createContractEvent$({ web3, abi, address })).toThrow(
+    const web3Http = new Web3("http://127.0.0.1:9545"); // HttpProvider
+    expect(() =>
+      createContractEvent$({ web3: web3Http, abi, address }),
+    ).toThrow(
       new Error("Must provide newBlock$ when using http provider with web3"),
     );
   });
