@@ -104,13 +104,29 @@ describe("contract-event-stream tests in node environment", () => {
     const event$ = createContractEvent$({ web3, abi, address, newBlock$ });
 
     // tap observable to make sure it emitted a "0" and then a "5"
+    const propertyMatcher = {
+      address: expect.anything(),
+      blockHash: expect.anything(),
+      blockNumber: expect.anything(),
+      id: expect.anything(),
+      logIndex: expect.anything(),
+      raw: {
+        data: expect.anything(),
+        topics: [expect.anything()],
+      },
+      signature: expect.anything(),
+      transactionHash: expect.anything(),
+    };
+
     event$
       .pipe(
         take(2),
         toArray(),
-        tap(vals => expect(vals).toMatchSnapshot()),
+        tap(vals =>
+          vals.forEach(val => expect(val).toMatchSnapshot(propertyMatcher)),
+        ),
         finalize(() => {
-          expect.assertions(1);
+          expect.assertions(2);
           subscription.unsubscribe();
           done();
         }),
