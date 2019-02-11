@@ -15,7 +15,6 @@ describe("new-block-stream tests in node environment", () => {
   let web3;
   let accounts;
   let contractInstance;
-  //   let artifact;
 
   beforeAll(async () => {
     // 1. Compile contract artifact
@@ -36,16 +35,6 @@ describe("new-block-stream tests in node environment", () => {
 
     // Note: deployed address located at `deployedInstance._address`
     contractInstance = deployedInstance;
-
-    // artifact = {
-    //   ...SimpleStorage,
-    //   // truffle-decoder needs this in artifact
-    //   networks: {
-    //     "4447": {
-    //       address: deployedInstance._address,
-    //     },
-    //   },
-    // };
   });
 
   afterAll(async () => {
@@ -65,4 +54,6 @@ describe("new-block-stream tests in node environment", () => {
   test("createNewBlock$ function exists", () => {
     expect(createNewBlock$).toBeDefined();
   });
+
+  test("createContractEvent$ throws errors when required options fields not found", () => {});
 });
