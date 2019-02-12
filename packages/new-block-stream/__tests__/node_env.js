@@ -7,7 +7,7 @@ const { take, finalize, tap, toArray } = require("rxjs/operators");
 
 const compile = require("./utils/compile");
 const createNewBlock$ = require("../index");
-const makePropertyMatcher = require("./utils/makePropertyMatcher");
+const { blockMatcher } = require("./utils/propertyMatchers");
 
 jest.setTimeout(20000);
 
@@ -77,7 +77,7 @@ describe("new-block-stream tests in node environment", () => {
         toArray(),
         tap(vals =>
           vals.forEach(val => {
-            expect(val).toMatchSnapshot(makePropertyMatcher());
+            expect(val).toMatchSnapshot(blockMatcher);
           }),
         ),
         finalize(() => {
@@ -111,7 +111,7 @@ describe("new-block-stream tests in node environment", () => {
         toArray(),
         tap(vals =>
           vals.forEach(val => {
-            expect(val).toMatchSnapshot(makePropertyMatcher());
+            expect(val).toMatchSnapshot(blockMatcher);
           }),
         ),
         finalize(() => {
