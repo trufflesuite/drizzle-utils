@@ -16,7 +16,7 @@ Object {
   "receiptsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
   "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
   "size": 1000,
-  "stateRoot": "0x9182e4bbb0559e4821e881204cca9ba38ee1eb65999b6d34c6ebba00ff6cc376",
+  "stateRoot": Anything,
   "timestamp": Anything,
   "totalDifficulty": "0",
   "transactions": Array [
@@ -45,7 +45,7 @@ Object {
   "receiptsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
   "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
   "size": 1000,
-  "stateRoot": "0x26c20d98f961ecb37857143c22ac3e90c9e214a61a8511763ca44d4e110f6d3d",
+  "stateRoot": Anything,
   "timestamp": Anything,
   "totalDifficulty": "0",
   "transactions": Array [
@@ -74,7 +74,7 @@ Object {
   "receiptsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
   "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
   "size": 1000,
-  "stateRoot": "0x2ca7c43e99a2022ccceb180de7ac8974da0b5eacbaab9a303e1275bd91cf5669",
+  "stateRoot": Anything,
   "timestamp": Anything,
   "totalDifficulty": "0",
   "transactions": Array [
@@ -103,7 +103,7 @@ Object {
   "receiptsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
   "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
   "size": 1000,
-  "stateRoot": "0x79adb9d3d574b46665a0a604af25c91bfb35bd4fd37b506602dd36579df7df92",
+  "stateRoot": Anything,
   "timestamp": Anything,
   "totalDifficulty": "0",
   "transactions": Array [
