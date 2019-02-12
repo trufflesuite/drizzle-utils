@@ -113,7 +113,7 @@ describe("contract-event-stream tests in node environment", () => {
         toArray(),
         tap(vals =>
           vals.forEach(val => {
-            expect(val).toMatchSnapshot(eventMatcher());
+            expect(val).toMatchSnapshot(eventMatcher);
           }),
         ),
         finalize(() => {
@@ -146,7 +146,7 @@ describe("contract-event-stream tests in node environment", () => {
         toArray(),
         tap(vals => {
           vals.forEach(val => {
-            expect(val).toMatchSnapshot(eventMatcher());
+            expect(val).toMatchSnapshot(eventMatcher);
           });
         }),
         finalize(() => {
