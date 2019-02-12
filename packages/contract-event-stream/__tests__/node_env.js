@@ -8,7 +8,7 @@ const { take, finalize, tap, toArray } = require("rxjs/operators");
 
 const compile = require("./utils/compile");
 const createContractEvent$ = require("../index");
-const makePropertyMatcher = require("./utils/propertyMatchers");
+const { eventMatcher } = require("./utils/propertyMatchers");
 
 jest.setTimeout(20000);
 
@@ -113,7 +113,7 @@ describe("contract-event-stream tests in node environment", () => {
         toArray(),
         tap(vals =>
           vals.forEach(val => {
-            expect(val).toMatchSnapshot(makePropertyMatcher());
+            expect(val).toMatchSnapshot(eventMatcher());
           }),
         ),
         finalize(() => {
@@ -146,7 +146,7 @@ describe("contract-event-stream tests in node environment", () => {
         toArray(),
         tap(vals => {
           vals.forEach(val => {
-            expect(val).toMatchSnapshot(makePropertyMatcher());
+            expect(val).toMatchSnapshot(eventMatcher());
           });
         }),
         finalize(() => {
