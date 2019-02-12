@@ -1,4 +1,4 @@
-const makePropertyMatcher = () => ({
+const eventMatcher = () => ({
   address: expect.anything(),
   blockHash: expect.anything(),
   blockNumber: expect.anything(),
@@ -12,4 +12,4 @@ const makePropertyMatcher = () => ({
   transactionHash: expect.anything(),
 });
 
-module.exports = makePropertyMatcher;
+module.exports = { eventMatcher };

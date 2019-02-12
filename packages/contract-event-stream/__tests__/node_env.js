@@ -8,7 +8,7 @@ const { take, finalize, tap, toArray } = require("rxjs/operators");
 
 const compile = require("./utils/compile");
 const createContractEvent$ = require("../index");
-const makePropertyMatcher = require("./utils/makePropertyMatcher");
+const makePropertyMatcher = require("./utils/propertyMatchers");
 
 jest.setTimeout(20000);
 
