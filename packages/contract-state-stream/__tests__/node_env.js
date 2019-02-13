@@ -90,7 +90,7 @@ describe("contract-state-stream tests in node environment", () => {
     subscription.unsubscribe();
   });
 
-  test("can track changes to a call method return value", async done => {
+  test("can track changes to a send method return value", async done => {
     const { observable: newBlock$, subscription } = createNewBlock$({
       web3,
       pollingInterval: 200,

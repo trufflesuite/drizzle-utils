@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`contract-state-stream tests in node environment can track changes to a call method return value 1`] = `
+exports[`contract-state-stream tests in node environment can track changes to a send method return value 1`] = `
 Array [
   Object {
     "balance": "0",
