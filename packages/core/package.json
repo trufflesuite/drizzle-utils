@@ -1,17 +1,17 @@
 {
   "name": "@drizzle-utils/core",
-  "version": "0.1.5-alpha.0",
+  "version": "0.1.6-alpha.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@drizzle-utils/contract-call-stream": "^0.1.5-alpha.0",
-    "@drizzle-utils/contract-event-stream": "^0.1.5-alpha.0",
-    "@drizzle-utils/contract-state-stream": "^0.1.5-alpha.0",
-    "@drizzle-utils/current-account-stream": "^0.1.5-alpha.0",
-    "@drizzle-utils/get-accounts": "^0.1.5-alpha.0",
-    "@drizzle-utils/get-contract-instance": "^0.1.5-alpha.0",
-    "@drizzle-utils/get-web3": "^0.1.5-alpha.0",
-    "@drizzle-utils/new-block-stream": "^0.1.5-alpha.0"
+    "@drizzle-utils/contract-call-stream": "^0.1.6-alpha.0",
+    "@drizzle-utils/contract-event-stream": "^0.1.6-alpha.0",
+    "@drizzle-utils/contract-state-stream": "^0.1.6-alpha.0",
+    "@drizzle-utils/current-account-stream": "^0.1.6-alpha.0",
+    "@drizzle-utils/get-accounts": "^0.1.6-alpha.0",
+    "@drizzle-utils/get-contract-instance": "^0.1.6-alpha.0",
+    "@drizzle-utils/get-web3": "^0.1.6-alpha.0",
+    "@drizzle-utils/new-block-stream": "^0.1.6-alpha.0"
   },
   "gitHead": "78353207c5f530445bc5966013595809bc14506c",
   "publishConfig": {
