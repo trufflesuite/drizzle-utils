@@ -2,6 +2,15 @@ const Ganache = require("ganache-core");
 const Web3 = require("web3");
 const compile = require("./compile");
 
+const initTestChain = async () => {
+  // Spawn Ganache test blockchain
+  const provider = Ganache.provider({ seed: "drizzle-utils" });
+  const web3 = new Web3(provider);
+  const accounts = await web3.eth.getAccounts();
+
+  return { provider, web3, accounts };
+};
+
 const deployContract = async ({ web3, account, contractArtifact }) => {
   // Create initial contract instance
   const instance = new web3.eth.Contract(contractArtifact.abi);
@@ -14,13 +23,8 @@ const deployContract = async ({ web3, account, contractArtifact }) => {
   return deployedInstance;
 };
 
-const initWithContract = async ({
-  contract: { dirname, filename, contractName },
-}) => {
-  // Spawn Ganache test blockchain
-  const provider = Ganache.provider({ seed: "drizzle-utils" });
-  const web3 = new Web3(provider);
-  const accounts = await web3.eth.getAccounts();
+const initContract = async ({ web3, account, contract }) => {
+  const { dirname, filename, contractName } = contract;
 
   // Compile contract artifact
   const { [contractName]: contractArtifact } = await compile({
@@ -29,19 +33,38 @@ const initWithContract = async ({
   });
 
   // Deploy contract
-  const deployedInstance = await deployContract({
+  const contractInstance = await deployContract({
     web3,
-    account: accounts[0],
+    account,
     contractArtifact,
   });
 
+  return { contractInstance, contractArtifact };
+};
+
+const init = async ({ contract } = {}) => {
+  const { provider, web3, accounts } = await initTestChain();
+
+  if (contract) {
+    const { contractInstance, contractArtifact } = await initContract({
+      web3,
+      account: accounts[0],
+      contract,
+    });
+    return {
+      provider,
+      web3,
+      accounts,
+      contractInstance,
+      contractArtifact,
+    };
+  }
+
   return {
-    contractInstance: deployedInstance,
     provider,
     web3,
     accounts,
-    contractArtifact,
   };
 };
 
-module.exports = initWithContract;
+module.exports = init;
