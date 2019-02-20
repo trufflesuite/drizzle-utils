@@ -17,8 +17,10 @@ describe("new-block-stream tests in node environment", () => {
 
   beforeAll(async () => {
     ({ provider, web3, accounts, contractInstance } = await initTestChain({
-      dirname: __dirname,
-      filename: "SimpleStorage.sol",
+      contract: {
+        dirname: __dirname,
+        filename: "SimpleStorage.sol",
+      },
     }));
   });
 

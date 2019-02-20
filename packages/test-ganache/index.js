@@ -2,7 +2,7 @@ const Ganache = require("ganache-core");
 const Web3 = require("web3");
 const compile = require("./compile");
 
-const init = async ({ dirname, filename }) => {
+const init = async ({ contract: { dirname, filename } }) => {
   // 1. Compile contract artifact
   const { SimpleStorage } = await compile({ dirname, filename });
 
