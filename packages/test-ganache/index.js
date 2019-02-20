@@ -14,7 +14,9 @@ const deployContract = async ({ web3, account, contractArtifact }) => {
   return deployedInstance;
 };
 
-const init = async ({ contract: { dirname, filename, contractName } }) => {
+const initWithContract = async ({
+  contract: { dirname, filename, contractName },
+}) => {
   // 1. Compile contract artifact
   const { [contractName]: contractArtifact } = await compile({
     dirname,
@@ -36,4 +38,4 @@ const init = async ({ contract: { dirname, filename, contractName } }) => {
   return { contractInstance: deployedInstance, provider, web3, accounts };
 };
 
-module.exports = init;
+module.exports = initWithContract;
