@@ -4,7 +4,7 @@
 const Web3 = require("web3");
 const createNewBlock$ = require("@drizzle-utils/new-block-stream");
 const { take, finalize, tap, toArray } = require("rxjs/operators");
-const initTestChain = require("@drizzle-utils/test-ganache");
+const initTestChain = require("@drizzle-utils/test-chain");
 
 const createContractEvent$ = require("../index");
 const { eventMatcher } = require("./utils/propertyMatchers");

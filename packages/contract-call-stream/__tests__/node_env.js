@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 const createNewBlock$ = require("@drizzle-utils/new-block-stream");
-const initTestChain = require("@drizzle-utils/test-ganache");
+const initTestChain = require("@drizzle-utils/test-chain");
 const { take, finalize, tap, toArray } = require("rxjs/operators");
 
 const createContractCall$ = require("../index");

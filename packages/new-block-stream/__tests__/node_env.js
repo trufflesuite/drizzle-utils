@@ -3,7 +3,7 @@
  */
 const Web3 = require("web3");
 const { take, finalize, tap, toArray } = require("rxjs/operators");
-const initTestChain = require("@drizzle-utils/test-ganache");
+const initTestChain = require("@drizzle-utils/test-chain");
 const createNewBlock$ = require("../index");
 const { blockMatcher } = require("./utils/propertyMatchers");
 
