@@ -1,11 +1,9 @@
 /**
  * @jest-environment node
  */
-const Ganache = require("ganache-core");
 const Web3 = require("web3");
 const { take, finalize, tap, toArray } = require("rxjs/operators");
-
-const compile = require("./utils/compile");
+const initTestChain = require("@drizzle-utils/test-ganache");
 const createNewBlock$ = require("../index");
 const { blockMatcher } = require("./utils/propertyMatchers");
 
@@ -18,24 +16,10 @@ describe("new-block-stream tests in node environment", () => {
   let contractInstance;
 
   beforeAll(async () => {
-    // 1. Compile contract artifact
-    const { SimpleStorage } = await compile("SimpleStorage.sol");
-
-    // 2. Spawn Ganache test blockchain
-    provider = Ganache.provider({ seed: "drizzle-utils" });
-    web3 = new Web3(provider);
-    accounts = await web3.eth.getAccounts();
-
-    // 3. Create initial contract instance
-    const instance = new web3.eth.Contract(SimpleStorage.abi);
-
-    // 4. Deploy contract and get new deployed Instance
-    const deployedInstance = await instance
-      .deploy({ data: SimpleStorage.bytecode })
-      .send({ from: accounts[0], gas: 150000 });
-
-    // Note: deployed address located at `deployedInstance._address`
-    contractInstance = deployedInstance;
+    ({ provider, web3, accounts, contractInstance } = await initTestChain({
+      dirname: __dirname,
+      filename: "SimpleStorage.sol",
+    }));
   });
 
   afterAll(async () => {
