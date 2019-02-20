@@ -1,12 +1,10 @@
 /**
  * @jest-environment node
  */
-const Ganache = require("ganache-core");
-const Web3 = require("web3");
 const createNewBlock$ = require("@drizzle-utils/new-block-stream");
 const { take, finalize, tap, toArray } = require("rxjs/operators");
+const initTestChain = require("@drizzle-utils/test-ganache");
 
-const compile = require("./utils/compile");
 const createContractState$ = require("../index");
 
 jest.setTimeout(20000);
@@ -17,34 +15,29 @@ describe("contract-state-stream tests in node environment", () => {
   let accounts;
   let contractInstance;
   let artifact;
+  let rawContractArtifact;
 
   beforeAll(async () => {
-    // 1. Compile contract artifact
-    const { SimpleStorage } = await compile("SimpleStorage.sol");
-
-    // 2. Spawn Ganache test blockchain
-    provider = Ganache.provider({ seed: "drizzle-utils" });
-    web3 = new Web3(provider);
-    accounts = await web3.eth.getAccounts();
-
-    // 3. Create initial contract instance
-    const instance = new web3.eth.Contract(SimpleStorage.abi);
-
-    // 4. Deploy contract and get new deployed Instance
-    const deployedInstance = await instance
-      .deploy({ data: SimpleStorage.bytecode })
-      .send({ from: accounts[0], gas: 150000 });
-
-    // Note: deployed address located at `deployedInstance._address`
-
-    contractInstance = deployedInstance;
+    ({
+      provider,
+      web3,
+      accounts,
+      contractInstance,
+      contractArtifact: rawContractArtifact,
+    } = await initTestChain({
+      contract: {
+        dirname: __dirname,
+        filename: "SimpleStorage.sol",
+        contractName: "SimpleStorage",
+      },
+    }));
 
     artifact = {
-      ...SimpleStorage,
+      ...rawContractArtifact,
       // truffle-decoder needs this in artifact
       networks: {
         "4447": {
-          address: deployedInstance._address,
+          address: contractInstance._address,
         },
       },
     };
