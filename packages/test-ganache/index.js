@@ -2,8 +2,6 @@ const Ganache = require("ganache-core");
 const Web3 = require("web3");
 const compile = require("./compile");
 
-const initProvider = () => Ganache.provider({ seed: "drizzle-utils" });
-
 const deployContract = async ({ web3, account, contractArtifact }) => {
   // Create initial contract instance
   const instance = new web3.eth.Contract(contractArtifact.abi);
@@ -16,12 +14,15 @@ const deployContract = async ({ web3, account, contractArtifact }) => {
   return deployedInstance;
 };
 
-const init = async ({ contract: { dirname, filename } }) => {
+const init = async ({ contract: { dirname, filename, contractName } }) => {
   // 1. Compile contract artifact
-  const { SimpleStorage } = await compile({ dirname, filename });
+  const { [contractName]: contractArtifact } = await compile({
+    dirname,
+    filename,
+  });
 
   // 2. Spawn Ganache test blockchain
-  const provider = initProvider();
+  const provider = Ganache.provider({ seed: "drizzle-utils" });
   const web3 = new Web3(provider);
   const accounts = await web3.eth.getAccounts();
 
@@ -29,7 +30,7 @@ const init = async ({ contract: { dirname, filename } }) => {
   const deployedInstance = await deployContract({
     web3,
     account: accounts[0],
-    contractArtifact: SimpleStorage,
+    contractArtifact,
   });
 
   return { contractInstance: deployedInstance, provider, web3, accounts };

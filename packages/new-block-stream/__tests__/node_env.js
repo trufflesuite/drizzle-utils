@@ -20,6 +20,7 @@ describe("new-block-stream tests in node environment", () => {
       contract: {
         dirname: __dirname,
         filename: "SimpleStorage.sol",
+        contractName: "SimpleStorage",
       },
     }));
   });
