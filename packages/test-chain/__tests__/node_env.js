@@ -5,7 +5,7 @@ const initTestChain = require("../index");
 
 jest.setTimeout(20000);
 
-describe("new-block-stream tests in node environment", () => {
+describe("test-chain tests in node environment", () => {
   let provider;
   let accounts;
   let contractInstance;
