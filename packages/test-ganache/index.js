@@ -17,18 +17,18 @@ const deployContract = async ({ web3, account, contractArtifact }) => {
 const initWithContract = async ({
   contract: { dirname, filename, contractName },
 }) => {
-  // 1. Compile contract artifact
+  // Spawn Ganache test blockchain
+  const provider = Ganache.provider({ seed: "drizzle-utils" });
+  const web3 = new Web3(provider);
+  const accounts = await web3.eth.getAccounts();
+
+  // Compile contract artifact
   const { [contractName]: contractArtifact } = await compile({
     dirname,
     filename,
   });
 
-  // 2. Spawn Ganache test blockchain
-  const provider = Ganache.provider({ seed: "drizzle-utils" });
-  const web3 = new Web3(provider);
-  const accounts = await web3.eth.getAccounts();
-
-  // 3. Deploy contract
+  // Deploy contract
   const deployedInstance = await deployContract({
     web3,
     account: accounts[0],
