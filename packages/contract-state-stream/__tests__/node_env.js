@@ -42,16 +42,6 @@ describe("contract-state-stream tests in node environment", () => {
     provider.close();
   });
 
-  test("ensure test suite setup works", async () => {
-    // Get old value, set a new value, check to see if it was set correctly
-    const oldVal = await contractInstance.methods.get().call();
-    await contractInstance.methods.set(5).send({ from: accounts[0] });
-    const newVal = await contractInstance.methods.get().call();
-
-    expect(oldVal).toBe("0");
-    expect(newVal).toBe("5");
-  });
-
   test("createContractState$ function exists", () => {
     expect(createContractState$).toBeDefined();
   });
