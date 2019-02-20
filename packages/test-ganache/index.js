@@ -35,7 +35,13 @@ const initWithContract = async ({
     contractArtifact,
   });
 
-  return { contractInstance: deployedInstance, provider, web3, accounts };
+  return {
+    contractInstance: deployedInstance,
+    provider,
+    web3,
+    accounts,
+    contractArtifact,
+  };
 };
 
 module.exports = initWithContract;
