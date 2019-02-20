@@ -15,25 +15,20 @@ describe("contract-state-stream tests in node environment", () => {
   let accounts;
   let contractInstance;
   let artifact;
-  let rawContractArtifact;
 
   beforeAll(async () => {
-    ({
-      provider,
-      web3,
-      accounts,
-      contractInstance,
-      contractArtifact: rawContractArtifact,
-    } = await initTestChain({
+    const { contractArtifact, ...rest } = await initTestChain({
       contract: {
         dirname: __dirname,
         filename: "SimpleStorage.sol",
         contractName: "SimpleStorage",
       },
-    }));
+    });
+
+    ({ provider, web3, accounts, contractInstance } = rest);
 
     artifact = {
-      ...rawContractArtifact,
+      ...contractArtifact,
       // truffle-decoder needs this in artifact
       networks: {
         "4447": {
