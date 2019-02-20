@@ -2,7 +2,7 @@ const Ganache = require("ganache-core");
 const Web3 = require("web3");
 const compile = require("./compile");
 
-const initTestChain = async () => {
+const initProviderWeb3 = async () => {
   // Spawn Ganache test blockchain
   const provider = Ganache.provider({ seed: "drizzle-utils" });
   const web3 = new Web3(provider);
@@ -42,8 +42,8 @@ const initContract = async ({ web3, account, contract }) => {
   return { contractInstance, contractArtifact };
 };
 
-const init = async ({ contract } = {}) => {
-  const { provider, web3, accounts } = await initTestChain();
+const initTestChain = async ({ contract } = {}) => {
+  const { provider, web3, accounts } = await initProviderWeb3();
 
   if (contract) {
     const { contractInstance, contractArtifact } = await initContract({
@@ -67,4 +67,4 @@ const init = async ({ contract } = {}) => {
   };
 };
 
-module.exports = init;
+module.exports = initTestChain;
