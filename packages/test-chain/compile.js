@@ -6,15 +6,15 @@ const TruffleCompile = require("truffle-compile");
 const truffleCompile = (...args) =>
   new Promise(resolve => TruffleCompile(...args, (_, data) => resolve(data)));
 
-const compile = async filename => {
-  const sourcePath = path.join(__dirname, "../contracts", filename);
+const compile = async ({ dirname, filename }) => {
+  const sourcePath = path.join(dirname, "contracts", filename);
 
   const sources = {
     [sourcePath]: fs.readFileSync(sourcePath, { encoding: "utf8" }),
   };
 
   const options = {
-    contracts_directory: path.join(__dirname, "../contracts"),
+    contracts_directory: path.join(dirname, "contracts"),
     compilers: {
       solc: {
         version: "0.5.2",

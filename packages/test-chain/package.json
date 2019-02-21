@@ -1,0 +1,9 @@
+{
+  "name": "@drizzle-utils/test-chain",
+  "version": "0.1.6-alpha.0",
+  "main": "index.js",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
