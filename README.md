@@ -29,7 +29,7 @@ const instance = await drizzleUtils.getContractInstance({
 Returns a Promise that resolves to an RxJS stream of events.
 
 ```js
-const event$ = await drizzleUtils.createContractEvent$({
+const event$ = drizzleUtils.createContractEvent$({
   abi: contractArtifact.abi,
   address: contractArtifact.networks[networkId].address
 })
@@ -42,7 +42,7 @@ event$.subscribe(event => console.log(event))
 Returns a Promise that resolves to an RxJS stream of contract states.
 
 ```js
-const state$ = await drizzleUtils.createContractState$({
+const state$ = drizzleUtils.createContractState$({
   artifact: contractArtifact,
   provider: web3.currentProvider
 })
@@ -55,7 +55,7 @@ state$.subscribe(state => console.log(state))
 In this example, `get` is a read-only method in our contract.
 
 ```js
-const call$ = await drizzleUtils.createContractCall$({
+const call$ = drizzleUtils.createContractCall$({
   methodCall: instance.methods.get()
 })
 
