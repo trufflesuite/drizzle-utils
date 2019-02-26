@@ -64,7 +64,7 @@ call$.subscribe(result => console.log(result))
 
 ### Using specific packages
 
-Refer to the specific package's README file for usage information.
+Find the package under the `packages` directory and refer to the README there. For example, under `packages/get-web3`, the README file located there illustrates multiple ways to use a custom provider.
 
 ## For development
 
