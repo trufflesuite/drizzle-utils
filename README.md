@@ -1,6 +1,8 @@
 # Drizzle Utils
 
-A library of tools for interacting with Ethereum smart contracts with a focus on [RxJS](https://github.com/ReactiveX/rxjs) streams so you can easily subscribe to events, contract state, and read-only methods.
+A library for interacting with Ethereum smart contracts based on [RxJS](https://github.com/ReactiveX/rxjs) streams.
+
+You can easily subscribe to events, contract state, and read-only methods. This library supports browser, node (i.e. server-side), and React Native environments.
 
 ## Usage
 
