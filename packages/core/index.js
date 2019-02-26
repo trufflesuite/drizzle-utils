@@ -28,7 +28,11 @@ const createDrizzleUtils = async ({ web3 }) => {
     _createContractEvent$({ web3, newBlock$, ...options });
 
   const createContractState$ = (options = {}) =>
-    _createContractState$({ web3, newBlock$, ...options });
+    _createContractState$({
+      newBlock$,
+      provider: web3.currentProvider,
+      ...options,
+    });
 
   return {
     getAccounts,
