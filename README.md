@@ -45,8 +45,7 @@ Returns a Promise that resolves to an RxJS stream of contract states.
 
 ```js
 const state$ = drizzleUtils.createContractState$({
-  artifact: contractArtifact,
-  provider: web3.currentProvider
+  artifact: contractArtifact
 })
 
 state$.subscribe(state => console.log(state))
