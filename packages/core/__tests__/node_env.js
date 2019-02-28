@@ -58,4 +58,13 @@ describe("contract-event-stream tests in node environment", () => {
 
     expect(event$).toMatchSnapshot();
   });
+
+  test("createContractEvent$ successfully returns observable from instance", async () => {
+    const event$ = await drizzleUtils.createContractEvent$({
+      instance: contractInstance,
+    });
+
+    expect(contractInstance._jsonInterface).toEqual(artifact.abi);
+    expect(event$).toMatchSnapshot();
+  });
 });

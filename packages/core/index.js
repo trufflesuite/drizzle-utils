@@ -39,6 +39,17 @@ const createDrizzleUtils = async ({ web3 }) => {
       });
     }
 
+    if (options.instance) {
+      const { instance } = options;
+      return _createContractEvent$({
+        web3,
+        newBlock$,
+        abi: instance._jsonInterface,
+        address: instance._address,
+        ...options,
+      });
+    }
+
     return _createContractEvent$({ web3, newBlock$, ...options });
   };
 
