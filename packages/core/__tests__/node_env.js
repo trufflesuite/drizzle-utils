@@ -25,11 +25,13 @@ describe("contract-event-stream tests in node environment", () => {
 
     ({ provider, web3, contractInstance } = testChain);
 
+    const networkId = await web3.eth.net.getId();
+
     artifact = {
       ...testChain.contractArtifact,
       // truffle-decoder needs this in artifact
       networks: {
-        "4447": {
+        [networkId]: {
           address: contractInstance._address,
         },
       },
@@ -47,6 +49,12 @@ describe("contract-event-stream tests in node environment", () => {
       abi: artifact.abi,
       address: contractInstance._address,
     });
+
+    expect(event$).toMatchSnapshot();
+  });
+
+  test("createContractEvent$ successfully returns observable from artifact", async () => {
+    const event$ = await drizzleUtils.createContractEvent$({ artifact });
 
     expect(event$).toMatchSnapshot();
   });
