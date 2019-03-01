@@ -10,6 +10,15 @@ Note that the `$` at the end of a variable name denotes an [RxJS](https://github
 
 ### Getting started
 
+Install via NPM:
+
+```
+npm install @drizzle-utils/core @drizzle-utils/get-web3
+```
+
+Usage example:
+
+
 ```js
 // import/require the packages you need
 const getWeb3 = require("@drizzle-utils/get-web3")
