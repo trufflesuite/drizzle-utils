@@ -24,8 +24,32 @@ const createDrizzleUtils = async ({ web3 }) => {
   const createContractCall$ = (options = {}) =>
     _createContractCall$({ web3, newBlock$, ...options });
 
-  const createContractEvent$ = (options = {}) =>
-    _createContractEvent$({ web3, newBlock$, ...options });
+  const createContractEvent$ = async (options = {}) => {
+    if (options.artifact) {
+      const { artifact } = options;
+      const networkId = await web3.eth.net.getId();
+      return _createContractEvent$({
+        web3,
+        newBlock$,
+        abi: artifact.abi,
+        address: artifact.networks[networkId].address,
+        ...options,
+      });
+    }
+
+    if (options.instance) {
+      const { instance } = options;
+      return _createContractEvent$({
+        web3,
+        newBlock$,
+        abi: instance._jsonInterface,
+        address: instance._address,
+        ...options,
+      });
+    }
+
+    return _createContractEvent$({ web3, newBlock$, ...options });
+  };
 
   const createContractState$ = (options = {}) =>
     _createContractState$({

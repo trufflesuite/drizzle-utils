@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`contract-event-stream tests in node environment createContractEvent$ successfully returns observable 1`] = `
+Observable {
+  "_isScalar": false,
+  "operator": MergeMapOperator {
+    "concurrent": Infinity,
+    "project": [Function],
+  },
+  "source": Observable {
+    "_isScalar": false,
+    "operator": MergeMapOperator {
+      "concurrent": 1,
+      "project": [Function],
+    },
+    "source": Observable {
+      "_isScalar": false,
+      "_subscribe": [Function],
+    },
+  },
+}
+`;
+
+exports[`contract-event-stream tests in node environment createContractEvent$ successfully returns observable from artifact 1`] = `
+Observable {
+  "_isScalar": false,
+  "operator": MergeMapOperator {
+    "concurrent": Infinity,
+    "project": [Function],
+  },
+  "source": Observable {
+    "_isScalar": false,
+    "operator": MergeMapOperator {
+      "concurrent": 1,
+      "project": [Function],
+    },
+    "source": Observable {
+      "_isScalar": false,
+      "_subscribe": [Function],
+    },
+  },
+}
+`;
+
+exports[`contract-event-stream tests in node environment createContractEvent$ successfully returns observable from instance 1`] = `
+Observable {
+  "_isScalar": false,
+  "operator": MergeMapOperator {
+    "concurrent": Infinity,
+    "project": [Function],
+  },
+  "source": Observable {
+    "_isScalar": false,
+    "operator": MergeMapOperator {
+      "concurrent": 1,
+      "project": [Function],
+    },
+    "source": Observable {
+      "_isScalar": false,
+      "_subscribe": [Function],
+    },
+  },
+}
+`;
