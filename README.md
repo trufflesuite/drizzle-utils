@@ -26,6 +26,10 @@ const instance = await drizzleUtils.getContractInstance({
 })
 ```
 
+### Getting the Web3 instance
+
+Refer to these [docs](./packages/get-web3/README.md) for reference.
+
 ### Streaming contract events
 
 Returns a Promise that resolves to an RxJS stream of events.
