@@ -32,8 +32,17 @@ Returns a Promise that resolves to an RxJS stream of events.
 
 ```js
 const event$ = await drizzleUtils.createContractEvent$({
-  abi: contractArtifact.abi,
-  address: contractArtifact.networks[networkId].address
+  instance: contractInstance  // web3 contract instance
+})
+
+event$.subscribe(event => console.log(event))
+```
+
+Alternatively, you can pass in the artifact:
+
+```js
+const event$ = await drizzleUtils.createContractEvent$({
+  artifact: contractArtifact
 })
 
 event$.subscribe(event => console.log(event))
