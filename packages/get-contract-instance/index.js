@@ -6,7 +6,6 @@ const getContractInstance = (options = {}) =>
 
     const { web3 } = options;
 
-    let instance;
     try {
       if (options.artifact) {
         // if artifact exists, attempt to get network ID and the deployed address
@@ -31,21 +30,20 @@ const getContractInstance = (options = {}) =>
         // if no deployed address is found, instantiate without the address
         const address = deployedNetwork && deployedNetwork.address;
 
-        instance = new web3.eth.Contract(artifact.abi, address);
+        const instance = new web3.eth.Contract(artifact.abi, address);
+        return resolve(instance);
       } else if (options.abi) {
         // otherwise, use passed-in ABI and deployed address (optional)
         const { abi, address } = options;
 
-        instance = new web3.eth.Contract(abi, address);
-      } else {
-        return reject(
-          new Error(
-            "You must pass in a contract artifact or the ABI of a deployed contract.",
-          ),
-        );
+        const instance = new web3.eth.Contract(abi, address);
+        return resolve(instance);
       }
-
-      return resolve(instance);
+      return reject(
+        new Error(
+          "You must pass in a contract artifact or the ABI of a deployed contract.",
+        ),
+      );
     } catch (err) {
       return reject(err);
     }
