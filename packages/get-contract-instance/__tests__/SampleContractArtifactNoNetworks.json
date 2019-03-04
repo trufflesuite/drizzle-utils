@@ -44,14 +44,6 @@
       "type": "function"
     }
   ],
-  "networks": {
-    "1234": {
-      "events": {},
-      "links": {},
-      "address": "0x345ca3e014aaf5dca488057592ee47305d9b3e10",
-      "transactionHash": "0x0c956a63da3c3d5891143e345036d91a2c354baf77407bafdc81a9af7cdf9dcd"
-    }
-  },
   "schemaVersion": "2.0.1",
   "updatedAt": "2018-12-07T21:17:42.275Z"
 }

@@ -1,37 +1,33 @@
+const instanceFromArtifact = require("./instanceFromArtifact");
+
 const getContractInstance = (options = {}) =>
   new Promise(async (resolve, reject) => {
     if (!options.web3) {
       return reject(new Error("The options object with web3 is required."));
     }
 
-    const { web3 } = options;
+    const { web3, suppressWarnings } = options;
 
-    let instance;
     try {
-      if (options.artifact) {
-        // if artifact exists, attempt to get network ID and the deployed address
-        const { artifact } = options;
-        const networkId = await web3.eth.net.getId();
-        const deployedNetwork = artifact.networks[networkId];
-
-        // if no deployed address is found, instantiate without the address
-        const address = deployedNetwork && deployedNetwork.address;
-
-        instance = new web3.eth.Contract(artifact.abi, address);
-      } else if (options.abi) {
-        // otherwise, use passed-in ABI and deployed address (optional)
+      // user passed in ABI
+      if (options.abi) {
         const { abi, address } = options;
-
-        instance = new web3.eth.Contract(abi, address);
-      } else {
-        return reject(
-          new Error(
-            "You must pass in a contract artifact or the ABI of a deployed contract.",
-          ),
-        );
+        const instance = new web3.eth.Contract(abi, address, suppressWarnings);
+        return resolve(instance);
       }
 
-      return resolve(instance);
+      // user passed in an artifact
+      if (options.artifact) {
+        const instance = await instanceFromArtifact(web3, options.artifact);
+        return resolve(instance);
+      }
+
+      // neither an ABI or artifact was passed in
+      return reject(
+        new Error(
+          "You must pass in a contract artifact or the ABI of a deployed contract.",
+        ),
+      );
     } catch (err) {
       return reject(err);
     }
