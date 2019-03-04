@@ -4,8 +4,9 @@
 const Ganache = require("ganache-core");
 const Web3 = require("web3");
 const getContractInstance = require("../index");
-const SampleContractArtifact = require("./SampleContractArtifact.json");
-const SampleContractArtifactNoNetworks = require("./SampleContractArtifactNoNetworks.json");
+const artifact = require("./SampleContractArtifact.json");
+const artifactWrongNetwork = require("./SampleContractArtifactWrongNetwork.json");
+const artifactNoNetworks = require("./SampleContractArtifactNoNetworks.json");
 
 describe("get-contract-instance tests in node environment", () => {
   let provider;
@@ -53,12 +54,28 @@ describe("get-contract-instance tests in node environment", () => {
   test("test instantiation from Truffle JSON artifact", async () => {
     /* eslint-disable no-console */
     console.warn = jest.fn();
-    const instance = await getContractInstance({
-      web3,
-      artifact: SampleContractArtifact,
-    });
+    const networkId = await web3.eth.net.getId();
+    const deployedAddress = artifact.networks[networkId].address;
+    const instance = await getContractInstance({ web3, artifact });
+
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
+    expect(instance._address.toLowerCase()).toEqual(deployedAddress);
+    expect(console.warn.mock.calls[0]).toBe(undefined);
+    /* eslint-enable no-console */
+  });
+
+  test("test instantiation from Truffle JSON artifact w/ wrong network", async () => {
+    /* eslint-disable no-console */
+    console.warn = jest.fn();
+    const instance = await getContractInstance({
+      web3,
+      artifact: artifactWrongNetwork,
+    });
+
+    expect(instance).toBeDefined();
+    expect(instance.methods).toBeDefined();
+    expect(instance._address).toBeNull();
     expect(console.warn.mock.calls[0][0]).toBe(
       "Contract instantiated without a deployed address.",
     );
@@ -70,10 +87,12 @@ describe("get-contract-instance tests in node environment", () => {
     console.warn = jest.fn();
     const instance = await getContractInstance({
       web3,
-      artifact: SampleContractArtifactNoNetworks,
+      artifact: artifactNoNetworks,
     });
+
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
+    expect(instance._address).toBeNull();
     expect(console.warn.mock.calls[0][0]).toBe(
       "Contract instantiated without a deployed address.",
     );
@@ -81,10 +100,7 @@ describe("get-contract-instance tests in node environment", () => {
   });
 
   test("test instantiation from ABI array", async () => {
-    const instance = await getContractInstance({
-      web3,
-      abi: SampleContractArtifact.abi,
-    });
+    const instance = await getContractInstance({ web3, abi: artifact.abi });
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
   });
