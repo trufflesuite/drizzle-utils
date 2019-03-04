@@ -5,6 +5,7 @@ const Ganache = require("ganache-core");
 const Web3 = require("web3");
 const getContractInstance = require("../index");
 const SampleContractArtifact = require("./SampleContractArtifact.json");
+const SampleContractArtifactNoNetworks = require("./SampleContractArtifactNoNetworks.json");
 
 describe("get-contract-instance tests in node environment", () => {
   let provider;
@@ -53,6 +54,15 @@ describe("get-contract-instance tests in node environment", () => {
     const instance = await getContractInstance({
       web3,
       artifact: SampleContractArtifact,
+    });
+    expect(instance).toBeDefined();
+    expect(instance.methods).toBeDefined();
+  });
+
+  test("test instantiation from Truffle JSON artifact w/ no networks object", async () => {
+    const instance = await getContractInstance({
+      web3,
+      artifact: SampleContractArtifactNoNetworks,
     });
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
