@@ -40,7 +40,7 @@ describe("get-contract-instance tests in node environment", () => {
 
   test("throw error if artifact is faulty", async () => {
     expect(getContractInstance({ web3, artifact: {} })).rejects.toThrow(
-      new TypeError("Cannot read property '1234' of undefined"),
+      "Your artifact must contain the ABI of the contract.",
     );
   });
 

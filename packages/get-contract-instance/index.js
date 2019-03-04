@@ -11,6 +11,20 @@ const getContractInstance = (options = {}) =>
       if (options.artifact) {
         // if artifact exists, attempt to get network ID and the deployed address
         const { artifact } = options;
+
+        // handle malformed artifact with missing ABI
+        if (!artifact.abi) {
+          return reject(
+            new Error("Your artifact must contain the ABI of the contract."),
+          );
+        }
+
+        // if no networks object is found, instantiate without the address
+        if (!artifact.networks) {
+          const instance = new web3.eth.Contract(artifact.abi);
+          return resolve(instance);
+        }
+
         const networkId = await web3.eth.net.getId();
         const deployedNetwork = artifact.networks[networkId];
 
