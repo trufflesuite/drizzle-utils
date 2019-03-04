@@ -51,21 +51,33 @@ describe("get-contract-instance tests in node environment", () => {
   });
 
   test("test instantiation from Truffle JSON artifact", async () => {
+    /* eslint-disable no-console */
+    console.warn = jest.fn();
     const instance = await getContractInstance({
       web3,
       artifact: SampleContractArtifact,
     });
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
+    expect(console.warn.mock.calls[0][0]).toBe(
+      "Contract instantiated without a deployed address.",
+    );
+    /* eslint-enable no-console */
   });
 
   test("test instantiation from Truffle JSON artifact w/ no networks object", async () => {
+    /* eslint-disable no-console */
+    console.warn = jest.fn();
     const instance = await getContractInstance({
       web3,
       artifact: SampleContractArtifactNoNetworks,
     });
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
+    expect(console.warn.mock.calls[0][0]).toBe(
+      "Contract instantiated without a deployed address.",
+    );
+    /* eslint-enable no-console */
   });
 
   test("test instantiation from ABI array", async () => {
