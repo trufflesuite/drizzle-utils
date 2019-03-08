@@ -57,6 +57,8 @@ describe("new-block-stream tests in node environment", () => {
 
 ### initTestChain
 
+Intializes the test chain with an optional contract deployed to it.
+
 #### Parameters
 
 1. options - `Object` (optional)
