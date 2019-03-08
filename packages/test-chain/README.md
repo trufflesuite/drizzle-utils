@@ -4,6 +4,76 @@ Utils for spawning a test blockchain to run automated tests on.
 
 ## Usage
 
-```js
-// TODO
+### Getting started
+
+Install via NPM:
+
 ```
+npm install @drizzle-utils/test-chain
+```
+
+Usage example (taken from `@drizzle-utils/new-block-stream/__tests__/node_env.js`):
+
+```js
+/**
+ * @jest-environment node
+ */
+const Web3 = require("web3");
+const { take, finalize, tap, toArray } = require("rxjs/operators");
+const initTestChain = require("@drizzle-utils/test-chain");
+const createNewBlock$ = require("../index");
+const { blockMatcher } = require("./utils/propertyMatchers");
+
+jest.setTimeout(20000);
+
+describe("new-block-stream tests in node environment", () => {
+  let provider;
+  let web3;
+  let accounts;
+  let contractInstance;
+
+  beforeAll(async () => {
+    // Assign results from initTestChain to be accessed by all tests
+    ({ provider, web3, accounts, contractInstance } = await initTestChain({
+      contract: {
+        dirname: __dirname,
+        filename: "SimpleStorage.sol",
+        contractName: "SimpleStorage",
+      },
+    }));
+  });
+
+  afterAll(async () => {
+    // Make sure to close the provider after all tests are done
+    provider.close();
+  });
+
+  test("fromPolling can track blocks", async done => {
+    // Do your other test stuff up here...
+
+    // Call your contract instance
+    await contractInstance.methods.set(0).send({ from: accounts[0] });
+    await contractInstance.methods.set(5).send({ from: accounts[0] });
+  });
+});
+```
+
+### initTestChain
+
+#### Parameters
+
+1. options - `Object` (optional)
+    - contract - `Object` (optional)
+      - dirname - `String`: The directory to search for a `contracts` folder
+      - filename - `String`: The Solidity filename
+      - contractName - `String`: The contract name
+
+
+#### Returns
+
+`Object`
+  - provider: A web3 provider
+  - web3: A web3 instance
+  - accounts - `String[]`: 
+  - contractInstance: (if `contract` was specified in `options` parameter) A [web3 contract instance](https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html)
+  - contractArtifact: (if `contract` was specified in `options` parameter) The `json` contract artifact
