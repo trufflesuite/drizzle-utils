@@ -73,7 +73,7 @@ Intializes the test chain with an optional contract deployed to it.
 
 `Object`
   - provider: A web3 provider.
-  - web3: A web3 instance.
+  - web3: A [web3 instance](https://web3js.readthedocs.io/en/1.0/web3.html#web3).
   - accounts - `String[]`: An array of address strings.
   - contractInstance: (if `contract` was specified in `options` parameter) A [web3 contract instance](https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html).
   - contractArtifact: (if `contract` was specified in `options` parameter) The `json` contract artifact.
