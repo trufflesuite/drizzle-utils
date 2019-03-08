@@ -19,12 +19,7 @@ Usage example (taken from `@drizzle-utils/new-block-stream/__tests__/node_env.js
  * @jest-environment node
  */
 const Web3 = require("web3");
-const { take, finalize, tap, toArray } = require("rxjs/operators");
 const initTestChain = require("@drizzle-utils/test-chain");
-const createNewBlock$ = require("../index");
-const { blockMatcher } = require("./utils/propertyMatchers");
-
-jest.setTimeout(20000);
 
 describe("new-block-stream tests in node environment", () => {
   let provider;
