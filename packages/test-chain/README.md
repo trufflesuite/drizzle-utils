@@ -74,6 +74,6 @@ describe("new-block-stream tests in node environment", () => {
 `Object`
   - provider: A web3 provider
   - web3: A web3 instance
-  - accounts - `String[]`: 
+  - accounts - `String[]`: An array of address strings.
   - contractInstance: (if `contract` was specified in `options` parameter) A [web3 contract instance](https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html)
   - contractArtifact: (if `contract` was specified in `options` parameter) The `json` contract artifact
