@@ -66,6 +66,7 @@ Intializes the test chain with an optional contract deployed to it.
       - dirname - `String`: The directory to search for a `contracts` folder.
       - filename - `String`: The Solidity filename.
       - contractName - `String`: The contract name.
+      - ganacheOptions - `Object`: [Ganache options object](https://github.com/trufflesuite/ganache-core#usage)
 
 
 #### Returns
