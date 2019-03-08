@@ -31,7 +31,7 @@ describe("new-block-stream tests in node environment", () => {
     // Assign results from initTestChain to be accessed by all tests
     ({ provider, web3, accounts, contractInstance } = await initTestChain({
       contract: {
-        dirname: __dirname,
+        dirname: __dirname, // contracts folder is a sibling to this .test.js file
         filename: "SimpleStorage.sol",
         contractName: "SimpleStorage",
       },
