@@ -66,9 +66,9 @@ describe("new-block-stream tests in node environment", () => {
 
 1. options - `Object` (optional)
     - contract - `Object` (optional)
-      - dirname - `String`: The directory to search for a `contracts` folder
-      - filename - `String`: The Solidity filename
-      - contractName - `String`: The contract name
+      - dirname - `String`: The directory to search for a `contracts` folder.
+      - filename - `String`: The Solidity filename.
+      - contractName - `String`: The contract name.
 
 
 #### Returns
