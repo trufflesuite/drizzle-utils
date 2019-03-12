@@ -47,7 +47,7 @@ main();
 
 ### createNewBlock$
 
-Creates an RxJS observable that will monitor the blockchain for new blocks. Supports both subscriptions and polling.
+Creates an RxJS observable that will monitor the blockchain for new blocks. Supports both [Web3 subscriptions](https://web3js.readthedocs.io/en/1.0/web3-eth-subscribe.html#eth-subscribe) and polling.
 
 #### Parameters
 
@@ -62,13 +62,15 @@ options - `Object`
 
 - observable: An RxJS observable.
 - subscription
-  - `Object` (if web3 subscription):  A reference to the underlying [Web3 subscription](https://web3js.readthedocs.io/en/1.0/web3-eth-subscribe.html#eth-subscribe).
-  - `Object` (if polling): An object containing a single function with the name `unsubscribe`.
+
+  If Web3 subscription: `subscription` is a reference to the underlying [Web3 subscription](https://web3js.readthedocs.io/en/1.0/web3-eth-subscribe.html#eth-subscribe).
+
+  If polling, `subscription` is an `Object` with the following fields:
   - unsubscribe - `Function`: Unsubscribe from either the web3.eth subscription or the polling block tracker.
 
 #### Example
 
-Subscription using a WebSocketProvider:
+Web3 subscription using a WebSocketProvider:
 
 ```js
 const web3 = new Web3("ws://127.0.0.1:9545"); // WebsocketProvider
