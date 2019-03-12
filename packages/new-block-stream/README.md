@@ -66,7 +66,7 @@ options - `Object`
   If Web3 subscription: `subscription` is a reference to the underlying [Web3 subscription](https://web3js.readthedocs.io/en/1.0/web3-eth-subscribe.html#eth-subscribe).
 
   If polling, `subscription` is an `Object` with the following fields:
-  - unsubscribe - `Function`: Unsubscribe from either the web3.eth subscription or the polling block tracker.
+  - unsubscribe - `Function`: Unsubscribe from either the Web3 subscription or the polling block tracker.
 
 #### Example
 
