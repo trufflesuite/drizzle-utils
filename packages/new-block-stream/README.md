@@ -58,7 +58,7 @@ options - `Object`
 
 #### Returns
 
-An RxJS stream
+An RxJS stream.
 
 #### Example
 
@@ -70,7 +70,6 @@ const { observable, subscription } = createNewBlock$({ web3 });
 ```
 
 Will fallback to polling if not a WebSocketProvider.
-
 
 Polling using a HttpProvider:
 
