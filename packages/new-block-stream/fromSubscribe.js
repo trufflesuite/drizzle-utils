@@ -1,6 +1,6 @@
 const { Subject } = require("rxjs");
 
-const fromSubscribeMethod = ({ web3 }) => {
+const fromSubscribe = ({ web3 }) => {
   const observable = new Subject();
   const subscription = web3.eth.subscribe(
     "newBlockHeaders",
@@ -16,4 +16,4 @@ const fromSubscribeMethod = ({ web3 }) => {
   return { observable, subscription };
 };
 
-module.exports = fromSubscribeMethod;
+module.exports = fromSubscribe;

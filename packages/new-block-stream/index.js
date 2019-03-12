@@ -1,4 +1,4 @@
-const fromSubscribeMethod = require("./fromSubscribeMethod");
+const fromSubscribe = require("./fromSubscribe");
 const fromPolling = require("./fromPolling");
 
 const createNewBlock$ = ({ web3, pollingInterval } = {}) => {
@@ -9,7 +9,7 @@ const createNewBlock$ = ({ web3, pollingInterval } = {}) => {
   const providerType = web3.currentProvider.constructor.name;
   if (providerType === "WebsocketProvider") {
     // use web3.eth.subscribe to listen for new blocks
-    return fromSubscribeMethod({ web3 });
+    return fromSubscribe({ web3 });
   }
 
   // fallback to polling with eth-block-tracker
