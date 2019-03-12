@@ -11,7 +11,7 @@ const main = async () => {
     pollingInterval: 200, // only used if non-WebsocketProvider
   });
 
-  // log out new blocks (can skip blocks if polling)
+  // log out new blocks (might skip blocks if polling)
   const stream = observable.subscribe(console.log);
 
   // 10 seconds later, unsubscribe
