@@ -6,7 +6,7 @@ A tool for creating a stream of new block data.
 
 ### Getting started
 
-Install via NPM:
+Install via npm:
 
 ```js
 npm install @drizzle-utils/new-block-stream
