@@ -53,7 +53,7 @@ Creates an RxJS stream that will monitor the blockchain for new blocks. Supports
 
 options - `Object`
   - web3 - `Object`: A [Web3 instance](https://web3js.readthedocs.io/en/1.0/web3.html#web3)
-  - pollingInterval (only used for non-WebsocketProvider) - `Number`: The rate at which the stream should poll for new blocks.
+  - pollingInterval (only used for non-WebsocketProvider) - `Number`: The rate in milliseconds at which the stream should poll for new blocks.
 
 
 #### Returns
