@@ -25,6 +25,9 @@ const fromPolling = ({ web3, pollingInterval }) => {
       // stub for users to unsubscribe
       unsubscribe: () => blockTracker.removeAllListeners("latest"),
     },
+    cleanup: () => {
+      blockTracker.removeAllListeners("latest");
+    },
   };
 };
 

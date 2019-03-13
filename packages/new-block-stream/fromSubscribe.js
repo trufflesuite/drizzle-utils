@@ -13,7 +13,13 @@ const fromSubscribe = ({ web3 }) => {
     },
   );
 
-  return { observable, subscription };
+  return {
+    observable,
+    subscription,
+    cleanup: () => {
+      subscription.unsubscribe();
+    },
+  };
 };
 
 module.exports = fromSubscribe;
