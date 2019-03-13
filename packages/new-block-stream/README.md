@@ -33,7 +33,6 @@ setTimeout(() => {
   console.log("unsubscribing...");
   subscription.unsubscribe();
   stream.unsubscribe();
-  process.exit();
 }, 10000);
 };
 
