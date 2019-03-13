@@ -21,8 +21,8 @@ const fromPolling = ({ web3, pollingInterval }) => {
   return {
     observable,
     cleanup: () => {
-      observable.complete();
       blockTracker.removeAllListeners("latest");
+      observable.complete();
     },
   };
 };

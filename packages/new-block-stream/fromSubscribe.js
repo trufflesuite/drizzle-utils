@@ -17,8 +17,8 @@ const fromSubscribe = ({ web3 }) => {
     observable,
     subscription,
     cleanup: () => {
-      observable.complete();
       subscription.unsubscribe();
+      observable.complete();
     },
   };
 };
