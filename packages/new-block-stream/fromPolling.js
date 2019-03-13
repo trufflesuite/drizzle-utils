@@ -26,6 +26,7 @@ const fromPolling = ({ web3, pollingInterval }) => {
     },
     cleanup: () => {
       blockTracker.removeAllListeners("latest");
+      observable.complete();
     },
   };
 };
