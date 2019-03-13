@@ -26,16 +26,11 @@ const { observable, subscription } = createNewBlock$({
 });
 
 // log out new blocks (might skip blocks if polling)
-const stream = observable.subscribe(block => console.log(block));
+const newBlock$ = observable.subscribe(block => console.log(block));
 
-// 10 seconds later, unsubscribe
-setTimeout(() => {
-  console.log("unsubscribing...");
-  subscription.unsubscribe();
-  stream.unsubscribe();
-}, 10000);
-};
-
+/* after some time, you want to stop listening to new blocks */
+newBlock$.unsubscribe()     // unsubscribe from the RxJS stream
+subscription.unsubscribe()  // unsubscribe from the underlying block listeners
 ```
 
 ## API
