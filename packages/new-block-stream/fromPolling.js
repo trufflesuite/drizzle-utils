@@ -9,7 +9,9 @@ const fromPolling = ({ web3, pollingInterval }) => {
   const provider = web3.currentProvider;
   const blockTracker = new PollingBlockTracker({ provider, pollingInterval });
 
+  let completeStream;
   const observable = new Observable(subscriber => {
+    completeStream = subscriber.complete();
     blockTracker
       .on("latest", async blockNum => {
         // get full block info with `web3.eth.getBlock`
@@ -27,6 +29,7 @@ const fromPolling = ({ web3, pollingInterval }) => {
     },
     cleanup: () => {
       blockTracker.removeAllListeners("latest");
+      completeStream();
     },
   };
 };
