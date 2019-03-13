@@ -1,64 +1,214 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`contract-event-stream tests in node environment createContractEvent$ successfully returns observable 1`] = `
-Observable {
+AnonymousSubject {
   "_isScalar": false,
-  "operator": MergeMapOperator {
-    "concurrent": Infinity,
-    "project": [Function],
-  },
-  "source": Observable {
+  "closed": false,
+  "destination": AnonymousSubject {
     "_isScalar": false,
+    "closed": false,
+    "destination": Subject {
+      "_isScalar": false,
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
+    },
+    "hasError": false,
+    "isStopped": false,
+    "observers": Array [],
     "operator": MergeMapOperator {
       "concurrent": 1,
       "project": [Function],
     },
-    "source": Observable {
+    "source": Subject {
       "_isScalar": false,
-      "_subscribe": [Function],
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
     },
+    "thrownError": null,
   },
+  "hasError": false,
+  "isStopped": false,
+  "observers": Array [],
+  "operator": MergeMapOperator {
+    "concurrent": Infinity,
+    "project": [Function],
+  },
+  "source": AnonymousSubject {
+    "_isScalar": false,
+    "closed": false,
+    "destination": Subject {
+      "_isScalar": false,
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
+    },
+    "hasError": false,
+    "isStopped": false,
+    "observers": Array [],
+    "operator": MergeMapOperator {
+      "concurrent": 1,
+      "project": [Function],
+    },
+    "source": Subject {
+      "_isScalar": false,
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
+    },
+    "thrownError": null,
+  },
+  "thrownError": null,
 }
 `;
 
 exports[`contract-event-stream tests in node environment createContractEvent$ successfully returns observable from artifact 1`] = `
-Observable {
+AnonymousSubject {
   "_isScalar": false,
-  "operator": MergeMapOperator {
-    "concurrent": Infinity,
-    "project": [Function],
-  },
-  "source": Observable {
+  "closed": false,
+  "destination": AnonymousSubject {
     "_isScalar": false,
+    "closed": false,
+    "destination": Subject {
+      "_isScalar": false,
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
+    },
+    "hasError": false,
+    "isStopped": false,
+    "observers": Array [],
     "operator": MergeMapOperator {
       "concurrent": 1,
       "project": [Function],
     },
-    "source": Observable {
+    "source": Subject {
       "_isScalar": false,
-      "_subscribe": [Function],
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
     },
+    "thrownError": null,
   },
+  "hasError": false,
+  "isStopped": false,
+  "observers": Array [],
+  "operator": MergeMapOperator {
+    "concurrent": Infinity,
+    "project": [Function],
+  },
+  "source": AnonymousSubject {
+    "_isScalar": false,
+    "closed": false,
+    "destination": Subject {
+      "_isScalar": false,
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
+    },
+    "hasError": false,
+    "isStopped": false,
+    "observers": Array [],
+    "operator": MergeMapOperator {
+      "concurrent": 1,
+      "project": [Function],
+    },
+    "source": Subject {
+      "_isScalar": false,
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
+    },
+    "thrownError": null,
+  },
+  "thrownError": null,
 }
 `;
 
 exports[`contract-event-stream tests in node environment createContractEvent$ successfully returns observable from instance 1`] = `
-Observable {
+AnonymousSubject {
   "_isScalar": false,
-  "operator": MergeMapOperator {
-    "concurrent": Infinity,
-    "project": [Function],
-  },
-  "source": Observable {
+  "closed": false,
+  "destination": AnonymousSubject {
     "_isScalar": false,
+    "closed": false,
+    "destination": Subject {
+      "_isScalar": false,
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
+    },
+    "hasError": false,
+    "isStopped": false,
+    "observers": Array [],
     "operator": MergeMapOperator {
       "concurrent": 1,
       "project": [Function],
     },
-    "source": Observable {
+    "source": Subject {
       "_isScalar": false,
-      "_subscribe": [Function],
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
     },
+    "thrownError": null,
   },
+  "hasError": false,
+  "isStopped": false,
+  "observers": Array [],
+  "operator": MergeMapOperator {
+    "concurrent": Infinity,
+    "project": [Function],
+  },
+  "source": AnonymousSubject {
+    "_isScalar": false,
+    "closed": false,
+    "destination": Subject {
+      "_isScalar": false,
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
+    },
+    "hasError": false,
+    "isStopped": false,
+    "observers": Array [],
+    "operator": MergeMapOperator {
+      "concurrent": 1,
+      "project": [Function],
+    },
+    "source": Subject {
+      "_isScalar": false,
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
+    },
+    "thrownError": null,
+  },
+  "thrownError": null,
 }
 `;
