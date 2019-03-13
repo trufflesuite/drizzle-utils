@@ -69,7 +69,7 @@ describe("contract-state-stream tests in node environment", () => {
   });
 
   test("can track changes to a send method return value", async done => {
-    const { observable: newBlock$, subscription } = createNewBlock$({
+    const { observable: newBlock$, cleanup } = createNewBlock$({
       web3,
       pollingInterval: 200,
     });
@@ -88,7 +88,7 @@ describe("contract-state-stream tests in node environment", () => {
         tap(vals => expect(vals).toMatchSnapshot()),
         finalize(() => {
           expect.assertions(1);
-          subscription.unsubscribe();
+          cleanup();
           done();
         }),
       )
