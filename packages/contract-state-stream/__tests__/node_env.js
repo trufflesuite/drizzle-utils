@@ -53,7 +53,7 @@ describe("contract-state-stream tests in node environment", () => {
       new Error("The options object with newBlock$ is required"),
     );
 
-    const { observable: newBlock$, subscription } = createNewBlock$({
+    const { observable: newBlock$, cleanup } = createNewBlock$({
       web3,
       pollingInterval: 1,
     });
@@ -65,11 +65,11 @@ describe("contract-state-stream tests in node environment", () => {
       new Error("The options object with provider is required"),
     );
 
-    subscription.unsubscribe();
+    cleanup();
   });
 
   test("can track changes to a send method return value", async done => {
-    const { observable: newBlock$, subscription } = createNewBlock$({
+    const { observable: newBlock$, cleanup } = createNewBlock$({
       web3,
       pollingInterval: 200,
     });
@@ -88,7 +88,7 @@ describe("contract-state-stream tests in node environment", () => {
         tap(vals => expect(vals).toMatchSnapshot()),
         finalize(() => {
           expect.assertions(1);
-          subscription.unsubscribe();
+          cleanup();
           done();
         }),
       )
