@@ -69,7 +69,7 @@ describe("new-block-stream tests in node environment", () => {
     await contractInstance.methods.set(5).send({ from: accounts[0] });
   });
 
-  test("fromSubscribeMethod can track blocks", async done => {
+  test("fromSubscribe can track blocks", async done => {
     // Change constructor so we can test Websocket route
     // Note that ganache provider.constructor.name is Provider
     function WebsocketProvider() {}

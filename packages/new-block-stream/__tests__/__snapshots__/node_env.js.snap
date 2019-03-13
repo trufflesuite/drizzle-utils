@@ -58,7 +58,7 @@ Object {
 }
 `;
 
-exports[`new-block-stream tests in node environment fromSubscribeMethod can track blocks 1`] = `
+exports[`new-block-stream tests in node environment fromSubscribe can track blocks 1`] = `
 Object {
   "difficulty": "0",
   "extraData": "0x",
@@ -87,7 +87,7 @@ Object {
 }
 `;
 
-exports[`new-block-stream tests in node environment fromSubscribeMethod can track blocks 2`] = `
+exports[`new-block-stream tests in node environment fromSubscribe can track blocks 2`] = `
 Object {
   "difficulty": "0",
   "extraData": "0x",
