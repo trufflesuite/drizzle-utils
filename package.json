@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint packages",
-    "test": "jest --coverage --verbose",
+    "test": "jest --coverage --verbose --detectOpenHandles",
     "test:watch": "jest --watch --verbose --coverage"
   },
   "devDependencies": {
