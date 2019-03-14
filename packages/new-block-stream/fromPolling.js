@@ -22,10 +22,10 @@ const fromPolling = ({ web3, pollingInterval }) => {
     observable,
     subscription: {
       // stub for users to unsubscribe
-      unsubscribe: () => blockTracker.removeAllListeners("latest"),
+      unsubscribe: () => blockTracker.removeAllListeners(),
     },
     cleanup: () => {
-      blockTracker.removeAllListeners("latest");
+      blockTracker.removeAllListeners();
       observable.complete();
     },
   };
