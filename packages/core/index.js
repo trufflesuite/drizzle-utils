@@ -7,10 +7,14 @@ const _createContractState$ = require("@drizzle-utils/contract-state-stream");
 const _createNewBlock$ = require("@drizzle-utils/new-block-stream");
 
 const createDrizzleUtils = async ({ web3 }) => {
-  const { observable: newBlock$ } = _createNewBlock$({
-    web3,
-    pollingInterval: 200, // only used if non-WebsocketProvider
-  });
+  const { observable: newBlock$, cleanup: cleanupNewBlock$ } = _createNewBlock$(
+    {
+      web3,
+      pollingInterval: 200, // only used if non-WebsocketProvider
+    },
+  );
+
+  const cleanup = () => cleanupNewBlock$();
 
   const getAccounts = async (options = {}) =>
     await _getAccounts({ web3, ...options });
@@ -66,6 +70,7 @@ const createDrizzleUtils = async ({ web3 }) => {
     createContractEvent$,
     createContractState$,
     newBlock$,
+    cleanup,
   };
 };
 

@@ -42,7 +42,7 @@ describe("new-block-stream tests in node environment", () => {
   });
 
   test("fromPolling can track blocks", async done => {
-    const { observable: newBlock$, subscription } = createNewBlock$({
+    const { observable: newBlock$, cleanup } = createNewBlock$({
       web3,
       pollingInterval: 200,
     });
@@ -59,7 +59,7 @@ describe("new-block-stream tests in node environment", () => {
         ),
         finalize(() => {
           expect.assertions(2);
-          subscription.unsubscribe();
+          cleanup();
           done();
         }),
       )
@@ -76,7 +76,7 @@ describe("new-block-stream tests in node environment", () => {
     const web3Ws = new Web3(provider);
     web3Ws.currentProvider.constructor = WebsocketProvider;
 
-    const { observable: newBlock$, subscription } = createNewBlock$({
+    const { observable: newBlock$, cleanup } = createNewBlock$({
       web3: web3Ws,
       pollingInterval: 200,
     });
@@ -93,7 +93,7 @@ describe("new-block-stream tests in node environment", () => {
         ),
         finalize(() => {
           expect.assertions(2);
-          subscription.unsubscribe();
+          cleanup();
           done();
         }),
       )

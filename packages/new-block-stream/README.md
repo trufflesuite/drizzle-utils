@@ -20,18 +20,19 @@ const createNewBlock$ = require("@drizzle-utils/new-block-stream");
 
 const web3 = new Web3("ws://127.0.0.1:9545");
 
-const { observable, subscription } = createNewBlock$({
+const { observable, cleanup } = createNewBlock$({
   web3,
   pollingInterval: 200, // only used if non-WebsocketProvider
 });
 
-// log out new blocks (might skip blocks if polling)
-const newBlock$ = observable.subscribe(block => console.log(block));
+// log out new blocks
+observable.subscribe(block => console.log(block));
 
-/* after some time, you want to stop listening to new blocks */
-newBlock$.unsubscribe()     // unsubscribe from the RxJS stream
-subscription.unsubscribe()  // unsubscribe from the underlying block listeners
+// stop listening to new blocks and end the stream
+cleanup();
 ```
+
+Note that listening to new blocks might skip blocks if polling is being used and the `pollingInterval` is longer than the rate in which new blocks are being produced.
 
 ## API
 
@@ -51,9 +52,5 @@ Creates an RxJS observable that will monitor the blockchain for new blocks. Supp
 `Object`
 
 - `observable`: An RxJS observable.
-- `subscription`
-
-  If Web3 subscription: `subscription` is a reference to the underlying [Web3 subscription](https://web3js.readthedocs.io/en/1.0/web3-eth-subscribe.html#eth-subscribe).
-
-  If polling, `subscription` is an `Object` with the following fields:
-  - `unsubscribe` - `Function`: Unsubscribe from either the Web3 subscription or the polling block tracker.
+- `cleanup`: A function for cleaning up listeners and completing/ending the streams created.
+- `subscription`: This is only returned if the provider passed-in is a WebsocketProvider. This is a reference to the underlying [Web3 subscription object](https://web3js.readthedocs.io/en/1.0/web3-eth-subscribe.html#eth-subscribe).

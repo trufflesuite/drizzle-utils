@@ -1,4 +1,4 @@
-const { Observable } = require("rxjs");
+const { Subject } = require("rxjs");
 const PollingBlockTracker = require("eth-block-tracker");
 
 const fromPolling = ({ web3, pollingInterval }) => {
@@ -9,21 +9,20 @@ const fromPolling = ({ web3, pollingInterval }) => {
   const provider = web3.currentProvider;
   const blockTracker = new PollingBlockTracker({ provider, pollingInterval });
 
-  const observable = new Observable(subscriber => {
-    blockTracker
-      .on("latest", async blockNum => {
-        // get full block info with `web3.eth.getBlock`
-        const block = await web3.eth.getBlock(blockNum, true);
-        subscriber.next(block);
-      })
-      .on("error", err => subscriber.next(err));
-  });
+  const observable = new Subject();
+  blockTracker
+    .on("latest", async blockNum => {
+      // get full block info with `web3.eth.getBlock`
+      const block = await web3.eth.getBlock(blockNum, true);
+      observable.next(block);
+    })
+    .on("error", err => observable.next(err));
 
   return {
     observable,
-    subscription: {
-      // stub for users to unsubscribe
-      unsubscribe: () => blockTracker.removeAllListeners("latest"),
+    cleanup: () => {
+      blockTracker.removeAllListeners("latest");
+      observable.complete();
     },
   };
 };

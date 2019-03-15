@@ -50,7 +50,7 @@ describe("contract-call-stream tests in node environment", () => {
   });
 
   test("can track changes to a call method return value", async done => {
-    const { observable: newBlock$, subscription } = createNewBlock$({
+    const { observable: newBlock$, cleanup } = createNewBlock$({
       web3,
       pollingInterval: 1,
     });
@@ -68,7 +68,7 @@ describe("contract-call-stream tests in node environment", () => {
         tap(vals => expect(vals).toEqual(["0", "5"])),
         finalize(() => {
           expect.assertions(1);
-          subscription.unsubscribe();
+          cleanup();
           done();
         }),
       )
