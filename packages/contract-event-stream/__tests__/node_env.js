@@ -113,7 +113,16 @@ describe("contract-event-stream tests in node environment", () => {
 
     const { _address: address } = contractInstance;
     const { abi } = artifact;
-    const event$ = createContractEvent$({ web3: web3Ws, abi, address });
+    const { observable: newBlock$, cleanup } = createNewBlock$({
+      web3: web3Ws,
+      pollingInterval: 200,
+    });
+    const event$ = createContractEvent$({
+      web3: web3Ws,
+      abi,
+      address,
+      newBlock$,
+    });
 
     // tap observable to make sure it emitted a "0" and then a "5"
     event$
@@ -126,6 +135,7 @@ describe("contract-event-stream tests in node environment", () => {
         }),
         finalize(() => {
           expect.assertions(2);
+          cleanup();
           done();
         }),
       )
