@@ -7,7 +7,6 @@ const { take, finalize, tap, toArray } = require("rxjs/operators");
 const initTestChain = require("@drizzle-utils/test-chain");
 
 const createContractEvent$ = require("../index");
-const { eventMatcher } = require("./utils/propertyMatchers");
 
 jest.setTimeout(20000);
 
@@ -89,11 +88,10 @@ describe("contract-event-stream tests in node environment", () => {
       .pipe(
         take(2),
         toArray(),
-        tap(vals =>
-          vals.forEach(val => {
-            expect(val).toMatchSnapshot(eventMatcher);
-          }),
-        ),
+        tap(vals => {
+          expect(vals[0].returnValues.storedData).toBe("0");
+          expect(vals[1].returnValues.storedData).toBe("5");
+        }),
         finalize(() => {
           expect.assertions(2);
           cleanup();
@@ -123,9 +121,8 @@ describe("contract-event-stream tests in node environment", () => {
         take(2),
         toArray(),
         tap(vals => {
-          vals.forEach(val => {
-            expect(val).toMatchSnapshot(eventMatcher);
-          });
+          expect(vals[0].returnValues.storedData).toBe("0");
+          expect(vals[1].returnValues.storedData).toBe("5");
         }),
         finalize(() => {
           expect.assertions(2);
