@@ -111,12 +111,12 @@ describe("contract-event-stream tests in node environment", () => {
     const web3Ws = new Web3(provider);
     web3Ws.currentProvider.constructor = WebsocketProvider;
 
-    const { _address: address } = contractInstance;
-    const { abi } = artifact;
     const { observable: newBlock$, cleanup } = createNewBlock$({
       web3: web3Ws,
-      pollingInterval: 200,
     });
+
+    const { _address: address } = contractInstance;
+    const { abi } = artifact;
     const event$ = createContractEvent$({
       web3: web3Ws,
       abi,
