@@ -7,7 +7,6 @@ const { take, finalize, tap, toArray } = require("rxjs/operators");
 const initTestChain = require("@drizzle-utils/test-chain");
 
 const createContractEvent$ = require("../index");
-const { eventMatcher } = require("./utils/propertyMatchers");
 
 jest.setTimeout(20000);
 
@@ -89,11 +88,10 @@ describe("contract-event-stream tests in node environment", () => {
       .pipe(
         take(2),
         toArray(),
-        tap(vals =>
-          vals.forEach(val => {
-            expect(val).toMatchSnapshot(eventMatcher);
-          }),
-        ),
+        tap(vals => {
+          expect(vals[0].returnValues.storedData).toBe("0");
+          expect(vals[1].returnValues.storedData).toBe("5");
+        }),
         finalize(() => {
           expect.assertions(2);
           subscription.unsubscribe();
@@ -113,9 +111,19 @@ describe("contract-event-stream tests in node environment", () => {
     const web3Ws = new Web3(provider);
     web3Ws.currentProvider.constructor = WebsocketProvider;
 
+    const { observable: newBlock$, subscription } = createNewBlock$({
+      web3,
+      pollingInterval: 200,
+    });
+
     const { _address: address } = contractInstance;
     const { abi } = artifact;
-    const event$ = createContractEvent$({ web3: web3Ws, abi, address });
+    const event$ = createContractEvent$({
+      web3: web3Ws,
+      abi,
+      address,
+      newBlock$,
+    });
 
     // tap observable to make sure it emitted a "0" and then a "5"
     event$
@@ -123,12 +131,12 @@ describe("contract-event-stream tests in node environment", () => {
         take(2),
         toArray(),
         tap(vals => {
-          vals.forEach(val => {
-            expect(val).toMatchSnapshot(eventMatcher);
-          });
+          expect(vals[0].returnValues.storedData).toBe("0");
+          expect(vals[1].returnValues.storedData).toBe("5");
         }),
         finalize(() => {
           expect.assertions(2);
+          subscription.unsubscribe();
           done();
         }),
       )
