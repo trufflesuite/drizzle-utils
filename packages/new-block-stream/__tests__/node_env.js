@@ -52,11 +52,10 @@ describe("new-block-stream tests in node environment", () => {
       .pipe(
         take(2),
         toArray(),
-        tap(vals =>
-          vals.forEach(val => {
-            expect(val).toMatchSnapshot(blockMatcher);
-          }),
-        ),
+        tap(vals => {
+          expect(vals[0]).toMatchSnapshot(blockMatcher);
+          expect(vals[1]).toMatchSnapshot(blockMatcher);
+        }),
         finalize(() => {
           expect.assertions(2);
           cleanup();
@@ -86,11 +85,10 @@ describe("new-block-stream tests in node environment", () => {
       .pipe(
         take(2),
         toArray(),
-        tap(vals =>
-          vals.forEach(val => {
-            expect(val).toMatchSnapshot(blockMatcher);
-          }),
-        ),
+        tap(vals => {
+          expect(vals[0]).toMatchSnapshot(blockMatcher);
+          expect(vals[1]).toMatchSnapshot(blockMatcher);
+        }),
         finalize(() => {
           expect.assertions(2);
           cleanup();
