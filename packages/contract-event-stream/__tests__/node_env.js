@@ -89,13 +89,14 @@ describe("contract-event-stream tests in node environment", () => {
       .pipe(
         take(2),
         toArray(),
-        tap(vals =>
-          vals.forEach(val => {
-            expect(val).toMatchSnapshot(eventMatcher);
-          }),
-        ),
+        tap(vals => {
+          expect(vals[0]).toMatchSnapshot(eventMatcher);
+          expect(vals[1]).toMatchSnapshot(eventMatcher);
+          expect(vals[0].returnValues.storedData).toBe("0");
+          expect(vals[1].returnValues.storedData).toBe("5");
+        }),
         finalize(() => {
-          expect.assertions(2);
+          expect.assertions(4);
           cleanup();
           done();
         }),
@@ -123,12 +124,13 @@ describe("contract-event-stream tests in node environment", () => {
         take(2),
         toArray(),
         tap(vals => {
-          vals.forEach(val => {
-            expect(val).toMatchSnapshot(eventMatcher);
-          });
+          expect(vals[0]).toMatchSnapshot(eventMatcher);
+          expect(vals[1]).toMatchSnapshot(eventMatcher);
+          expect(vals[0].returnValues.storedData).toBe("0");
+          expect(vals[1].returnValues.storedData).toBe("5");
         }),
         finalize(() => {
-          expect.assertions(2);
+          expect.assertions(4);
           done();
         }),
       )
