@@ -1,22 +1,34 @@
 # @drizzle-utils/get-web3
 
-A tool for getting the Web3 object.
+A tool for getting the Web3 object with different potential sources for providers.
 
-This supports:
+### Provider loading order
 
-- A custom provider that you can specify
-- A provider injected by MetaMask (i.e. `window.ethereum`)
-- A web3 object injected by legacy dapp browsers (i.e. `window.web3`)
-- A fallback provider that you can specify if the above do not exist
-- If all else fails, it defaults to `"http://127.0.0.1:9545"`, which is the default for `truffle develop`
+The provider to be used is determined in the following order:
 
-This library also takes care of the case where the page is not finished loading as well as the case where the page is already finished loading when the function is called. In other words, you can call `getWeb3()` at anytime.
+1. A **custom provider** that you can specify
+2. A provider injected by MetaMask (i.e. `window.ethereum`)
+3. A web3 object injected by legacy dapp browsers (i.e. `window.web3`)
+4. A **fallback provider** that you can specify
+5. If all else fails, it defaults to `"http://127.0.0.1:9545"`, which is the default for `truffle develop`
+
+Note the difference between the **custom provider** and the **fallback provider** option. The custom provider option assumes you _always_ want to use the passed-in provider first, whereas the fallback provider serves as a last-resort.
+
+### Supported Environments
+
+- Node.js 8 and above
+- Browser (Chromium)
+- React Native
+
+### Page load status
+
+You can call `getWeb3()` whenever you want. If `document.readyState` is `"complete"`, it will attempt to get Web3 immediately. Otherwise, it will wait until the page `load` event fires.
 
 ## Usage
 
 ```js
 import getWeb3 from "@drizzle-utils/get-web3";
-import Web3 from "web3";  // only required for custom/fallbakc provider option
+import Web3 from "web3";  // only required for custom/fallback provider option
 
 // simple
 const web3 = await getWeb3();
