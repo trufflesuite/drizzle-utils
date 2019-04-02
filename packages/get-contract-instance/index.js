@@ -12,13 +12,21 @@ const getContractInstance = (options = {}) =>
       // user passed in ABI
       if (options.abi) {
         const { abi, address } = options;
-        const instance = new web3.eth.Contract(abi, address, suppressWarnings);
+        if (!address && !suppressWarnings) {
+          // eslint-disable-next-line no-console
+          console.warn("Contract instantiated without a deployed address.");
+        }
+        const instance = new web3.eth.Contract(abi, address);
         return resolve(instance);
       }
 
       // user passed in an artifact
       if (options.artifact) {
-        const instance = await instanceFromArtifact(web3, options.artifact);
+        const instance = await instanceFromArtifact(
+          web3,
+          options.artifact,
+          suppressWarnings,
+        );
         return resolve(instance);
       }
 
