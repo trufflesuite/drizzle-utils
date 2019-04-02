@@ -12,13 +12,17 @@ const getContractInstance = (options = {}) =>
       // user passed in ABI
       if (options.abi) {
         const { abi, address } = options;
-        const instance = new web3.eth.Contract(abi, address, suppressWarnings);
+        const instance = new web3.eth.Contract(abi, address);
         return resolve(instance);
       }
 
       // user passed in an artifact
       if (options.artifact) {
-        const instance = await instanceFromArtifact(web3, options.artifact);
+        const instance = await instanceFromArtifact(
+          web3,
+          options.artifact,
+          suppressWarnings,
+        );
         return resolve(instance);
       }
 
