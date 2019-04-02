@@ -99,9 +99,17 @@ describe("get-contract-instance tests in node environment", () => {
     /* eslint-enable no-console */
   });
 
-  test("test instantiation from ABI array", async () => {
+  test("test instantiation from ABI array (w/ no deployed address)", async () => {
+    /* eslint-disable no-console */
+    console.warn = jest.fn();
     const instance = await getContractInstance({ web3, abi: artifact.abi });
+
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
+    expect(instance._address).toBeNull();
+    expect(console.warn.mock.calls[0][0]).toBe(
+      "Contract instantiated without a deployed address.",
+    );
+    /* eslint-enable no-console */
   });
 });
