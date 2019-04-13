@@ -18,21 +18,20 @@ npm install @drizzle-utils/core @drizzle-utils/get-web3
 
 Usage example:
 
-
 ```js
 // import/require the packages you need
-const getWeb3 = require("@drizzle-utils/get-web3")
-const createDrizzleUtils = require("@drizzle-utils/core")
+const getWeb3 = require("@drizzle-utils/get-web3");
+const createDrizzleUtils = require("@drizzle-utils/core");
 
 // initialize the tooling
-const web3 = await getWeb3()
-const drizzleUtils = await createDrizzleUtils({ web3 })
-const accounts = await drizzleUtils.getAccounts()
+const web3 = await getWeb3();
+const drizzleUtils = await createDrizzleUtils({ web3 });
+const accounts = await drizzleUtils.getAccounts();
 
 // `instance` is a web3 Contract instance of the deployed contract
 const instance = await drizzleUtils.getContractInstance({
-  artifact: contractArtifact
-})
+  artifact: contractArtifact,
+});
 ```
 
 ### Getting the Web3 instance
@@ -44,21 +43,21 @@ Refer to these [docs](./packages/get-web3/README.md) for reference.
 Returns a Promise that resolves to an RxJS stream of events.
 
 ```js
-const event$ = await drizzleUtils.createContractEvent$({
-  instance: contractInstance  // web3 contract instance
-})
+const event$ = await drizzleUtils.createEvent$({
+  instance: contractInstance, // web3 contract instance
+});
 
-event$.subscribe(event => console.log(event))
+event$.subscribe(event => console.log(event));
 ```
 
 Alternatively, you can pass in the artifact:
 
 ```js
-const event$ = await drizzleUtils.createContractEvent$({
-  artifact: contractArtifact
-})
+const event$ = await drizzleUtils.createEvent$({
+  artifact: contractArtifact,
+});
 
-event$.subscribe(event => console.log(event))
+event$.subscribe(event => console.log(event));
 ```
 
 ### Streaming the contract state
@@ -66,11 +65,11 @@ event$.subscribe(event => console.log(event))
 Returns a Promise that resolves to an RxJS stream of contract states.
 
 ```js
-const state$ = await drizzleUtils.createContractState$({
-  artifact: contractArtifact
-})
+const state$ = await drizzleUtils.createState$({
+  artifact: contractArtifact,
+});
 
-state$.subscribe(state => console.log(state))
+state$.subscribe(state => console.log(state));
 ```
 
 ### Streaming a constant read-only method from a contract
@@ -78,11 +77,20 @@ state$.subscribe(state => console.log(state))
 In this example, `get` is a read-only method in our contract.
 
 ```js
-const call$ = await drizzleUtils.createContractCall$({
-  methodCall: instance.methods.get()
-})
+const call$ = await drizzleUtils.createCall$({
+  methodCall: instance.methods.get(),
+});
 
-call$.subscribe(result => console.log(result))
+call$.subscribe(result => console.log(result));
+```
+
+### Current account stream
+
+When the user changes accounts via MetaMask, you can watch for changes using the `drizzleUtils.currentAccount$` stream.
+
+```js
+// The current account stream is created upon instantiation
+drizzleUtils.currentAccount$.subscribe(account => console.log(account));
 ```
 
 ### Using specific packages
