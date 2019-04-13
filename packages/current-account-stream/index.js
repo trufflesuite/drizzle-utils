@@ -20,7 +20,7 @@ const createCurrentAccount$ = options =>
 
     try {
       // request account access if Metamask is detected
-      if (window && window.ethereum) {
+      if (typeof window !== "undefined" && window.ethereum) {
         await window.ethereum.enable();
       }
 

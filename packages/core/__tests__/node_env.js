@@ -44,8 +44,8 @@ describe("contract-event-stream tests in node environment", () => {
     provider.close();
   });
 
-  test("createContractEvent$ successfully returns observable", async () => {
-    const event$ = await drizzleUtils.createContractEvent$({
+  test("createEvent$ successfully returns observable", async () => {
+    const event$ = await drizzleUtils.createEvent$({
       abi: artifact.abi,
       address: contractInstance._address,
     });
@@ -53,18 +53,23 @@ describe("contract-event-stream tests in node environment", () => {
     expect(event$).toMatchSnapshot();
   });
 
-  test("createContractEvent$ successfully returns observable from artifact", async () => {
-    const event$ = await drizzleUtils.createContractEvent$({ artifact });
+  test("createEvent$ successfully returns observable from artifact", async () => {
+    const event$ = await drizzleUtils.createEvent$({ artifact });
 
     expect(event$).toMatchSnapshot();
   });
 
-  test("createContractEvent$ successfully returns observable from instance", async () => {
-    const event$ = await drizzleUtils.createContractEvent$({
+  test("createEvent$ successfully returns observable from instance", async () => {
+    const event$ = await drizzleUtils.createEvent$({
       instance: contractInstance,
     });
 
     expect(contractInstance._jsonInterface).toEqual(artifact.abi);
     expect(event$).toMatchSnapshot();
+  });
+
+  test("currentAccount$ exists", async () => {
+    expect(drizzleUtils.currentAccount$).toBeDefined();
+    expect(drizzleUtils.currentAccount$.subscribe).toBeDefined();
   });
 });

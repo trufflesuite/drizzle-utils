@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`contract-event-stream tests in node environment createContractEvent$ successfully returns observable 1`] = `
+exports[`contract-event-stream tests in node environment createEvent$ successfully returns observable 1`] = `
 Observable {
   "_isScalar": false,
   "operator": MergeMapOperator {
@@ -21,7 +21,7 @@ Observable {
 }
 `;
 
-exports[`contract-event-stream tests in node environment createContractEvent$ successfully returns observable from artifact 1`] = `
+exports[`contract-event-stream tests in node environment createEvent$ successfully returns observable from artifact 1`] = `
 Observable {
   "_isScalar": false,
   "operator": MergeMapOperator {
@@ -42,7 +42,7 @@ Observable {
 }
 `;
 
-exports[`contract-event-stream tests in node environment createContractEvent$ successfully returns observable from instance 1`] = `
+exports[`contract-event-stream tests in node environment createEvent$ successfully returns observable from instance 1`] = `
 Observable {
   "_isScalar": false,
   "operator": MergeMapOperator {
