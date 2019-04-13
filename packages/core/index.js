@@ -14,6 +14,8 @@ const createDrizzleUtils = async ({ web3 }) => {
     },
   );
 
+  const currentAccount$ = await _createCurrentAccount$({ web3 });
+
   const cleanup = () => cleanupNewBlock$();
 
   const getAccounts = async (options = {}) =>
@@ -70,6 +72,7 @@ const createDrizzleUtils = async ({ web3 }) => {
     createEvent$,
     createState$,
     newBlock$,
+    currentAccount$,
     cleanup,
   };
 };
