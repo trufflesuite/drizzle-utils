@@ -25,7 +25,7 @@ const createDrizzleUtils = async ({ web3 }) => {
   const createCurrentAccount$ = async (options = {}) =>
     await _createCurrentAccount$({ web3, ...options });
 
-  const createContractCall$ = (options = {}) =>
+  const createCall$ = (options = {}) =>
     _createContractCall$({ web3, newBlock$, ...options });
 
   const createContractEvent$ = async (options = {}) => {
@@ -66,7 +66,7 @@ const createDrizzleUtils = async ({ web3 }) => {
     getAccounts,
     getContractInstance,
     createCurrentAccount$,
-    createContractCall$,
+    createCall$,
     createContractEvent$,
     createContractState$,
     newBlock$,
