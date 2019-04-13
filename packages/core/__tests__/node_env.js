@@ -45,7 +45,7 @@ describe("contract-event-stream tests in node environment", () => {
   });
 
   test("createContractEvent$ successfully returns observable", async () => {
-    const event$ = await drizzleUtils.createContractEvent$({
+    const event$ = await drizzleUtils.createEvent$({
       abi: artifact.abi,
       address: contractInstance._address,
     });
@@ -54,13 +54,13 @@ describe("contract-event-stream tests in node environment", () => {
   });
 
   test("createContractEvent$ successfully returns observable from artifact", async () => {
-    const event$ = await drizzleUtils.createContractEvent$({ artifact });
+    const event$ = await drizzleUtils.createEvent$({ artifact });
 
     expect(event$).toMatchSnapshot();
   });
 
   test("createContractEvent$ successfully returns observable from instance", async () => {
-    const event$ = await drizzleUtils.createContractEvent$({
+    const event$ = await drizzleUtils.createEvent$({
       instance: contractInstance,
     });
 
