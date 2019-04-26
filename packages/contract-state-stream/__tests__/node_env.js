@@ -27,11 +27,13 @@ describe("contract-state-stream tests in node environment", () => {
 
     ({ provider, web3, accounts, contractInstance } = testChain);
 
+    const networkId = await web3.eth.net.getId();
+
     artifact = {
       ...testChain.contractArtifact,
       // truffle-decoder needs this in artifact
       networks: {
-        "4447": {
+        [networkId]: {
           address: contractInstance._address,
         },
       },
