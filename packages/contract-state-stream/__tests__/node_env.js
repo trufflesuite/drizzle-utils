@@ -4,6 +4,7 @@
 const createNewBlock$ = require("@drizzle-utils/new-block-stream");
 const { take, finalize, tap, toArray } = require("rxjs/operators");
 const initTestChain = require("@drizzle-utils/test-chain");
+const { stateMatcher } = require("./utils/propertyMatchers");
 
 const createContractState$ = require("../index");
 
@@ -87,9 +88,12 @@ describe("contract-state-stream tests in node environment", () => {
       .pipe(
         take(2),
         toArray(),
-        tap(vals => expect(vals).toMatchSnapshot()),
+        tap(vals => {
+          expect(vals[0]).toMatchSnapshot(stateMatcher);
+          expect(vals[1]).toMatchSnapshot(stateMatcher);
+        }),
         finalize(() => {
-          expect.assertions(1);
+          expect.assertions(2);
           cleanup();
           done();
         }),

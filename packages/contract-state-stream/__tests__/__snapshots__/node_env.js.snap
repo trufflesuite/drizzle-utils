@@ -1,32 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`contract-state-stream tests in node environment can track changes to a send method return value 1`] = `
-Array [
-  Object {
-    "balance": "0",
-    "code": "0x6080604052348015600f57600080fd5b50600436106059576000357c0100000000000000000000000000000000000000000000000000000000900480632a1afcd914605e57806360fe47b114607a5780636d4ce63c1460a5575b600080fd5b606460c1565b6040518082815260200191505060405180910390f35b60a360048036036020811015608e57600080fd5b810190808035906020019092919050505060c7565b005b60ab60d1565b6040518082815260200191505060405180910390f35b60005481565b8060008190555050565b6000805490509056fea165627a7a72305820195ab95e89d2204147c3035a6d9c6437dc286f8f77c304ee22003e0fb8292a700029",
-    "name": undefined,
-    "nonce": "1",
-    "variables": Object {
-      "storedData": Object {
-        "name": "storedData",
-        "type": "uint",
-        "value": "0",
-      },
+Object {
+  "balance": "0",
+  "code": Any<String>,
+  "name": undefined,
+  "nonce": "1",
+  "variables": Object {
+    "storedData": Object {
+      "name": "storedData",
+      "type": "uint",
+      "value": "0",
     },
   },
-  Object {
-    "balance": "0",
-    "code": "0x6080604052348015600f57600080fd5b50600436106059576000357c0100000000000000000000000000000000000000000000000000000000900480632a1afcd914605e57806360fe47b114607a5780636d4ce63c1460a5575b600080fd5b606460c1565b6040518082815260200191505060405180910390f35b60a360048036036020811015608e57600080fd5b810190808035906020019092919050505060c7565b005b60ab60d1565b6040518082815260200191505060405180910390f35b60005481565b8060008190555050565b6000805490509056fea165627a7a72305820195ab95e89d2204147c3035a6d9c6437dc286f8f77c304ee22003e0fb8292a700029",
-    "name": undefined,
-    "nonce": "1",
-    "variables": Object {
-      "storedData": Object {
-        "name": "storedData",
-        "type": "uint",
-        "value": "5",
-      },
+}
+`;
+
+exports[`contract-state-stream tests in node environment can track changes to a send method return value 2`] = `
+Object {
+  "balance": "0",
+  "code": Any<String>,
+  "name": undefined,
+  "nonce": "1",
+  "variables": Object {
+    "storedData": Object {
+      "name": "storedData",
+      "type": "uint",
+      "value": "5",
     },
   },
-]
+}
 `;
