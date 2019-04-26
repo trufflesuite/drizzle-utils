@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "rxjs": "^6.3.3",
-    "truffle-decoder": "^1.0.2"
+    "truffle-decoder": "^3.0.1"
   },
   "publishConfig": {
     "access": "public"
