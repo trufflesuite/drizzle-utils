@@ -58,16 +58,18 @@ class App extends Component {
   transfer = async () => {};
 
   render() {
-    if (!this.state.web3) {
+    const { web3, accounts, balance0, balance1 } = this.state;
+
+    if (!web3) {
       return <div>Loading Web3 and accounts...</div>;
     }
     return (
       <div className="App">
         <div>
-          Account 1 ({this.state.accounts[0]}): {this.state.balance0}
+          Account 1 ({accounts[0]}): {balance0}
         </div>
         <div>
-          Account 2 ({this.state.accounts[1]}): {this.state.balance1}
+          Account 2 ({accounts[1]}): {balance1}
         </div>
         <button onClick={this.transfer}>
           Transfer 1 ETH from account 1 to 2
