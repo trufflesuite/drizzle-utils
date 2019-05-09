@@ -1,0 +1,12 @@
+{
+  "name": "@drizzle-utils/get-balance-stream",
+  "version": "0.2.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "rxjs": "^6.3.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
