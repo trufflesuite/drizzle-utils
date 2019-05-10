@@ -60,7 +60,7 @@ class App extends Component {
     web3.eth.sendTransaction({
       from: accounts[0],
       to: accounts[1],
-      value: web3.utils.toWei(1),
+      value: web3.utils.toWei("1", "ether"),
     });
   };
 
