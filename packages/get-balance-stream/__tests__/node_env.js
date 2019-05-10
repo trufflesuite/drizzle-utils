@@ -3,7 +3,7 @@
  */
 const createNewBlock$ = require("@drizzle-utils/new-block-stream");
 const initTestChain = require("@drizzle-utils/test-chain");
-// const { take, finalize, tap, toArray } = require("rxjs/operators");
+const { take, finalize, tap, toArray } = require("rxjs/operators");
 
 const createBalanceStream$ = require("../index");
 
@@ -47,5 +47,56 @@ describe("get-balance-stream tests in node environment", () => {
     expect(() => createBalanceStream$({ web3, address: accounts[0] })).toThrow(
       new Error("The options object with newBlock$ is required"),
     );
+  });
+
+  test("can track balance of addresses", async done => {
+    const { observable: newBlock$, cleanup } = createNewBlock$({
+      web3,
+      pollingInterval: 200,
+    });
+
+    const balance0$ = createBalanceStream$({
+      web3,
+      newBlock$,
+      address: accounts[0],
+    });
+    const balance1$ = createBalanceStream$({
+      web3,
+      newBlock$,
+      address: accounts[1],
+    });
+
+    balance0$
+      .pipe(
+        take(1),
+        toArray(),
+        // TODO Look at jest failure to find the actual value (gas depenednt)
+        tap(vals => expect(vals).toEqual(["0"])),
+        finalize(() => {
+          expect.assertions(1);
+          cleanup();
+          done();
+        }),
+      )
+      .subscribe();
+
+    balance1$
+      .pipe(
+        take(1),
+        toArray(),
+        tap(vals => expect(vals).toEqual(["0"])),
+        finalize(() => {
+          expect.assertions(1);
+          cleanup();
+          done();
+        }),
+      )
+      .subscribe();
+
+    await web3.eth.sendTransaction({
+      from: accounts[0],
+      to: accounts[1],
+      value: web3.utils.toWei("1", "ether"),
+    });
   });
 });
