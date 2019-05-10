@@ -57,7 +57,11 @@ class App extends Component {
 
   transfer = async () => {
     const { web3, accounts } = this.state;
-    web3.eth.sendTransaction({ from: accounts[0], to: accounts[1], value: 1 });
+    web3.eth.sendTransaction({
+      from: accounts[0],
+      to: accounts[1],
+      value: web3.utils.toWei(1),
+    });
   };
 
   render() {
