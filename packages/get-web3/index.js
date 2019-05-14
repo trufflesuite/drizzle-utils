@@ -9,6 +9,7 @@ const resolveWeb3 = (resolve, options, isBrowser) => {
   } else if (isBrowser && window.ethereum) {
     // use `ethereum` object injected by MetaMask
     provider = window.ethereum;
+    if(options.requestPermission) window.ethereum.enable();
   } else if (isBrowser && typeof window.web3 !== "undefined") {
     // use injected web3 object by legacy dapp browsers
     provider = window.web3.currentProvider;
