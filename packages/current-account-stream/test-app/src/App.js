@@ -1,15 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import getWeb3 from "@drizzle-utils/get-web3";
 import createCurrentAccount$ from "@drizzle-utils/current-account-stream";
 
-class App extends Component {
+class App extends React.Component {
   state = { currentAccount: null };
 
   componentDidMount = async () => {
     const web3 = await getWeb3();
     const currentAccount$ = await createCurrentAccount$({ web3 });
+    console.log(currentAccount$);
     currentAccount$.subscribe(currentAccount =>
-      this.setState({ currentAccount })
+      this.setState({ currentAccount }),
     );
   };
 
