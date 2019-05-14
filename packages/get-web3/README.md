@@ -57,3 +57,11 @@ const web3 = await getWeb3({ fallbackProvider });
 ```
 
 For detailed usage example, see the `test-app` directory, specifically `test-app/src/App.js`.
+
+### Request Permissions
+
+There is also a handy `requestPermission` option that will call `window.ethereum.enable()` for you.
+
+```js
+const web3 = await getWeb3({ requestPermission: true });
+```
