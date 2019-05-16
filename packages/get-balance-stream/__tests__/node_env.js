@@ -4,6 +4,7 @@
 const createNewBlock$ = require("@drizzle-utils/new-block-stream");
 const initTestChain = require("@drizzle-utils/test-chain");
 const { take, finalize, tap, toArray } = require("rxjs/operators");
+const { merge } = require("rxjs");
 
 const createBalanceStream$ = require("../index");
 
@@ -66,25 +67,18 @@ describe("get-balance-stream tests in node environment", () => {
       address: accounts[1],
     });
 
-    balance0$
-      .pipe(
-        take(1),
-        toArray(),
-        // TODO Look at jest failure to find the actual value (gas depenednt)
-        tap(vals => expect(vals).toEqual(["0"])),
-        finalize(() => {
-          expect.assertions(1);
-          cleanup();
-          done();
-        }),
-      )
-      .subscribe();
+    const merged$ = merge(balance0$.pipe(take(1)), balance1$.pipe(take(1)));
 
-    balance1$
+    merged$
       .pipe(
-        take(1),
+        take(2),
         toArray(),
-        tap(vals => expect(vals).toEqual(["0"])),
+        tap(vals =>
+          expect(vals).toEqual([
+            "89999958000000000000",
+            "110000000000000000000",
+          ]),
+        ),
         finalize(() => {
           expect.assertions(1);
           cleanup();
@@ -96,7 +90,7 @@ describe("get-balance-stream tests in node environment", () => {
     await web3.eth.sendTransaction({
       from: accounts[0],
       to: accounts[1],
-      value: web3.utils.toWei("1", "ether"),
+      value: web3.utils.toWei("10", "ether"),
     });
   });
 });
