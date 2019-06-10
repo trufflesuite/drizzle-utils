@@ -4,7 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "eth-block-tracker": "^4.1.0",
     "rxjs": "^6.3.3"
   },
   "publishConfig": {
