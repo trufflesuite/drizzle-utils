@@ -1,5 +1,11 @@
 const { timer, from, of } = require("rxjs");
-const { map, concatMap, startWith, pairwise } = require("rxjs/operators");
+const {
+  distinctUntilChanged,
+  map,
+  concatMap,
+  startWith,
+  pairwise,
+} = require("rxjs/operators");
 
 // helper function to create an array from [x..y]
 const range = (min, max) => {
@@ -22,6 +28,7 @@ const fromPolling = ({ web3, pollingInterval }) => {
   const latestBlockNum$ = timer$.pipe(
     concatMap(() => from(web3.eth.getBlock("latest"))),
     map(block => block.number),
+    distinctUntilChanged(),
   );
 
   // a stream of block numbers that do not miss any blocks
