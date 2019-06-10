@@ -18,9 +18,6 @@ const range = (min, max) => {
 };
 
 const fromPolling = ({ web3, pollingInterval }) => {
-  // patch missing method
-  web3.currentProvider.sendAsync = web3.currentProvider.send;
-
   // create a stream to poll the blockchain at an interval
   const timer$ = timer(0, pollingInterval);
 
