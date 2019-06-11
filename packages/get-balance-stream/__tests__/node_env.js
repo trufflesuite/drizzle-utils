@@ -27,19 +27,16 @@ describe("get-balance-stream tests in node environment", () => {
   });
 
   test("createBalanceStream$ throws errors when required options fields not found", () => {
-    const { observable: newBlock$ } = createNewBlock$({
+    const newBlock$ = createNewBlock$({
       web3,
       pollingInterval: 200,
     });
 
     expect(() => createBalanceStream$()).toThrow();
 
-    expect(() =>
-      createBalanceStream$({
-        newBlock$,
-        web3,
-      }),
-    ).toThrow(new Error("The options object with address is required"));
+    expect(() => createBalanceStream$({ newBlock$, web3 })).toThrow(
+      new Error("The options object with address is required"),
+    );
 
     expect(() =>
       createBalanceStream$({ newBlock$, address: accounts[0] }),
@@ -51,7 +48,7 @@ describe("get-balance-stream tests in node environment", () => {
   });
 
   test("can track balance of addresses", async done => {
-    const { observable: newBlock$, cleanup } = createNewBlock$({
+    const newBlock$ = createNewBlock$({
       web3,
       pollingInterval: 200,
     });
@@ -81,7 +78,6 @@ describe("get-balance-stream tests in node environment", () => {
         ),
         finalize(() => {
           expect.assertions(1);
-          cleanup();
           done();
         }),
       )

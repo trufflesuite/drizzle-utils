@@ -50,10 +50,7 @@ const fromPolling = ({ web3, pollingInterval }) => {
     concatMap(num => web3.eth.getBlock(num, true)),
   );
 
-  return {
-    observable,
-    cleanup: () => {},
-  };
+  return observable;
 };
 
 module.exports = fromPolling;
