@@ -42,7 +42,7 @@ describe("new-block-stream tests in node environment", () => {
   });
 
   test("fromPolling can track blocks", async done => {
-    const { observable: newBlock$ } = createNewBlock$({
+    const newBlock$ = createNewBlock$({
       web3,
       pollingInterval: 200,
     });
@@ -74,7 +74,7 @@ describe("new-block-stream tests in node environment", () => {
     const web3Ws = new Web3(provider);
     web3Ws.currentProvider.constructor = WebsocketProvider;
 
-    const { observable: newBlock$ } = createNewBlock$({
+    const newBlock$ = createNewBlock$({
       web3: web3Ws,
       pollingInterval: 200,
     });

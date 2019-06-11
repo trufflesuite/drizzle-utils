@@ -15,9 +15,7 @@ const fromSubscribe = ({ web3 }) => {
     return subscription.unsubscribe;
   });
 
-  return {
-    observable,
-  };
+  return observable;
 };
 
 module.exports = fromSubscribe;
