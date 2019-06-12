@@ -47,7 +47,7 @@ describe("get-contract-instance tests in node environment", () => {
 
   test("throw error if ABI is faulty", async () => {
     expect(getContractInstance({ web3, abi: {} })).rejects.toThrow(
-      "You must provide the json interface of the contract when instantiating a contract object.",
+      "You must pass in a contract artifact or the ABI of a deployed contract.",
     );
   });
 
@@ -60,7 +60,7 @@ describe("get-contract-instance tests in node environment", () => {
 
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
-    expect(instance._address.toLowerCase()).toEqual(deployedAddress);
+    expect(instance.address.toLowerCase()).toEqual(deployedAddress);
     expect(console.warn.mock.calls[0]).toBe(undefined);
     /* eslint-enable no-console */
   });
@@ -75,7 +75,7 @@ describe("get-contract-instance tests in node environment", () => {
 
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
-    expect(instance._address).toBeNull();
+    expect(instance.address).toBeUndefined();
     expect(console.warn.mock.calls[0][0]).toBe(
       "Contract instantiated without a deployed address.",
     );
@@ -92,7 +92,7 @@ describe("get-contract-instance tests in node environment", () => {
 
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
-    expect(instance._address).toBeNull();
+    expect(instance.address).toBeUndefined();
     expect(console.warn.mock.calls[0][0]).toBe(
       "Contract instantiated without a deployed address.",
     );
@@ -106,7 +106,7 @@ describe("get-contract-instance tests in node environment", () => {
 
     expect(instance).toBeDefined();
     expect(instance.methods).toBeDefined();
-    expect(instance._address).toBeNull();
+    expect(instance.address).toBeUndefined();
     expect(console.warn.mock.calls[0][0]).toBe(
       "Contract instantiated without a deployed address.",
     );

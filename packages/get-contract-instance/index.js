@@ -10,7 +10,7 @@ const getContractInstance = (options = {}) =>
 
     try {
       // user passed in ABI
-      if (options.abi) {
+      if (options.abi && options.abi.forEach) {
         const { abi, address } = options;
         if (!address && !suppressWarnings) {
           // eslint-disable-next-line no-console
