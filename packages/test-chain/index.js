@@ -8,7 +8,7 @@ const initProviderWeb3 = async ganacheOptions => {
   // Spawn Ganache test blockchain
 
   const provider = Ganache.provider(ganacheOptions || defaultGanacheOptions);
-  const web3 = new Web3(provider);
+  const web3 = new Web3(provider, null, { transactionConfirmationBlocks: 1 });
   const accounts = await web3.eth.getAccounts();
 
   return { provider, web3, accounts };

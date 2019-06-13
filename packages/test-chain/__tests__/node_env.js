@@ -34,7 +34,7 @@ describe("test-chain tests in node environment", () => {
     await contractInstance.methods.set(5).send({ from: accounts[0] });
     const newVal = await contractInstance.methods.get().call();
 
-    expect(oldVal).toBe("0");
-    expect(newVal).toBe("5");
+    expect(oldVal.toString()).toBe("0");
+    expect(newVal.toString()).toBe("5");
   });
 });
