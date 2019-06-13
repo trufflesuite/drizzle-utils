@@ -1,5 +1,5 @@
 const { from } = require("rxjs");
-const { switchMap } = require("rxjs/operators");
+const { concatMap } = require("rxjs/operators");
 const TruffleDecoder = require("truffle-decoder");
 
 const createContractState$ = options => {
@@ -17,7 +17,7 @@ const createContractState$ = options => {
   decoder.init();
 
   // for each new block, we decode the state
-  const observable = newBlock$.pipe(switchMap(() => from(decoder.state())));
+  const observable = newBlock$.pipe(concatMap(() => from(decoder.state())));
 
   return observable;
 };

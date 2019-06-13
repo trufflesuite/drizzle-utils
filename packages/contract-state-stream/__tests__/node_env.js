@@ -1,8 +1,14 @@
 /**
  * @jest-environment node
  */
+const {
+  take,
+  finalize,
+  tap,
+  toArray,
+  distinctUntilChanged,
+} = require("rxjs/operators");
 const createNewBlock$ = require("@drizzle-utils/new-block-stream");
-const { take, finalize, tap, toArray } = require("rxjs/operators");
 const initTestChain = require("@drizzle-utils/test-chain");
 const { stateMatcher } = require("./utils/propertyMatchers");
 
@@ -35,7 +41,7 @@ describe("contract-state-stream tests in node environment", () => {
       // truffle-decoder needs this in artifact
       networks: {
         [networkId]: {
-          address: contractInstance._address,
+          address: contractInstance.address,
         },
       },
     };
@@ -84,14 +90,23 @@ describe("contract-state-stream tests in node environment", () => {
     // tap observable to make sure it emitted a "0" and then a "5"
     returnVal$
       .pipe(
+        distinctUntilChanged((x, y) => {
+          const a = x.variables.storedData.value.toString();
+          const b = y.variables.storedData.value.toString();
+          return a === b;
+        }),
         take(2),
         toArray(),
-        tap(vals => {
-          expect(vals[0]).toMatchSnapshot(stateMatcher);
-          expect(vals[1]).toMatchSnapshot(stateMatcher);
+        tap(responses => {
+          expect(responses[0]).toMatchSnapshot(stateMatcher);
+          expect(responses[1]).toMatchSnapshot(stateMatcher);
+          const vals = responses.map(x =>
+            x.variables.storedData.value.toString(),
+          );
+          expect(vals).toEqual(["0", "5"]);
         }),
         finalize(() => {
-          expect.assertions(2);
+          expect.assertions(3);
           done();
         }),
       )
