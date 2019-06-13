@@ -3,7 +3,13 @@
  */
 const createNewBlock$ = require("@drizzle-utils/new-block-stream");
 const initTestChain = require("@drizzle-utils/test-chain");
-const { take, finalize, tap, toArray } = require("rxjs/operators");
+const {
+  take,
+  tap,
+  finalize,
+  toArray,
+  distinctUntilChanged,
+} = require("rxjs/operators");
 
 const createContractCall$ = require("../index");
 
@@ -63,9 +69,12 @@ describe("contract-call-stream tests in node environment", () => {
     // tap observable to make sure it emitted a "0" and then a "5"
     returnVal$
       .pipe(
+        distinctUntilChanged((x, y) => x.toString() === y.toString()),
         take(2),
         toArray(),
-        tap(vals => expect(vals).toEqual(["0", "5"])),
+        tap(vals => {
+          expect(vals.map(x => x.toString())).toEqual(["0", "5"]);
+        }),
         finalize(() => {
           expect.assertions(1);
           done();

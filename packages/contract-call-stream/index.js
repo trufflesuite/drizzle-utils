@@ -1,5 +1,5 @@
 const { from } = require("rxjs");
-const { distinctUntilChanged, switchMap } = require("rxjs/operators");
+const { concatMap } = require("rxjs/operators");
 
 const createContractCall$ = (options = {}) => {
   const { newBlock$, methodCall } = options;
@@ -9,10 +9,7 @@ const createContractCall$ = (options = {}) => {
     throw new Error("The options object with methodCall is required");
 
   // for each new block, we call the method
-  const observable = newBlock$.pipe(
-    switchMap(() => from(methodCall.call())),
-    distinctUntilChanged(),
-  );
+  const observable = newBlock$.pipe(concatMap(() => from(methodCall.call())));
 
   return observable;
 };
