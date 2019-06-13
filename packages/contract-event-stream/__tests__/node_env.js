@@ -34,7 +34,7 @@ describe("contract-event-stream tests in node environment", () => {
       // truffle-decoder needs this in artifact
       networks: {
         "4447": {
-          address: contractInstance._address,
+          address: contractInstance.address,
         },
       },
     };
@@ -49,7 +49,7 @@ describe("contract-event-stream tests in node environment", () => {
   });
 
   test("createContractEvent$ throws errors when required options fields not found", () => {
-    const { _address: address } = contractInstance;
+    const { address } = contractInstance;
     const { abi } = artifact;
 
     expect(() => createContractEvent$()).toThrow();
@@ -74,13 +74,13 @@ describe("contract-event-stream tests in node environment", () => {
     );
   });
 
-  test("fromPolling can track events emitted by send method", async done => {
+  test("can track events emitted by send method", async done => {
     const newBlock$ = createNewBlock$({
       web3,
       pollingInterval: 200,
     });
 
-    const { _address: address } = contractInstance;
+    const { address } = contractInstance;
     const { abi } = artifact;
     const event$ = createContractEvent$({ web3, abi, address, newBlock$ });
 
@@ -92,41 +92,8 @@ describe("contract-event-stream tests in node environment", () => {
         tap(vals => {
           expect(vals[0]).toMatchSnapshot(eventMatcher);
           expect(vals[1]).toMatchSnapshot(eventMatcher);
-          expect(vals[0].returnValues.storedData).toBe("0");
-          expect(vals[1].returnValues.storedData).toBe("5");
-        }),
-        finalize(() => {
-          expect.assertions(4);
-          done();
-        }),
-      )
-      .subscribe();
-
-    await contractInstance.methods.set(0).send({ from: accounts[0] });
-    await contractInstance.methods.set(5).send({ from: accounts[0] });
-  });
-
-  test("fromSubscribe can track events emitted by send method", async done => {
-    // Change constructor so we can test Websocket route
-    // Note that ganache provider.constructor.name is Provider
-    function WebsocketProvider() {}
-    const web3Ws = new Web3(provider);
-    web3Ws.currentProvider.constructor = WebsocketProvider;
-
-    const { _address: address } = contractInstance;
-    const { abi } = artifact;
-    const event$ = createContractEvent$({ web3: web3Ws, abi, address });
-
-    // tap observable to make sure it emitted a "0" and then a "5"
-    event$
-      .pipe(
-        take(2),
-        toArray(),
-        tap(vals => {
-          expect(vals[0]).toMatchSnapshot(eventMatcher);
-          expect(vals[1]).toMatchSnapshot(eventMatcher);
-          expect(vals[0].returnValues.storedData).toBe("0");
-          expect(vals[1].returnValues.storedData).toBe("5");
+          expect(vals[0].returnValues.storedData.toString()).toBe("0");
+          expect(vals[1].returnValues.storedData.toString()).toBe("5");
         }),
         finalize(() => {
           expect.assertions(4);

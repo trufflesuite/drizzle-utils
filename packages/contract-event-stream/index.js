@@ -1,5 +1,4 @@
-const fromPolling = require("./fromPolling");
-const fromSubscribe = require("./fromSubscribe");
+const createStream = require("./createStream");
 
 const createContractEvent$ = (options = {}) => {
   const { web3, abi, address, newBlock$ } = options;
@@ -8,22 +7,15 @@ const createContractEvent$ = (options = {}) => {
   if (!address)
     throw new Error("The options object with contract address is required");
 
-  const providerType = web3.currentProvider.constructor.name;
-
   // TODO: perhaps use get-contract-instance and user just passes the entire json artifact in
   const contract = new web3.eth.Contract(abi, address);
-
-  // TODO: for subs, return sub so user can unsub
-  // Events subscription only works with websocket provider
-  if (providerType === "WebsocketProvider") {
-    return fromSubscribe({ contract });
-  }
 
   if (!newBlock$)
     throw new Error(
       "Must provide newBlock$ when using http provider with web3",
     );
-  return fromPolling({ contract, newBlock$ });
+
+  return createStream({ contract, newBlock$ });
 };
 
 module.exports = createContractEvent$;
