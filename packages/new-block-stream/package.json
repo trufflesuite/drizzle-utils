@@ -1,6 +1,6 @@
 {
   "name": "@drizzle-utils/new-block-stream",
-  "version": "0.2.1",
+  "version": "0.3.0-alpha.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
