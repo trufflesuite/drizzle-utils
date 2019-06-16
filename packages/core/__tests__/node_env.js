@@ -32,7 +32,7 @@ describe("contract-event-stream tests in node environment", () => {
       // truffle-decoder needs this in artifact
       networks: {
         [networkId]: {
-          address: contractInstance._address,
+          address: contractInstance.address,
         },
       },
     };
@@ -47,7 +47,7 @@ describe("contract-event-stream tests in node environment", () => {
   test("createEvent$ successfully returns observable", async () => {
     const event$ = await drizzleUtils.createEvent$({
       abi: artifact.abi,
-      address: contractInstance._address,
+      address: contractInstance.address,
     });
 
     expect(event$).toMatchSnapshot();
@@ -59,14 +59,15 @@ describe("contract-event-stream tests in node environment", () => {
     expect(event$).toMatchSnapshot();
   });
 
-  test("createEvent$ successfully returns observable from instance", async () => {
-    const event$ = await drizzleUtils.createEvent$({
-      instance: contractInstance,
-    });
+  // Test removed due to API change, see index.js for more info
+  // test.skip("createEvent$ successfully returns observable from instance", async () => {
+  //   const event$ = await drizzleUtils.createEvent$({
+  //     instance: contractInstance,
+  //   });
 
-    expect(contractInstance._jsonInterface).toEqual(artifact.abi);
-    expect(event$).toMatchSnapshot();
-  });
+  //   expect(contractInstance._jsonInterface).toEqual(artifact.abi);
+  //   expect(event$).toMatchSnapshot();
+  // });
 
   test("currentAccount$ exists", async () => {
     expect(drizzleUtils.currentAccount$).toBeDefined();

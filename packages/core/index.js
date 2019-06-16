@@ -39,16 +39,19 @@ const createDrizzleUtils = async ({ web3 }) => {
       });
     }
 
-    if (options.instance) {
-      const { instance } = options;
-      return _createContractEvent$({
-        web3,
-        newBlock$,
-        abi: instance._jsonInterface,
-        address: instance._address,
-        ...options,
-      });
-    }
+    // TODO - cannot create event stream from instance
+    // 1. We don't have access to raw ABI anymore
+    // 2. instance.address is the correct reference to the deployed address
+    // if (options.instance) {
+    //   const { instance } = options;
+    //   return _createContractEvent$({
+    //     web3,
+    //     newBlock$,
+    //     abi: instance._jsonInterface,
+    //     address: instance._address,
+    //     ...options,
+    //   });
+    // }
 
     return _createContractEvent$({ web3, newBlock$, ...options });
   };
