@@ -33,7 +33,7 @@ describe("contract-call-stream tests in node environment", () => {
   });
 
   test("createContractCall$ throws errors when required options fields not found", () => {
-    const { observable: newBlock$ } = createNewBlock$({
+    const newBlock$ = createNewBlock$({
       web3,
       pollingInterval: 200,
     });
@@ -50,7 +50,7 @@ describe("contract-call-stream tests in node environment", () => {
   });
 
   test("can track changes to a call method return value", async done => {
-    const { observable: newBlock$, cleanup } = createNewBlock$({
+    const newBlock$ = createNewBlock$({
       web3,
       pollingInterval: 1,
     });
@@ -68,7 +68,6 @@ describe("contract-call-stream tests in node environment", () => {
         tap(vals => expect(vals).toEqual(["0", "5"])),
         finalize(() => {
           expect.assertions(1);
-          cleanup();
           done();
         }),
       )
