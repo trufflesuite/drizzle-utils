@@ -20,16 +20,13 @@ const createNewBlock$ = require("@drizzle-utils/new-block-stream");
 
 const web3 = new Web3("ws://127.0.0.1:9545");
 
-const { observable, cleanup } = createNewBlock$({
+const newBlock$ = createNewBlock$({
   web3,
   pollingInterval: 200, // only used if non-WebsocketProvider
 });
 
 // log out new blocks
-observable.subscribe(block => console.log(block));
-
-// stop listening to new blocks and end the stream
-cleanup();
+newBlock$.subscribe(block => console.log(block));
 ```
 
 Note that listening to new blocks might skip blocks if polling is being used and the `pollingInterval` is longer than the rate in which new blocks are being produced.
@@ -49,8 +46,4 @@ Creates an RxJS observable that will monitor the blockchain for new blocks. Supp
 
 #### Returns
 
-`Object`
-
 - `observable`: An RxJS observable.
-- `cleanup`: A function for cleaning up listeners and completing/ending the streams created.
-- `subscription`: This is only returned if the provider passed-in is a WebsocketProvider. This is a reference to the underlying [Web3 subscription object](https://web3js.readthedocs.io/en/1.0/web3-eth-subscribe.html#eth-subscribe).
