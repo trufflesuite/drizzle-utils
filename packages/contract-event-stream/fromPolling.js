@@ -3,7 +3,13 @@ const { concatMap, flatMap } = require("rxjs/operators");
 
 const fromPolling = ({ contract, newBlock$ }) => {
   const observable = newBlock$.pipe(
-    concatMap(() => from(contract.getPastEvents("allEvents"))),
+    concatMap(block => {
+      const options = {
+        fromBlock: block.number,
+        toBlock: block.number,
+      };
+      return from(contract.getPastEvents("allEvents", options));
+    }),
     flatMap(arr => from(arr)),
   );
 

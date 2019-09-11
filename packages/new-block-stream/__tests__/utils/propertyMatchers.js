@@ -3,7 +3,7 @@ const blockMatcher = {
   parentHash: expect.anything(),
   timestamp: expect.anything(),
   stateRoot: expect.anything(),
-  transactions: [{ blockHash: expect.anything() }],
+  transactions: expect.anything(),
   transactionsRoot: expect.any(String),
   receiptsRoot: expect.any(String),
   gasUsed: expect.any(Number),
