@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "rxjs": "^6.3.3",
-    "truffle-decoder": "^3.0.1"
+    "@truffle/decoder": "^3.0.12",
+    "rxjs": "^6.3.3"
   },
   "publishConfig": {
     "access": "public"
