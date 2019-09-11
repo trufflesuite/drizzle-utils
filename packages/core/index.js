@@ -6,10 +6,11 @@ const _createContractEvent$ = require("@drizzle-utils/contract-event-stream");
 const _createContractState$ = require("@drizzle-utils/contract-state-stream");
 const _createNewBlock$ = require("@drizzle-utils/new-block-stream");
 
-const createDrizzleUtils = async ({ web3 }) => {
+const createDrizzleUtils = async ({ web3, skipBlocks = false }) => {
   const newBlock$ = _createNewBlock$({
     web3,
     pollingInterval: 200, // only used if non-WebsocketProvider
+    skipBlocks,
   });
 
   const currentAccount$ = await _createCurrentAccount$({ web3 });

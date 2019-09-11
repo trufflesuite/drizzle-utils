@@ -23,6 +23,7 @@ const web3 = new Web3("ws://127.0.0.1:9545");
 const newBlock$ = createNewBlock$({
   web3,
   pollingInterval: 200, // only used if non-WebsocketProvider
+  skipBlocks: true
 });
 
 // log out new blocks
@@ -42,6 +43,7 @@ Creates an RxJS observable that will monitor the blockchain for new blocks. Supp
 `options` - `Object`
   - `web3` - `Object`: A [Web3 instance](https://web3js.readthedocs.io/en/1.0/web3.html#web3)
   - `pollingInterval` (only used for non-WebsocketProvider) - `Number`: The rate in milliseconds at which the stream should poll for new blocks.
+  - `skipBlocks` — `Boolean`: Default is `false`. If you don't want to grab every single block (i.e. you don't mind missing blocks due to your polling interval), this should be set to `true`.
 
 
 #### Returns
