@@ -87,11 +87,15 @@ describe("contract-state-stream tests in node environment", () => {
         take(2),
         toArray(),
         tap(vals => {
+          const twoValues = vals.map(x =>
+            x.variables.storedData.value.toString(),
+          );
+          expect(twoValues).toEqual(["0", "5"]);
           expect(vals[0]).toMatchSnapshot(stateMatcher);
           expect(vals[1]).toMatchSnapshot(stateMatcher);
         }),
         finalize(() => {
-          expect.assertions(2);
+          expect.assertions(3);
           done();
         }),
       )

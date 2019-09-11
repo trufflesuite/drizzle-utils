@@ -1135,6 +1135,33 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@truffle/decode-utils@^1.0.18":
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/@truffle/decode-utils/-/decode-utils-1.0.18.tgz#53cf249b9b41088be296ddbe6f61f035133f599a"
+  integrity sha512-gMffTX2gxvQi+CXY0xlYc/goU/0Ucp2bghnYpvvU5SWCIuE9beq/piQcn4o7p5cmnxs3huZU0hrrxx9ONwIarw==
+  dependencies:
+    bn.js "^4.11.8"
+    lodash.clonedeep "^4.5.0"
+    lodash.escaperegexp "^4.1.2"
+    web3 "1.2.1"
+    web3-eth-abi "1.0.0-beta.52"
+
+"@truffle/decoder@^3.0.12":
+  version "3.0.12"
+  resolved "https://registry.yarnpkg.com/@truffle/decoder/-/decoder-3.0.12.tgz#7cd4bbe1423305b26c9940c0bcacd3f82d1484d9"
+  integrity sha512-Wc31D9ox1W1/BH9ISFdwihtmlomjw1G2llJE/b3j2AGMXmsTQvSO59iGi3DkjdZUtIWdYtRjB1ou2vnS3Nnp3A==
+  dependencies:
+    "@truffle/decode-utils" "^1.0.18"
+    abi-decoder "^1.2.0"
+    async-eventemitter "^0.2.4"
+    bn.js "^4.11.8"
+    debug "^4.1.0"
+    lodash.clonedeep "^4.5.0"
+    lodash.isequal "^4.5.0"
+    lodash.merge "^4.6.1"
+    utf8 "^3.0.0"
+    web3 "1.2.1"
+
 "@truffle/error@^0.0.6":
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@truffle/error/-/error-0.0.6.tgz#75d499845b4b3a40537889e7d04c663afcaee85d"
@@ -10836,33 +10863,6 @@ truffle-contract-sources@^0.1.5:
   dependencies:
     debug "^4.1.0"
     glob "^7.1.2"
-
-truffle-decode-utils@^1.0.17:
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/truffle-decode-utils/-/truffle-decode-utils-1.0.17.tgz#019f67f3be178d3f8cda1f13f442fec65654228f"
-  integrity sha512-fnJOV3aGlNcxkXXuLIaoBWd6l1JEs8DVfQlabpIxfUZOprdRnDAAkkiIe8HotqBqLg06tSDbacQi3bOzCNSBZA==
-  dependencies:
-    bn.js "^4.11.8"
-    lodash.clonedeep "^4.5.0"
-    lodash.escaperegexp "^4.1.2"
-    web3 "1.2.1"
-    web3-eth-abi "1.0.0-beta.52"
-
-truffle-decoder@^3.0.1:
-  version "3.0.11"
-  resolved "https://registry.yarnpkg.com/truffle-decoder/-/truffle-decoder-3.0.11.tgz#1fdf1a9ee6e81872c90db25f7dfff3809bb34bfe"
-  integrity sha512-yUsKJSxCrX3/FkJdBcxJX1GbM4gxkgSFEX3CluxR1u5lRkmGRS37CosnTDKw66+uc8ykvZ5z7KaCalZYnpiuuw==
-  dependencies:
-    abi-decoder "^1.2.0"
-    async-eventemitter "^0.2.4"
-    bn.js "^4.11.8"
-    debug "^4.1.0"
-    lodash.clonedeep "^4.5.0"
-    lodash.isequal "^4.5.0"
-    lodash.merge "^4.6.1"
-    truffle-decode-utils "^1.0.17"
-    utf8 "^3.0.0"
-    web3 "1.2.1"
 
 truffle-interface-adapter@^0.2.5:
   version "0.2.5"
