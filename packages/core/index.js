@@ -1,3 +1,4 @@
+const Web3 = require("web3");
 const _getAccounts = require("@drizzle-utils/get-accounts");
 const _getContractInstance = require("@drizzle-utils/get-contract-instance");
 const _createCurrentAccount$ = require("@drizzle-utils/current-account-stream");
@@ -6,7 +7,11 @@ const _createContractEvent$ = require("@drizzle-utils/contract-event-stream");
 const _createContractState$ = require("@drizzle-utils/contract-state-stream");
 const _createNewBlock$ = require("@drizzle-utils/new-block-stream");
 
-const createDrizzleUtils = async ({ web3, skipBlocks = false }) => {
+const createDrizzleUtils = async ({ provider, web3, skipBlocks = false }) => {
+  if (provider) {
+    web3 = new Web3(provider);
+  }
+
   const newBlock$ = _createNewBlock$({
     web3,
     pollingInterval: 200, // only used if non-WebsocketProvider
