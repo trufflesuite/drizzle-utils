@@ -37,7 +37,7 @@ describe("contract-event-stream tests in node environment", () => {
       },
     };
 
-    drizzleUtils = await createDrizzleUtils({ web3 });
+    drizzleUtils = await createDrizzleUtils({ provider });
   });
 
   afterAll(async () => {

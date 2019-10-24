@@ -1,17 +1,24 @@
+const Web3 = require("web3");
 const fromSubscribe = require("./fromSubscribe");
 const fromPolling = require("./fromPolling");
 
 const createNewBlock$ = ({
+  provider,
   web3,
   pollingInterval,
   skipBlocks = false,
 } = {}) => {
-  if (!web3) {
-    throw new Error("The options object with web3 is required.");
+  if (!provider && !web3) {
+    throw new Error("A provider or web3 instance is required");
   }
 
-  const providerType = web3.currentProvider.constructor.name;
-  if (!pollingInterval && providerType === "WebsocketProvider") {
+  web3 = new Web3(web3 ? web3.currentProvider : provider);
+
+  // NOTE: We currently do not support subscriptions, as there is no reliable way to detect support
+  // const providerType = web3.currentProvider.constructor.name;
+  // const useSubscribe = !pollingInterval && providerType === "WebsocketProvider"
+  const useSubscribe = false;
+  if (useSubscribe) {
     // use web3.eth.subscribe to listen for new blocks
     return fromSubscribe({ web3 });
   }

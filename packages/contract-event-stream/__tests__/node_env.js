@@ -55,15 +55,15 @@ describe("contract-event-stream tests in node environment", () => {
     expect(() => createContractEvent$()).toThrow();
 
     expect(() => createContractEvent$({ abi, address })).toThrow(
-      new Error("The options object with web3 is required"),
+      new Error("A provider or web3 instance is required"),
     );
 
-    expect(() => createContractEvent$({ web3, address })).toThrow(
-      new Error("The options object with contract abi is required"),
+    expect(() => createContractEvent$({ provider, address })).toThrow(
+      new Error("The contract ABI is required"),
     );
 
-    expect(() => createContractEvent$({ web3, abi })).toThrow(
-      new Error("The options object with contract address is required"),
+    expect(() => createContractEvent$({ provider, abi })).toThrow(
+      new Error("The contract address is required"),
     );
 
     const web3Http = new Web3("http://127.0.0.1:9545"); // HttpProvider
@@ -82,7 +82,7 @@ describe("contract-event-stream tests in node environment", () => {
 
     const { _address: address } = contractInstance;
     const { abi } = artifact;
-    const event$ = createContractEvent$({ web3, abi, address, newBlock$ });
+    const event$ = createContractEvent$({ provider, abi, address, newBlock$ });
 
     // tap observable to make sure it emitted a "0" and then a "5"
     event$

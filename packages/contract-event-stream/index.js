@@ -1,13 +1,17 @@
+const Web3 = require("web3");
 const fromPolling = require("./fromPolling");
 const fromSubscribe = require("./fromSubscribe");
 
 const createContractEvent$ = (options = {}) => {
-  const { web3, abi, address, newBlock$ } = options;
-  if (!web3) throw new Error("The options object with web3 is required");
-  if (!abi) throw new Error("The options object with contract abi is required");
-  if (!address)
-    throw new Error("The options object with contract address is required");
+  const { abi, address, newBlock$ } = options;
+  if (!options.provider && !options.web3)
+    throw new Error("A provider or web3 instance is required");
+  if (!abi) throw new Error("The contract ABI is required");
+  if (!address) throw new Error("The contract address is required");
 
+  const web3 = new Web3(
+    options.web3 ? options.web3.currentProvider : options.provider,
+  );
   const providerType = web3.currentProvider.constructor.name;
 
   // TODO: perhaps use get-contract-instance and user just passes the entire json artifact in

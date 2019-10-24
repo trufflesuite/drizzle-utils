@@ -11,12 +11,11 @@ jest.setTimeout(20000);
 
 describe("new-block-stream tests in node environment", () => {
   let provider;
-  let web3;
   let accounts;
   let contractInstance;
 
   beforeAll(async () => {
-    ({ provider, web3, accounts, contractInstance } = await initTestChain({
+    ({ provider, accounts, contractInstance } = await initTestChain({
       contract: {
         dirname: __dirname,
         filename: "SimpleStorage.sol",
@@ -37,13 +36,13 @@ describe("new-block-stream tests in node environment", () => {
     expect(() => createNewBlock$()).toThrow();
 
     expect(() => createNewBlock$({ pollingInterval: 200 })).toThrow(
-      new Error("The options object with web3 is required."),
+      new Error("A provider or web3 instance is required"),
     );
   });
 
   test("fromPolling can track blocks", async done => {
     const newBlock$ = createNewBlock$({
-      web3,
+      provider,
       pollingInterval: 200,
     });
 
