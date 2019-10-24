@@ -9,7 +9,9 @@ const createContractEvent$ = (options = {}) => {
   if (!abi) throw new Error("The contract ABI is required");
   if (!address) throw new Error("The contract address is required");
 
-  const web3 = options.provider ? new Web3(options.provider) : options.web3;
+  const web3 = new Web3(
+    options.web3 ? options.web3.currentProvider : options.provider,
+  );
   const providerType = web3.currentProvider.constructor.name;
 
   // TODO: perhaps use get-contract-instance and user just passes the entire json artifact in
