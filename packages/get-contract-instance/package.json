@@ -3,6 +3,11 @@
   "version": "0.2.0",
   "main": "index.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trufflesuite/drizzle-utils.git",
+    "directory": "packages/get-contract-instance"
+  },
   "gitHead": "78353207c5f530445bc5966013595809bc14506c",
   "publishConfig": {
     "access": "public"

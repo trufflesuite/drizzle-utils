@@ -6,6 +6,11 @@
   "dependencies": {
     "rxjs": "^6.3.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trufflesuite/drizzle-utils.git",
+    "directory": "packages/current-account-stream"
+  },
   "gitHead": "78353207c5f530445bc5966013595809bc14506c",
   "publishConfig": {
     "access": "public"

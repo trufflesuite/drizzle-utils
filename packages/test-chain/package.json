@@ -3,6 +3,11 @@
   "version": "0.2.0",
   "main": "index.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trufflesuite/drizzle-utils.git",
+    "directory": "packages/test-chain"
+  },
   "publishConfig": {
     "access": "public"
   }
