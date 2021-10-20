@@ -6,6 +6,11 @@
   "dependencies": {
     "rxjs": "^6.3.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trufflesuite/drizzle-utils.git",
+    "directory": "packages/get-balance-stream"
+  },
   "publishConfig": {
     "access": "public"
   }

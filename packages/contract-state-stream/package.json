@@ -7,6 +7,11 @@
     "@truffle/decoder": "^3.0.12",
     "rxjs": "^6.3.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trufflesuite/drizzle-utils.git",
+    "directory": "packages/contract-state-stream"
+  },
   "publishConfig": {
     "access": "public"
   }
